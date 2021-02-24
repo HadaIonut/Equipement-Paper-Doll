@@ -17,13 +17,15 @@ export default class PaperDollWindow extends Application {
             return accum;
         });
 
+        Handlebars.registerHelper('leftOrRight', function (n) {
+            return n % 2 === 0? "leftItem" : "rightItem";
+        })
+
         return {
             ...super.defaultOptions,
             id: "paper-doll",
             template: "modules/Equipment-Paper-Doll/templates/paperDollWindow.hbs",
             resizable: false,
-            height: "auto",
-            width: 600,
             minimizable: true,
             title: "Paper Doll Viewer"
         }

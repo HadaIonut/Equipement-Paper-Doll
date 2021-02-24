@@ -1,7 +1,32 @@
+.container {
+    height: 70vh;
+    width: 600px;
+}
+
 .paperDollImage {
     background: url("../static/paperDollFigure.svg") no-repeat center;
     background-size: contain;
-    height: 70vh;
+    height: 70%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    align-items: center;
+}
+
+.leftItem {
+    justify-self: left;
+}
+
+.rightItem {
+    justify-self: right;
+}
+
+.selector {
+    width: 150px;
+    overflow: hidden;
+    margin-bottom: 25px;
+
 }
 
 /*# sourceMappingURL=module.css.map */

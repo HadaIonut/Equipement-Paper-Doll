@@ -1,12 +1,22 @@
 <div>
-    <div class="paperDollImage">
-        <form>
+    <div class="container">
+        <div class="paperDollImage">
             {{#times 13}}
-                <div class="form-group">
-                    <label for="{{this}}"> {{this}} </label>
-                    <select class="form-fields" name="{{this}}"></select>
+                <div class="{{leftOrRight this}}">
+                    <select class="selector" name="{{this}}">
+                        <option value="" disabled selected>Select your option</option>
+                    </select>
                 </div>
             {{/times}}
-        </form>
+        </div>
+        <div>
+            {{#times 2}}
+                <div>
+                    <select class="selector" name="{{this}}">
+                        <option value="" disabled selected>Select your option</option>
+                    </select>
+                </div>
+            {{/times}}
+        </div>
     </div>
 </div>
