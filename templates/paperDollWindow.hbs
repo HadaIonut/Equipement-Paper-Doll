@@ -1,5 +1,12 @@
 <div>
     <div class="paperDollImage">
-
+        <form>
+            {{#times 13}}
+                <div class="form-group">
+                    <label for="{{this}}"> {{this}} </label>
+                    <select class="form-fields" name="{{this}}"></select>
+                </div>
+            {{/times}}
+        </form>
     </div>
 </div>
