@@ -20,12 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/static/paperDollFigure.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,20 +64,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/styles" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\personalProjects\Equipement-Paper-Doll\static" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\styles" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\scripts\lib" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\scripts" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\languages" />
-      <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\.github" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\personalProjects\Equipement-Paper-Doll\templates" />
+      <recent name="C:\personalProjects\Equipement-Paper-Doll\styles" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template" />
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\.github" />
     </key>
@@ -80,6 +95,7 @@
       <workItem from="1604936394394" duration="104000" />
       <workItem from="1604936515379" duration="31000" />
       <workItem from="1604936553224" duration="1676000" />
+      <workItem from="1614183236652" duration="5799000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -120,27 +136,5 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Init" />
     <option name="LAST_COMMIT_MESSAGE" value="Init" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="949" y="333" key="EditFileWatcherDialog" timestamp="1604937408492">
-      <screen x="0" y="30" width="2560" height="1050" />
-    </state>
-    <state x="949" y="333" key="EditFileWatcherDialog/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1604937408492" />
-    <state x="1060" y="310" key="FileChooserDialogImpl" timestamp="1604936813183">
-      <screen x="0" y="30" width="2560" height="1050" />
-    </state>
-    <state x="1060" y="310" key="FileChooserDialogImpl/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1604936813183" />
-    <state x="781" y="200" key="SettingsEditor" timestamp="1604937514914">
-      <screen x="0" y="30" width="2560" height="1050" />
-    </state>
-    <state x="781" y="200" key="SettingsEditor/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1604937514914" />
-    <state x="872" y="288" key="Vcs.Push.Dialog.v2" timestamp="1604937729875">
-      <screen x="0" y="30" width="2560" height="1050" />
-    </state>
-    <state x="872" y="288" key="Vcs.Push.Dialog.v2/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1604937729875" />
-    <state x="1097" y="469" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604937720140">
-      <screen x="0" y="30" width="2560" height="1050" />
-    </state>
-    <state x="1097" y="469" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1604937720140" />
   </component>
 </project>

@@ -1,11 +1,11 @@
 {
-  "name": "fvtt-module-template",
-  "title": "Fvtt Module Template",
+  "name": "Equipment-Paper-Doll",
+  "title": "Equipment-Paper-Doll",
   "description": "",
   "version": "0.0.1",
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.6",
-  "author": "bmarian",
+  "author": "HadaIonut",
   "dependencies": [
 
   ],
