@@ -1,5 +1,5 @@
 .container {
-    height: 70vh;
+    height: 700px;
     width: 600px;
 }
 
@@ -10,7 +10,7 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     align-items: center;
 }
 

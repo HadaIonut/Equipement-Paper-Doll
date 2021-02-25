@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/itemTypesCreater.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemTypesCreater.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
@@ -92,7 +93,7 @@
       <workItem from="1604936394394" duration="104000" />
       <workItem from="1604936515379" duration="31000" />
       <workItem from="1604936553224" duration="1676000" />
-      <workItem from="1614183236652" duration="12976000" />
+      <workItem from="1614183236652" duration="19322000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -122,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614195796139</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Finished MVP for display">
+      <created>1614198549688</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614198549688</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +156,7 @@
     <MESSAGE value="Init" />
     <MESSAGE value="Initial commit" />
     <MESSAGE value="WIP item filtering &#10;WIP item dropdown display" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP item filtering &#10;WIP item dropdown display" />
+    <MESSAGE value="Finished MVP for display" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished MVP for display" />
   </component>
 </project>

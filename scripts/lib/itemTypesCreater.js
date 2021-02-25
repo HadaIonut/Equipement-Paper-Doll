@@ -19,4 +19,12 @@ const itemTypes = (actorItems) => {
     itemTypesObject['head'] = itemsContains(actorItems,["helmet", "circlet", "headband", "helm"]);
 }
 
-export {itemTypes};
+const itemNames = (actorItems) => {
+    let itemNamesArray = [];
+    actorItems.forEach((item) => {
+        itemNamesArray.push(item.data.name);
+    })
+    return itemNamesArray;
+}
+
+export {itemTypes, itemNames};
