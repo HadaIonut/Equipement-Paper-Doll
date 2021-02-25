@@ -5,6 +5,7 @@ export default class PaperDollWindow extends FormApplication {
         super();
         this.sourceActor = sourceActor;
         this.items = sourceActor.items.entries;
+        this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
         itemTypes(this.items);
     }
 
@@ -19,6 +20,14 @@ export default class PaperDollWindow extends FormApplication {
 
         Handlebars.registerHelper('leftOrRight', function (n) {
             return n % 2 === 0? "leftItem" : "rightItem";
+        })
+
+        Handlebars.registerHelper('shouldBeSelected', function (itemID, position, selectedItems) {
+            return new Handlebars.SafeString(itemID === selectedItems?.[position] ? "selected" : '');
+        })
+
+        Handlebars.registerHelper('startingSelection', function (position, selectedItems) {
+            return new Handlebars.SafeString(selectedItems?.[position] ? '' : 'selected');
         })
 
         return {
@@ -36,9 +45,14 @@ export default class PaperDollWindow extends FormApplication {
 
     getData(options) {
         return {
+            selectedItems: this.selectedItems,
             itemTypesArray: ['head', 'eyes', 'neck', 'shoulders', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet', 'legs'],
             items: this.items
         }
+    }
+
+    async _updateObject(event, formData) {
+        await this.sourceActor.setFlag("Equipment-Paper-Doll", "data", formData)
     }
 
     activateListeners(html) {

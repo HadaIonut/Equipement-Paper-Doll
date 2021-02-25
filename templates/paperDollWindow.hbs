@@ -4,9 +4,11 @@
             {{#each itemTypesArray}}
                 <div class="{{leftOrRight @index}}">
                     <select class="selector" name="{{this}}">
-                        <option value="" disabled selected>Select {{this}}</option>
+                        <option {{startingSelection this ../selectedItems}} value="" disabled>Select {{this}}</option>
                         {{#each ../items}}
-                            <option value="{{this.data.name}}">{{this.data.name}}</option>
+                            <option {{shouldBeSelected this.data._id ../this ../../selectedItems}} value="{{this.data._id}}">
+                                {{this.data.name}}
+                            </option>
                         {{/each}}
                     </select>
                 </div>
@@ -22,4 +24,5 @@
             {{/times}}
         </div>
     </div>
+    <button type="submit">Submit</button>
 </form>
