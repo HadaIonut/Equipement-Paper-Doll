@@ -30,6 +30,15 @@ export default class PaperDollWindow extends FormApplication {
             return new Handlebars.SafeString(selectedItems?.[position] ? '' : 'selected');
         })
 
+        Handlebars.registerHelper('getItemFromArray', function (array, position) {
+            return array?.[position];
+        })
+
+        Handlebars.registerHelper('getItemPosition', function (index) {
+            const positionsArray = ['75px', '55px', '50px', '35px', '35px', '25px', '35px', '25px', '50px', '35px', '75px', '55px'];
+            return index % 2 === 0 ? `margin-left: ${positionsArray[index]}` : `margin-right: ${positionsArray[index]}`;
+        })
+
         return {
             ...super.defaultOptions,
             id: "paper-doll",
@@ -47,6 +56,7 @@ export default class PaperDollWindow extends FormApplication {
         return {
             selectedItems: this.selectedItems,
             itemTypesArray: ['head', 'eyes', 'neck', 'shoulders', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet', 'legs'],
+            itemsTypeLocation: ['headL', 'headL', 'headL', 'handRight', 'body', 'body', 'body', 'handRight', 'handLeft', 'handRight', 'legLeft', 'legRight'],
             items: this.items
         }
     }

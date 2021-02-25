@@ -1,5 +1,5 @@
 .container {
-    height: 700px;
+    height: 600px;
     width: 600px;
 }
 
@@ -11,6 +11,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(6, 1fr);
+    align-items: center;
+}
+
+.secondaryItems {
+    height: 30%;
+    margin: 0 80px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
     align-items: center;
 }
 
@@ -26,7 +36,7 @@
     width: 150px;
     overflow: hidden;
     margin-bottom: 25px;
-
 }
+
 
 /*# sourceMappingURL=module.css.map */
