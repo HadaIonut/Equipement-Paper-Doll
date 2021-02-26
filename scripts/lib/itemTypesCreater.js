@@ -22,7 +22,18 @@ const filterEquipableItems = (actorItems) => {
 const itemTypes = (actorItems) => {
     const itemTypesObject = {};
     const equipableItems = filterEquipableItems(actorItems);
-    itemTypesObject['head'] = itemsContains(equipableItems,["helmet", "circlet", "headband", "helm", "crown"]);
+    itemTypesObject['head'] = itemsContains(equipableItems,['helmet', 'circlet', 'headband', 'helm', 'crown', 'hat']);
+    itemTypesObject['eyes'] = itemsContains(equipableItems,['goggle', 'eye']);
+    itemTypesObject['neck'] = itemsContains(equipableItems,['amulet', 'necklace', 'periapt']);
+    itemTypesObject['cape'] = itemsContains(equipableItems,['cape', 'backpack', 'haversack', 'mantle', 'robe', 'cloak']);
+    itemTypesObject['torso'] = itemsContains(equipableItems,['breastplate', 'armor', 'mail', 'chain', 'plate', 'clothes', 'shirt']);
+    itemTypesObject['waist'] = itemsContains(equipableItems,['belt']);
+    itemTypesObject['wrists'] = itemsContains(equipableItems,['shackle', 'manacles', 'bracers']);
+    itemTypesObject['hands'] = itemsContains(equipableItems,['gloves']);
+    itemTypesObject['feet'] = itemsContains(equipableItems,['boot']);
+    itemTypesObject['ring'] = itemsContains(equipableItems,['ring']);
+
+    return itemTypesObject;
 }
 
 export {itemTypes};

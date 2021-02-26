@@ -7,7 +7,6 @@ export default class PaperDollWindow extends FormApplication {
         this.sourceActor = sourceActor;
         this.items = sourceActor.items.entries;
         this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
-        itemTypes(this.items);
     }
 
     static get defaultOptions() {
@@ -28,8 +27,8 @@ export default class PaperDollWindow extends FormApplication {
     getData(options) {
         return {
             selectedItems: this.selectedItems,
-            itemTypesArray: ['head', 'eyes', 'neck', 'shoulders', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet', 'legs'],
-            items: this.items
+            itemTypesArray: ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'],
+            items: {...itemTypes(this.items)}
         }
     }
 
@@ -39,16 +38,11 @@ export default class PaperDollWindow extends FormApplication {
 
     activateListeners(html) {
         const addBoxes = html.find('.addBox');
-        // addBoxes.each((index, box) => {
-        //     box.on('click',function () {
-        //         console.log('yes');
-        //     })
-        // })
         addBoxes.on('click', (source) => {
             const newDiv = $(`<div class="addBox" style="background: aqua"></div>`);
             const location = source.currentTarget.parentNode.parentNode.className;
             source.currentTarget[location === 'leftItem' ? 'before' : 'after'](newDiv[0]);
-        } );
+        });
         super.activateListeners(html);
     }
 }
