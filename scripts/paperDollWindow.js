@@ -1,4 +1,5 @@
-import {itemTypes, itemNames} from "./lib/itemTypesCreater.js"
+import {itemTypes} from "./lib/itemTypesCreater.js"
+import {registerHelpers} from "./lib/handlebarsHelpers.js";
 
 export default class PaperDollWindow extends FormApplication {
     constructor(sourceActor) {
@@ -10,35 +11,7 @@ export default class PaperDollWindow extends FormApplication {
     }
 
     static get defaultOptions() {
-        //TODO remove this, it is shit
-        Handlebars.registerHelper('times', function(n, block) {
-            var accum = '';
-            for(var i = 0; i < n; ++i)
-                accum += block.fn(i);
-            return accum;
-        });
-
-        Handlebars.registerHelper('leftOrRight', function (n) {
-            return n % 2 === 0? "leftItem" : "rightItem";
-        })
-
-        Handlebars.registerHelper('shouldBeSelected', function (itemID, position, selectedItems) {
-            return new Handlebars.SafeString(itemID === selectedItems?.[position] ? "selected" : '');
-        })
-
-        Handlebars.registerHelper('startingSelection', function (position, selectedItems) {
-            return new Handlebars.SafeString(selectedItems?.[position] ? '' : 'selected');
-        })
-
-        Handlebars.registerHelper('getItemFromArray', function (array, position) {
-            return array?.[position];
-        })
-
-        Handlebars.registerHelper('getItemPosition', function (index) {
-            const positionsArray = ['75px', '55px', '50px', '35px', '35px', '25px', '35px', '25px', '50px', '35px', '75px', '55px'];
-            return index % 2 === 0 ? `margin-left: ${positionsArray[index]}` : `margin-right: ${positionsArray[index]}`;
-        })
-
+        registerHelpers()
         return {
             ...super.defaultOptions,
             id: "paper-doll",
@@ -56,7 +29,6 @@ export default class PaperDollWindow extends FormApplication {
         return {
             selectedItems: this.selectedItems,
             itemTypesArray: ['head', 'eyes', 'neck', 'shoulders', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet', 'legs'],
-            itemsTypeLocation: ['headL', 'headL', 'headL', 'handRight', 'body', 'body', 'body', 'handRight', 'handLeft', 'handRight', 'legLeft', 'legRight'],
             items: this.items
         }
     }
@@ -66,6 +38,17 @@ export default class PaperDollWindow extends FormApplication {
     }
 
     activateListeners(html) {
+        const addBoxes = html.find('.addBox');
+        // addBoxes.each((index, box) => {
+        //     box.on('click',function () {
+        //         console.log('yes');
+        //     })
+        // })
+        addBoxes.on('click', (source) => {
+            const newDiv = $(`<div class="addBox" style="background: aqua"></div>`);
+            const location = source.currentTarget.parentNode.parentNode.className;
+            source.currentTarget[location === 'leftItem' ? 'before' : 'after'](newDiv[0]);
+        } );
         super.activateListeners(html);
     }
 }

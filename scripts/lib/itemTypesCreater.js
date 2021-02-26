@@ -9,22 +9,20 @@ const containsAnyOfArray = (array, target) => {
 const itemsContains = (itemsArray, namesArray) => {
     let itemsList = [];
     itemsArray.forEach((item) => {
-        if (containsAnyOfArray(namesArray, item.data.name.toLowerCase())) itemsList.push(item.data.name);
+        if (containsAnyOfArray(namesArray, item.data.name.toLowerCase())) itemsList.push(item);
     })
     return itemsList;
 }
 
+const filterEquipableItems = (actorItems) => {
+    const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot'];
+    return actorItems.filter((item) => equipableTypes.includes(item.type));
+}
+
 const itemTypes = (actorItems) => {
     const itemTypesObject = {};
-    itemTypesObject['head'] = itemsContains(actorItems,["helmet", "circlet", "headband", "helm"]);
+    const equipableItems = filterEquipableItems(actorItems);
+    itemTypesObject['head'] = itemsContains(equipableItems,["helmet", "circlet", "headband", "helm", "crown"]);
 }
 
-const itemNames = (actorItems) => {
-    let itemNamesArray = [];
-    actorItems.forEach((item) => {
-        itemNamesArray.push(item.data.name);
-    })
-    return itemNamesArray;
-}
-
-export {itemTypes, itemNames};
+export {itemTypes};

@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/deleted.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/itemTypesCreater.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemTypesCreater.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
@@ -101,7 +103,8 @@
       <workItem from="1604936394394" duration="104000" />
       <workItem from="1604936515379" duration="31000" />
       <workItem from="1604936553224" duration="1676000" />
-      <workItem from="1614183236652" duration="34172000" />
+      <workItem from="1614183236652" duration="35250000" />
+      <workItem from="1614334718030" duration="12322000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -152,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614246996567</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Finished design for the paper doll view">
+      <created>1614271615731</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1614271615732</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +191,7 @@
     <MESSAGE value="Finished MVP for display" />
     <MESSAGE value="Populated the dropdowns with the actors items" />
     <MESSAGE value="Persistent selections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Persistent selections" />
+    <MESSAGE value="Finished design for the paper doll view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished design for the paper doll view" />
   </component>
 </project>

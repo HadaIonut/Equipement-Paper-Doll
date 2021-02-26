@@ -28,14 +28,28 @@
     justify-self: left;
 }
 
+.leftItem h3 {
+    text-align: left;
+}
+
 .rightItem {
     justify-self: right;
+}
+
+.rightItem h3 {
+    text-align: right;
 }
 
 .selector {
     width: 150px;
     overflow: hidden;
     margin-bottom: 25px;
+}
+
+.addBox {
+    height: 50px;
+    width: 50px;
+    border: black;
 }
 
 

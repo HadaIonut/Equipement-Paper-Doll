@@ -2,30 +2,14 @@
     <div class="container">
         <div class="paperDollImage">
             {{#each itemTypesArray}}
-                <div id="{{this}}" class="{{leftOrRight @index}}" style="{{getItemPosition @index}}">
-                    <select class="selector" name="{{this}}">
-                        <option {{startingSelection this ../selectedItems}} value="" disabled>Select {{this}}</option>
-                        {{#each ../items}}
-                            <option {{shouldBeSelected this.data._id ../this ../../selectedItems}}
-                                    value="{{this.data._id}}">
-                                {{this.data.name}}
-                            </option>
-                        {{/each}}
-                    </select>
+                <div id="{{this}}" class="{{leftOrRight @index}}">
+                    <h3>{{this}}</h3>
+                    <div class="flexrow">
+                        <div class="addBox"><i class="fas fa-plus-square"></i></div>
+                    </div>
                 </div>
             {{/each}}
         </div>
-
-        <div class="secondaryItems">
-            {{#times 4}}
-                <div class="{{leftOrRight this}}">
-                    <select class="selector" name="{{this}}">
-                        <option value="" disabled selected>Select your option</option>
-                    </select>
-                </div>
-            {{/times}}
-        </div>
-
     </div>
     <button type="submit">Submit</button>
 </form>
