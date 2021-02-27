@@ -19,7 +19,7 @@ const filterEquipableItems = (actorItems) => {
     return actorItems.filter((item) => equipableTypes.includes(item.type));
 }
 
-const itemTypes = (actorItems) => {
+const filterActorItems = (actorItems) => {
     const itemTypesObject = {};
     const equipableItems = filterEquipableItems(actorItems);
     itemTypesObject['head'] = itemsContains(equipableItems,['helmet', 'circlet', 'headband', 'helm', 'crown', 'hat']);
@@ -36,4 +36,4 @@ const itemTypes = (actorItems) => {
     return itemTypesObject;
 }
 
-export {itemTypes};
+export {filterActorItems};

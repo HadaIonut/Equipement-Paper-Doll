@@ -1,5 +1,6 @@
-import {itemTypes} from "./lib/itemTypesCreater.js"
+import {filterActorItems} from "./lib/itemFiltering.js"
 import {registerHelpers} from "./lib/handlebarsHelpers.js";
+import itemSearchWindow from "./itemSearchWindow.js";
 
 export default class PaperDollWindow extends FormApplication {
     constructor(sourceActor) {
@@ -7,6 +8,7 @@ export default class PaperDollWindow extends FormApplication {
         this.sourceActor = sourceActor;
         this.items = sourceActor.items.entries;
         this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
+        this.filteredItems = filterActorItems(this.items)
     }
 
     static get defaultOptions() {
@@ -28,7 +30,7 @@ export default class PaperDollWindow extends FormApplication {
         return {
             selectedItems: this.selectedItems,
             itemTypesArray: ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'],
-            items: {...itemTypes(this.items)}
+            items: {...this.filteredItems}
         }
     }
 
@@ -39,9 +41,8 @@ export default class PaperDollWindow extends FormApplication {
     activateListeners(html) {
         const addBoxes = html.find('.addBox');
         addBoxes.on('click', (source) => {
-            const newDiv = $(`<div class="addBox" style="background: aqua"></div>`);
-            const location = source.currentTarget.parentNode.parentNode.className;
-            source.currentTarget[location === 'leftItem' ? 'before' : 'after'](newDiv[0]);
+            const location = source.currentTarget.parentNode.parentNode;
+            new itemSearchWindow(this.filteredItems[location.id], source).render(true);
         });
         super.activateListeners(html);
     }

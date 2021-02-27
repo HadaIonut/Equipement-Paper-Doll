@@ -5,7 +5,9 @@
                 <div id="{{this}}" class="{{leftOrRight @index}}">
                     <h3>{{this}}</h3>
                     <div class="flexrow">
-                        <div class="addBox"><i class="fas fa-plus-square"></i></div>
+                        {{#times 4}}
+                            <button class="addBox">+</button>
+                        {{/times}}
                     </div>
                 </div>
             {{/each}}
