@@ -1,6 +1,7 @@
 import {filterActorItems} from "./lib/itemFiltering.js"
 import {registerHelpers} from "./lib/handlebarsHelpers.js";
 import itemSearchWindow from "./itemSearchWindow.js";
+import {getItemsSlotArray} from "./settings.js";
 
 export default class PaperDollWindow extends FormApplication {
     constructor(sourceActor) {
@@ -26,16 +27,18 @@ export default class PaperDollWindow extends FormApplication {
     }
 
     getData(options) {
+        const itemSlotNames = ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'];
+        const weaponSlotNames = ['mainHand', 'offHand'];
         return {
             selectedItems: this.selectedItems,
             itemTypes: {
-                types: ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'],
-                slots: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1]
+                types: itemSlotNames,
+                slots: getItemsSlotArray(itemSlotNames)
             },
             items: {...this.filteredItems},
             weaponsTypes: {
-                types: ['mainHand', 'offHand'],
-                slots: [1, 1]
+                types: weaponSlotNames,
+                slots: getItemsSlotArray(weaponSlotNames)
             }
         }
     }

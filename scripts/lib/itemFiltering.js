@@ -1,5 +1,8 @@
+import {getFilterArray} from "../settings.js";
+
 const containsAnyOfArray = (array, target) => {
     let output = false;
+    if (array.length === 1 && array[0] === '') return output;
     array.forEach((current) => {
         if (target.includes(current)) output = true;
     })
@@ -20,28 +23,28 @@ const filterEquipableItems = (actorItems) => {
 }
 
 const findWeapons = (items) => {
-    return items.filter((item) => item.type === 'weapon')
+    return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, getFilterArray('mainHand')))
 }
 
 const findOffHand = (items) => {
     const weapons = items.filter((item) => item.type === 'weapon');
-    const secondary = itemsContains(items,['shield']);
+    const secondary = itemsContains(items, getFilterArray('offHand'));
     return weapons.concat(secondary);
 }
 
 const filterActorItems = (actorItems) => {
     const itemTypesObject = {};
     const equipableItems = filterEquipableItems(actorItems);
-    itemTypesObject['head'] = itemsContains(equipableItems,['helmet', 'circlet', 'headband', 'helm', 'crown', 'hat']);
-    itemTypesObject['eyes'] = itemsContains(equipableItems,['goggle', 'eye']);
-    itemTypesObject['neck'] = itemsContains(equipableItems,['amulet', 'necklace', 'periapt']);
-    itemTypesObject['cape'] = itemsContains(equipableItems,['cape', 'backpack', 'haversack', 'mantle', 'robe', 'cloak']);
-    itemTypesObject['torso'] = itemsContains(equipableItems,['breastplate', 'armor', 'mail', 'chain', 'plate', 'clothes', 'shirt']);
-    itemTypesObject['waist'] = itemsContains(equipableItems,['belt']);
-    itemTypesObject['wrists'] = itemsContains(equipableItems,['shackle', 'manacles', 'bracers']);
-    itemTypesObject['hands'] = itemsContains(equipableItems,['gloves']);
-    itemTypesObject['feet'] = itemsContains(equipableItems,['boot']);
-    itemTypesObject['ring'] = itemsContains(equipableItems,['ring']);
+    itemTypesObject['head'] = itemsContains(equipableItems, getFilterArray('head'));
+    itemTypesObject['eyes'] = itemsContains(equipableItems, getFilterArray('eyes'));
+    itemTypesObject['neck'] = itemsContains(equipableItems, getFilterArray('neck'));
+    itemTypesObject['cape'] = itemsContains(equipableItems, getFilterArray('cape'));
+    itemTypesObject['torso'] = itemsContains(equipableItems, getFilterArray('torso'));
+    itemTypesObject['waist'] = itemsContains(equipableItems, getFilterArray('waist'));
+    itemTypesObject['wrists'] = itemsContains(equipableItems, getFilterArray('wrists'));
+    itemTypesObject['hands'] = itemsContains(equipableItems, getFilterArray('hands'));
+    itemTypesObject['feet'] = itemsContains(equipableItems, getFilterArray('feet'));
+    itemTypesObject['ring'] = itemsContains(equipableItems, getFilterArray('ring'));
     itemTypesObject['mainHand'] = findWeapons(equipableItems);
     itemTypesObject['offHand'] = findOffHand(equipableItems);
 

@@ -1,9 +1,11 @@
 import PaperDollWindow from "./paperDollWindow.js";
+import {registerSettings} from "./settings.js";
 
 Hooks.once('init', async () => {});
 
 Hooks.once('ready', async () => {
-    CONFIG.debug.hooks = true
+    CONFIG.debug.hooks = true;
+    registerSettings();
 });
 
 Hooks.on('renderActorSheet', (obj, html) => {
