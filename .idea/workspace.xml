@@ -19,10 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Settings for slot numbers and filter list">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Data extraction from paperDoll">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
       <workItem from="1614334718030" duration="12654000" />
       <workItem from="1614365643446" duration="23438000" />
       <workItem from="1614499250373" duration="10000" />
-      <workItem from="1614503118059" duration="20284000" />
+      <workItem from="1614503118059" duration="22378000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -198,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614529403655</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Data extraction from paperDoll">
+      <created>1614535081953</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1614535081953</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +240,7 @@
     <MESSAGE value="finished selected items" />
     <MESSAGE value="More design changes and added weapons to display and filter" />
     <MESSAGE value="Settings for slot numbers and filter list" />
-    <option name="LAST_COMMIT_MESSAGE" value="Settings for slot numbers and filter list" />
+    <MESSAGE value="Data extraction from paperDoll" />
+    <option name="LAST_COMMIT_MESSAGE" value="Data extraction from paperDoll" />
   </component>
 </project>

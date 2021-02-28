@@ -22,7 +22,6 @@ export default class PaperDollWindow extends FormApplication {
             minimizable: true,
             title: "Paper Doll Viewer",
             closeOnSubmit: true,
-            submitOnClose: true,
         }
     }
 
@@ -57,6 +56,19 @@ export default class PaperDollWindow extends FormApplication {
         return formData;
     }
 
+    replaceWithStoredItems(html, storedItems, actorItems) {
+        Object.keys(storedItems).forEach((itemType) => {
+            storedItems[itemType].forEach((itemSlot, index) => {
+                if (itemSlot === '') return;
+
+                const slotsArray = [...html.find(`#${itemType}`)[0].lastElementChild.children];
+                const item = actorItems.filter(localItem => localItem.data._id === itemSlot)[0];
+                const newTile = $(`<div id='${item.data._id}' class="addedItem"><img src="${item.data.img}" ></div>`)[0];
+                slotsArray[index]?.replaceWith(newTile);
+            })
+        })
+    }
+
     async _updateObject(event, formData) {
         formData = this.extractDataFromForm(event);
 
@@ -69,6 +81,8 @@ export default class PaperDollWindow extends FormApplication {
             const location = source.currentTarget.parentNode.parentNode;
             new itemSearchWindow(this.filteredItems[location.id], source).render(true);
         });
+
+        this.replaceWithStoredItems(html, this.selectedItems, this.items)
         super.activateListeners(html);
     }
 }

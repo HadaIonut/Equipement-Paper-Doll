@@ -4,7 +4,7 @@
             {{#each itemTypes.types}}
                 <div id="{{this}}" class="{{leftOrRight @index}}">
                     <h3>{{this}}</h3>
-                    <div class="">
+                    <div class="flexrow">
                         {{#times ../itemTypes.slots ../itemTypes.types this}}
                             <button type="button" class="addBox"></button>
                         {{/times}}
@@ -16,7 +16,7 @@
             {{#each weaponsTypes.types}}
                 <div id="{{this}}" class="centerItem">
                     <h3>{{this}}</h3>
-                    <div class="">
+                    <div class="flexrow">
                         {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
                             <button type="button" class="addBox"></button>
                         {{/times}}
