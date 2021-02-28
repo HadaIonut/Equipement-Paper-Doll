@@ -29,10 +29,9 @@ export default class itemSearchWindow extends FormApplication {
     }
 
     createNewTile(item) {
-        const newTile = $(`<img src="${item.data.img}" class="addedItem">`)[0];
+        const newTile = $(`<div class="addedItem"><img src="${item.data.img}" ></div>`)[0];
         const location = this.source.currentTarget;
         location.replaceWith(newTile);
-        //this.source.currentTarget.before(newTile);
         this.close();
     }
 
@@ -42,6 +41,17 @@ export default class itemSearchWindow extends FormApplication {
             const selectedItemId = source.currentTarget.id;
             const selectedItem = this.itemList.filter((item) => item.data._id === selectedItemId)[0];
             this.createNewTile(selectedItem);
+        })
+        const searchBar = html.find('.searchBar');
+        searchBar.on('input', (event) => {
+            const itemObjectsArray = [...event.currentTarget.parentNode.firstElementChild.children];
+            itemObjectsArray.forEach((itemObject)=> {
+                const itemObjectText = itemObject.lastElementChild.innerText.toLowerCase()
+                const searchText = event.currentTarget.value.toLowerCase()
+                if (!itemObjectText.includes(searchText)) {
+                    $(itemObject).hide()
+                } else $(itemObject).show()
+            })
         })
     }
 }

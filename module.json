@@ -16,7 +16,8 @@
     "/scripts/lib/lib.js"
   ],
   "styles": [
-    "/styles/module.css"
+    "/styles/module.css",
+    "/styles/tooltip.css"
   ],
   "languages": [
     {

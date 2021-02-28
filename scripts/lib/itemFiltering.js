@@ -19,6 +19,16 @@ const filterEquipableItems = (actorItems) => {
     return actorItems.filter((item) => equipableTypes.includes(item.type));
 }
 
+const findWeapons = (items) => {
+    return items.filter((item) => item.type === 'weapon')
+}
+
+const findOffHand = (items) => {
+    const weapons = items.filter((item) => item.type === 'weapon');
+    const secondary = itemsContains(items,['shield']);
+    return weapons.concat(secondary);
+}
+
 const filterActorItems = (actorItems) => {
     const itemTypesObject = {};
     const equipableItems = filterEquipableItems(actorItems);
@@ -32,6 +42,8 @@ const filterActorItems = (actorItems) => {
     itemTypesObject['hands'] = itemsContains(equipableItems,['gloves']);
     itemTypesObject['feet'] = itemsContains(equipableItems,['boot']);
     itemTypesObject['ring'] = itemsContains(equipableItems,['ring']);
+    itemTypesObject['mainHand'] = findWeapons(equipableItems);
+    itemTypesObject['offHand'] = findOffHand(equipableItems);
 
     return itemTypesObject;
 }

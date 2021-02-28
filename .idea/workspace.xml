@@ -20,12 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/tooltip.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lib/itemTypesCreater.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -71,7 +75,8 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../material-bars" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -105,7 +110,9 @@
       <workItem from="1604936553224" duration="1676000" />
       <workItem from="1614183236652" duration="35250000" />
       <workItem from="1614334718030" duration="12654000" />
-      <workItem from="1614365643446" duration="22732000" />
+      <workItem from="1614365643446" duration="23438000" />
+      <workItem from="1614499250373" duration="10000" />
+      <workItem from="1614503118059" duration="11443000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -177,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614367700629</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="finished selected items">
+      <created>1614445012404</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1614445012404</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +223,7 @@
     <MESSAGE value="Finished design for the paper doll view" />
     <MESSAGE value="WIP new item display" />
     <MESSAGE value="Added filters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added filters" />
+    <MESSAGE value="finished selected items" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished selected items" />
   </component>
 </project>

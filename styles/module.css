@@ -6,7 +6,7 @@
 .paperDollImage {
     background: url("../static/paperDollFigure.svg") no-repeat center;
     background-size: contain;
-    /*height: 70%;*/
+    height: 80%;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -16,18 +16,18 @@
 }
 
 .secondaryItems {
-    height: 30%;
+    height: 15%;
     margin: 0 80px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1fr;
     align-items: center;
 }
 
 .leftItem {
     justify-self: left;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
 }
 
 .leftItem h3 {
@@ -36,12 +36,22 @@
 
 .rightItem {
     justify-self: right;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
 }
 
 .rightItem h3 {
     text-align: center;
 }
+
+.centerItem {
+    justify-self: center;
+    /*border: 2px solid black;*/
+}
+
+.centerItem h3 {
+    text-align: center;
+}
+
 
 .selector {
     width: 150px;
@@ -50,16 +60,29 @@
 }
 
 .addBox {
-    height: 50px;
-    width: 50px;
-    margin-left: 3px;
+    height: 45px;
+    width: 45px;
+    /* margin-left: 3px; */
     font-size: 30px;
+    position: relative;
+    border: 1px solid #000;
+    border-radius: 2px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0 5px #000 inset;
+    cursor: pointer;
 }
 
 .addedItem {
-    height: 50px;
-    width: 50px;
-    margin-left: 3px;
+    height: 45px;
+    width: 45px;
+    margin-left: 2px;
+    font-size: 30px;
+    position: relative;
+    border: 1px solid #000;
+    border-radius: 2px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0 5px #000 inset;
+    cursor: pointer;
 }
 
 .selectorImage {

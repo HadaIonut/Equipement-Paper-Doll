@@ -1,12 +1,24 @@
 <form>
     <div class="container">
         <div class="paperDollImage">
-            {{#each itemTypesArray}}
+            {{#each itemTypes.types}}
                 <div id="{{this}}" class="{{leftOrRight @index}}">
                     <h3>{{this}}</h3>
-                    <div class="flexrow">
-                        {{#times 4}}
-                            <button class="addBox">+</button>
+                    <div class="">
+                        {{#times ../itemTypes.slots ../itemTypes.types this}}
+                            <button type="button" class="addBox"></button>
+                        {{/times}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="secondaryItems">
+            {{#each weaponsTypes.types}}
+                <div id="{{this}}" class="centerItem">
+                    <h3>{{this}}</h3>
+                    <div class="">
+                        {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
+                            <button type="button" class="addBox"></button>
                         {{/times}}
                     </div>
                 </div>

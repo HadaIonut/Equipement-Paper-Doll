@@ -20,17 +20,23 @@ export default class PaperDollWindow extends FormApplication {
             resizable: false,
             minimizable: true,
             title: "Paper Doll Viewer",
-            closeOnSubmit: false,
+            closeOnSubmit: true,
             submitOnClose: true,
-            submitOnChange: true
         }
     }
 
     getData(options) {
         return {
             selectedItems: this.selectedItems,
-            itemTypesArray: ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'],
-            items: {...this.filteredItems}
+            itemTypes: {
+                types: ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'],
+                slots: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1]
+            },
+            items: {...this.filteredItems},
+            weaponsTypes: {
+                types: ['mainHand', 'offHand'],
+                slots: [1, 1]
+            }
         }
     }
 
