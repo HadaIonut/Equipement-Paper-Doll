@@ -19,11 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More design changes and added weapons to display and filter">
-      <change afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Settings for slot numbers and filter list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +105,7 @@
       <workItem from="1614334718030" duration="12654000" />
       <workItem from="1614365643446" duration="23438000" />
       <workItem from="1614499250373" duration="10000" />
-      <workItem from="1614503118059" duration="16836000" />
+      <workItem from="1614503118059" duration="20284000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -193,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614519292412</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Settings for slot numbers and filter list">
+      <created>1614529403655</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1614529403655</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,6 +232,7 @@
     <MESSAGE value="Added filters" />
     <MESSAGE value="finished selected items" />
     <MESSAGE value="More design changes and added weapons to display and filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="More design changes and added weapons to display and filter" />
+    <MESSAGE value="Settings for slot numbers and filter list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Settings for slot numbers and filter list" />
   </component>
 </project>

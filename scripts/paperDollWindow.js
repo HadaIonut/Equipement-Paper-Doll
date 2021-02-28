@@ -43,7 +43,23 @@ export default class PaperDollWindow extends FormApplication {
         }
     }
 
+    extractDataFromForm(event) {
+        const divStructureArray = [...event.path[1].firstElementChild.firstElementChild.firstElementChild.children];
+        const formData = {};
+        divStructureArray.forEach((element) => {
+            const dataPoints = [...element.lastElementChild.children];
+            const fieldData = [];
+
+            dataPoints.forEach(point => fieldData.push(point.id));
+            formData[element.id] = fieldData;
+        })
+
+        return formData;
+    }
+
     async _updateObject(event, formData) {
+        formData = this.extractDataFromForm(event);
+
         await this.sourceActor.setFlag("Equipment-Paper-Doll", "data", formData)
     }
 
