@@ -43,7 +43,7 @@ export default class PaperDollWindow extends FormApplication {
     }
 
     extractDataFromForm(event) {
-        const divStructureArray = [...event.path[1].firstElementChild.firstElementChild.firstElementChild.children];
+        const divStructureArray = [...$('.paperDollImage')[0].children, ...$('.secondaryItems')[0].children];
         const formData = {};
         divStructureArray.forEach((element) => {
             const dataPoints = [...element.lastElementChild.children];
