@@ -19,9 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Added persistence for main items (not for weapons)">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Added persistent weapons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +109,7 @@
       <workItem from="1614334718030" duration="12654000" />
       <workItem from="1614365643446" duration="23438000" />
       <workItem from="1614499250373" duration="10000" />
-      <workItem from="1614503118059" duration="23143000" />
+      <workItem from="1614503118059" duration="34760000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -211,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614540214610</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added persistent weapons">
+      <created>1614540924118</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1614540924118</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +260,7 @@
     <MESSAGE value="Settings for slot numbers and filter list" />
     <MESSAGE value="Data extraction from paperDoll" />
     <MESSAGE value="Added persistence for main items (not for weapons)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added persistence for main items (not for weapons)" />
+    <MESSAGE value="Added persistent weapons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added persistent weapons" />
   </component>
 </project>

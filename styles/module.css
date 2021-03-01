@@ -53,34 +53,26 @@
 }
 
 
+.addBox {
+    height: 45px;
+    width: 45px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    box-shadow: 0 0 5px #000 inset;
+    cursor: pointer;
+}
+
 .selector {
     width: 150px;
     overflow: hidden;
     margin-bottom: 25px;
 }
 
-.addBox {
-    height: 45px;
-    width: 45px;
-    /* margin-left: 3px; */
-    font-size: 30px;
-    position: relative;
-    border: 1px solid #000;
-    border-radius: 2px;
-    /* background: rgba(0, 0, 0, 0.5); */
-    box-shadow: 0 0 5px #000 inset;
-    cursor: pointer;
-}
-
 .addedItem {
     height: 45px;
-    width: 45px;
-    margin-left: 2px;
-    font-size: 30px;
-    position: relative;
+    width: 47px;
     border: 1px solid #000;
     border-radius: 2px;
-    /* background: rgba(0, 0, 0, 0.5); */
     box-shadow: 0 0 5px #000 inset;
     cursor: pointer;
 }
@@ -117,6 +109,22 @@
     text-shadow: 0 0 10px red;
 }
 
+.itemSlotsGrid {
+    height: 50%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 3px;
+}
+
+.fillerElement {
+    border: 1px solid #000;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px #000 inset;
+}
 
 
 /*# sourceMappingURL=module.css.map */

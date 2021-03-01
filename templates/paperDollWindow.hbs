@@ -3,11 +3,14 @@
         <div class="paperDollImage">
             {{#each itemTypes.types}}
                 <div id="{{this}}" class="{{leftOrRight @index}}">
-                    <h3>{{this}}</h3>
-                    <div class="flexrow">
+                    <h3 style="height: 50%">{{this}}</h3>
+                    <div class="itemSlotsGrid">
                         {{#times ../itemTypes.slots ../itemTypes.types this}}
                             <button type="button" class="addBox"></button>
                         {{/times}}
+                        {{#createFillerElements ../itemTypes.slots ../itemTypes.types this}}
+                            <div class="fillerElement"></div>
+                        {{/createFillerElements}}
                     </div>
                 </div>
             {{/each}}
@@ -16,10 +19,13 @@
             {{#each weaponsTypes.types}}
                 <div id="{{this}}" class="centerItem">
                     <h3>{{this}}</h3>
-                    <div class="flexrow">
+                    <div class="itemSlotsGrid">
                         {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
                             <button type="button" class="addBox"></button>
                         {{/times}}
+                        {{#createFillerElements ../weaponsTypes.slots ../weaponsTypes.types this}}
+                            <div class="fillerElement"></div>
+                        {{/createFillerElements}}
                     </div>
                 </div>
             {{/each}}

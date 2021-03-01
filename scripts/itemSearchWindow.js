@@ -1,7 +1,7 @@
 export default class itemSearchWindow extends FormApplication {
-    constructor(itemList, source) {
+    constructor(filteredItems, source) {
         super();
-        this.itemList = itemList;
+        this.filteredItems = filteredItems;
         this.source = source;
     }
 
@@ -20,7 +20,7 @@ export default class itemSearchWindow extends FormApplication {
 
     getData(options) {
         return {
-            items: this.itemList
+            filteredItems: this.filteredItems
         }
     }
 
@@ -45,17 +45,18 @@ export default class itemSearchWindow extends FormApplication {
         const itemObjectsArray = [...event.currentTarget.parentNode.firstElementChild.children];
 
         itemObjectsArray.forEach((itemObject)=> {
-            const itemObjectText = itemObject.lastElementChild.innerText.toLowerCase()
-            const searchText = event.currentTarget.value.toLowerCase()
+            const itemObjectText = itemObject.lastElementChild.innerText.toLowerCase();
+            const searchText = event.currentTarget.value.toLowerCase();
+
             if (!itemObjectText.includes(searchText)) {
-                $(itemObject).hide()
-            } else $(itemObject).show()
+                $(itemObject).hide();
+            } else $(itemObject).show();
         })
     }
 
     activateListeners(html) {
         const itemsFromDisplay = html.find('.searchInternalGrid');
-        itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.itemList));
+        itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.filteredItems));
 
         const searchBar = html.find('.searchBar');
         searchBar.on('input', this.searchItems)
