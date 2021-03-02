@@ -1,10 +1,10 @@
 import {filterActorItems, filterEquipableItems} from "../scripts/lib/itemFiltering.js"
 import {registerHelpers} from "../scripts/lib/handlebarsHelpers.js";
-import itemSearchWindow from "./itemSearchWindow.js";
+import itemSearchApp from "./itemSearchApp.js";
 import {getItemsSlotArray} from "../scripts/settings.js";
 import {createImageTile} from "../scripts/lib/imageTile.js";
 
-export default class PaperDollWindow extends FormApplication {
+export default class PaperDollApp extends FormApplication {
     constructor(sourceActor) {
         super();
         this.sourceActor = sourceActor;
@@ -19,7 +19,7 @@ export default class PaperDollWindow extends FormApplication {
         return {
             ...super.defaultOptions,
             id: "paper-doll",
-            template: "modules/Equipment-Paper-Doll/templates/paperDollWindow.hbs",
+            template: "modules/Equipment-Paper-Doll/templates/paperDollApp.hbs",
             resizable: false,
             minimizable: true,
             title: "Paper Doll Viewer",
@@ -81,12 +81,12 @@ export default class PaperDollWindow extends FormApplication {
 
     renderSearchWindow(source, selectedItems, allItems) {
         const location = source.currentTarget.parentNode.parentNode;
-        new itemSearchWindow(selectedItems[location.id], allItems ,source).render(true);
+        new itemSearchApp(selectedItems[location.id], allItems ,source).render(true);
     }
 
     unequipItem (item) {
         const addBox = $('<button type="button" class="addBox"></button>');
-        addBox.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.items));
+        addBox.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
         item.parent().children().each((index, element) => {
             if (element.nodeName === 'SPAN' && element.id === 'tooltip' && element.className === `${item[0].id}`) element.remove();
         })

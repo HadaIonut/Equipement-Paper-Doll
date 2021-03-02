@@ -19,16 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Show all button">
-      <change afterPath="$PROJECT_DIR$/templates/personalSettings.hbs" afterDir="false" />
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Max 8 rings and some cleanup">
+      <change afterPath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/itemSearchWindow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/itemSearchApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollApp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollWindow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/deleted.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/itemSearchApp.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollApp.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/personalSettings.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/apps/personalSettingsApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
       <workItem from="1614664274951" duration="3677000" />
       <workItem from="1614669853168" duration="1205000" />
       <workItem from="1614671090661" duration="423000" />
-      <workItem from="1614671529772" duration="13883000" />
+      <workItem from="1614671529772" duration="16331000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -258,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614684239921</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Max 8 rings and some cleanup">
+      <created>1614696537384</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1614696537384</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +306,7 @@
     <MESSAGE value="Modified the context menu to not leave the screen on the right" />
     <MESSAGE value="Added tooltips and WIP on show all button" />
     <MESSAGE value="Show all button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Show all button" />
+    <MESSAGE value="Max 8 rings and some cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Max 8 rings and some cleanup" />
   </component>
 </project>
