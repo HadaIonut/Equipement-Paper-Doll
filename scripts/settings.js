@@ -363,4 +363,4 @@ const settingList = [
 
 ]
 
-export {getFilterArray, registerSettings, getItemsSlotArray}
+export {getFilterArray, registerSettings, getItemsSlotArray, getSetting}

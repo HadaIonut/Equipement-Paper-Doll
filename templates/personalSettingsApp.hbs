@@ -1,0 +1,8 @@
+<form>
+    <div>
+        {{#each items}}
+            <label for="{{this.name}}"> {{this.name}} </label>
+            <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.current}}">
+        {{/each}}
+    </div>
+</form>

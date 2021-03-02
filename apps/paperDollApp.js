@@ -3,6 +3,7 @@ import {registerHelpers} from "../scripts/lib/handlebarsHelpers.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {getItemsSlotArray} from "../scripts/settings.js";
 import {createImageTile} from "../scripts/lib/imageTile.js";
+import personalSettingsApp from "./personalSettingsApp.js";
 
 export default class PaperDollApp extends FormApplication {
     constructor(sourceActor) {
@@ -102,10 +103,20 @@ export default class PaperDollApp extends FormApplication {
         }])
     }
 
+    openPersonalSettings(html) {
+        const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
+        const openSettingsButton = $(`<a class="popout"> Open Settings </a>`);
+        openSettingsButton.on('click', () => {
+            new personalSettingsApp(this.sourceActor).render(true);
+        })
+        lastButton.before(openSettingsButton[0]);
+    }
+
     activateListeners(html) {
         const addBoxes = html.find('.addBox');
         addBoxes.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
 
+        this.openPersonalSettings(html);
         this.createNewContextMenu(html);
         this.replaceWithStoredItems(html, this.selectedItems, this.items)
         super.activateListeners(html);
