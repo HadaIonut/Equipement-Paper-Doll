@@ -19,11 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More refactor to the naming of the apps">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="WIP personal settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollApp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/personalSettingsApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +111,7 @@
       <workItem from="1614664274951" duration="3677000" />
       <workItem from="1614669853168" duration="1205000" />
       <workItem from="1614671090661" duration="423000" />
-      <workItem from="1614671529772" duration="19680000" />
+      <workItem from="1614671529772" duration="22309000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -268,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614699758438</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="WIP personal settings">
+      <created>1614703424906</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1614703424906</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +318,7 @@
     <MESSAGE value="Show all button" />
     <MESSAGE value="Max 8 rings and some cleanup" />
     <MESSAGE value="More refactor to the naming of the apps" />
-    <option name="LAST_COMMIT_MESSAGE" value="More refactor to the naming of the apps" />
+    <MESSAGE value="WIP personal settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP personal settings" />
   </component>
 </project>

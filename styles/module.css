@@ -138,4 +138,9 @@
 #ring .itemSlotsGrid {
     grid-template-rows: 1fr 1fr;
 }
+
+.personalSettingsContainer {
+    height: 500px;
+    width: 300px;
+}
 /*# sourceMappingURL=module.css.map */

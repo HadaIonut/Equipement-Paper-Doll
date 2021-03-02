@@ -24,12 +24,11 @@ export default class personalSettingsApp extends FormApplication {
         const itemsData = [];
         this.itemSlotNames.forEach((slotName) => {
             const name = `${slotName}Slots`
-            const current = this.currentSlotSettings?.filter((setting) => setting.name === slotName) || getSetting(name);
+            const current = this.currentSlotSettings?.filter((setting) => setting.name === name) || getSetting(name);
             itemsData.push({
-                name: name,
+                ...current[0],
                 min: 1,
                 max: name === 'ringSlots' ? 8: 4,
-                current: current
             })
         })
         return itemsData;
@@ -42,7 +41,12 @@ export default class personalSettingsApp extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        await this.sourceActor.setFlag("Equipment-Paper-Doll", "personalSettings", formData)
+        const formattedFromData = [];
+        Object.keys(formData).forEach((formName) => formattedFromData.push({
+            name: formName,
+            value: formData[formName]
+        }))
+        await this.sourceActor.setFlag("Equipment-Paper-Doll", "personalSettings", formattedFromData)
     }
 
     activateListeners(html) {

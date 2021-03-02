@@ -1,8 +1,14 @@
 <form>
-    <div>
+    <div class="personalSettingsContainer">
         {{#each items}}
-            <label for="{{this.name}}"> {{this.name}} </label>
-            <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.current}}">
+            <div class="form-group">
+                <label for="{{this.name}}"> {{this.name}} </label>
+                <div class="form-fields">
+                    <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.value}}">
+                    <span class="range-value">{{this.value}}</span>
+                </div>
+            </div>
         {{/each}}
+        <button type="submit" style="margin-top: 90px">Submit</button>
     </div>
 </form>
