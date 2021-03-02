@@ -19,14 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Added persistent weapons">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More design changes to the display and added removeable items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/itemSearchWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/itemSearchWindow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/handlebarsHelpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/paperDollWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/paperDollWindow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/itemSearchWindow.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/paperDollWindow.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollWindow.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +104,9 @@
       <workItem from="1614334718030" duration="12654000" />
       <workItem from="1614365643446" duration="23438000" />
       <workItem from="1614499250373" duration="10000" />
-      <workItem from="1614503118059" duration="34760000" />
+      <workItem from="1614503118059" duration="35430000" />
+      <workItem from="1614622451175" duration="8488000" />
+      <workItem from="1614664274951" duration="1112000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -223,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614540924118</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="More design changes to the display and added removeable items">
+      <created>1614613240050</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1614613240050</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +265,7 @@
     <MESSAGE value="Data extraction from paperDoll" />
     <MESSAGE value="Added persistence for main items (not for weapons)" />
     <MESSAGE value="Added persistent weapons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added persistent weapons" />
+    <MESSAGE value="More design changes to the display and added removeable items" />
+    <option name="LAST_COMMIT_MESSAGE" value="More design changes to the display and added removeable items" />
   </component>
 </project>

@@ -126,5 +126,8 @@
     box-shadow: 0 0 5px #000 inset;
 }
 
+.rightItem .itemSlotsGrid .addedItem #context-menu {
+    left: -100px;
+}
 
 /*# sourceMappingURL=module.css.map */
