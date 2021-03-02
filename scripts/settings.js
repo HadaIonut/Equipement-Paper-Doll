@@ -300,7 +300,7 @@ const settingList = [
             name: 'Number of ring slots',
             range: {
                 min: 1,
-                max: 4,
+                max: 8,
                 step: 1
             },
             default: 2,

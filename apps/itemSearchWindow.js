@@ -1,4 +1,4 @@
-import {createImageTile} from "./lib/imageTile.js";
+import {createImageTile} from "../scripts/lib/imageTile.js";
 
 export default class itemSearchWindow extends FormApplication {
     constructor(filteredItems, allItems, source) {

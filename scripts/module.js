@@ -1,4 +1,4 @@
-import PaperDollWindow from "./paperDollWindow.js";
+import PaperDollWindow from "../apps/paperDollWindow.js";
 import {registerSettings} from "./settings.js";
 
 Hooks.once('init', async () => {});

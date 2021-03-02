@@ -1,8 +1,8 @@
-import {filterActorItems, filterEquipableItems} from "./lib/itemFiltering.js"
-import {registerHelpers} from "./lib/handlebarsHelpers.js";
+import {filterActorItems, filterEquipableItems} from "../scripts/lib/itemFiltering.js"
+import {registerHelpers} from "../scripts/lib/handlebarsHelpers.js";
 import itemSearchWindow from "./itemSearchWindow.js";
-import {getItemsSlotArray} from "./settings.js";
-import {createImageTile} from "./lib/imageTile.js";
+import {getItemsSlotArray} from "../scripts/settings.js";
+import {createImageTile} from "../scripts/lib/imageTile.js";
 
 export default class PaperDollWindow extends FormApplication {
     constructor(sourceActor) {

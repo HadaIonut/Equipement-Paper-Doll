@@ -130,5 +130,12 @@
     left: -100px;
 }
 
+#ring {
+    grid-row: auto / span 2;
+    align-self: baseline;
+}
 
+#ring .itemSlotsGrid {
+    grid-template-rows: 1fr 1fr;
+}
 /*# sourceMappingURL=module.css.map */
