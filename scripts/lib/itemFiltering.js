@@ -51,4 +51,4 @@ const filterActorItems = (actorItems) => {
     return itemTypesObject;
 }
 
-export {filterActorItems};
+export {filterActorItems, filterEquipableItems};

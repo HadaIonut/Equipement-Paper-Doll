@@ -1,7 +1,10 @@
+import {createImageTile} from "./lib/imageTile.js";
+
 export default class itemSearchWindow extends FormApplication {
-    constructor(filteredItems, source) {
+    constructor(filteredItems, allItems, source) {
         super();
         this.filteredItems = filteredItems;
+        this.allItems = allItems;
         this.source = source;
     }
 
@@ -20,6 +23,7 @@ export default class itemSearchWindow extends FormApplication {
 
     getData(options) {
         return {
+            allItems: this.allItems,
             filteredItems: this.filteredItems
         }
     }
@@ -29,9 +33,7 @@ export default class itemSearchWindow extends FormApplication {
     }
 
     createNewTile(item) {
-        const newTile = $(`<div id='${item.data._id}' class="addedItem"><img src="${item.data.img}" ></div>`)[0];
-        const location = this.source.currentTarget;
-        location.replaceWith(newTile);
+        createImageTile(item, this.source.currentTarget);
         this.close();
     }
 
@@ -44,7 +46,7 @@ export default class itemSearchWindow extends FormApplication {
     searchItems(event) {
         const itemObjectsArray = [...event.currentTarget.parentNode.firstElementChild.children];
 
-        itemObjectsArray.forEach((itemObject)=> {
+        itemObjectsArray.forEach((itemObject) => {
             const itemObjectText = itemObject.lastElementChild.innerText.toLowerCase();
             const searchText = event.currentTarget.value.toLowerCase();
 
@@ -54,9 +56,20 @@ export default class itemSearchWindow extends FormApplication {
         })
     }
 
+    hideNonFilteredItems(displayedItems, filteredItems) {
+        const filteredItemsIds = [];
+        filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
+        displayedItems.each((index, item) => {
+            if (!filteredItemsIds.includes(item.id))
+                item.style.display = 'none'
+        })
+        console.log('yes');
+    }
+
     activateListeners(html) {
         const itemsFromDisplay = html.find('.searchInternalGrid');
-        itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.filteredItems));
+        itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.allItems));
+        this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)
 
         const searchBar = html.find('.searchBar');
         searchBar.on('input', this.searchItems)
