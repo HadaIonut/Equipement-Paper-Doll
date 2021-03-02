@@ -61,15 +61,24 @@ export default class itemSearchWindow extends FormApplication {
         filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
         displayedItems.each((index, item) => {
             if (!filteredItemsIds.includes(item.id))
-                item.style.display = 'none'
+                item.style.display = 'none';
         })
-        console.log('yes');
+    }
+
+    showAllItemsButton(html) {
+        const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
+        const showAllButton = $(`<a class="popout"> Show all </a>`);
+        showAllButton.on('click', (event) => {
+            $('.searchGrid').children().show()
+        })
+        lastButton.before(showAllButton[0]);
     }
 
     activateListeners(html) {
         const itemsFromDisplay = html.find('.searchInternalGrid');
         itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.allItems));
         this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)
+        this.showAllItemsButton(html);
 
         const searchBar = html.find('.searchBar');
         searchBar.on('input', this.searchItems)
