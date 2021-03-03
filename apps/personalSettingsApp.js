@@ -1,10 +1,22 @@
 import {getItemsSlotArray, getSetting} from "../scripts/settings.js";
 import itemSearchApp from "./itemSearchApp.js";
 
+/**
+ * Returns a filler slot
+ *
+ * @returns {*|jQuery|HTMLElement}
+ */
 const createFillerSlot = () => {
     return $('<div class="fillerElement"></div>')
 }
 
+/**
+ * Returns an equip new item button
+ *
+ * @param filteredItems - items that can be equipped on this slot
+ * @param allItems - all items held by the owner actor
+ * @returns {*|jQuery|HTMLElement}
+ */
 const createButtonSlot = (filteredItems, allItems) => {
     const button = $('<button type="button" class="addBox"></button>');
     button.on('click', (event) => {
@@ -35,6 +47,11 @@ export default class personalSettingsApp extends FormApplication {
         }
     }
 
+    /**
+     * Creates an array with the min/max/current/name value for each slot
+     *
+     * @returns {[{value: Number, min: 1, max: 4 or 8, current: Number}]}
+     */
     constructItemsData() {
         const itemsData = [];
         this.itemSlotNames.forEach((slotName) => {
@@ -59,6 +76,12 @@ export default class personalSettingsApp extends FormApplication {
         }
     }
 
+    /**
+     * Updates the paper doll with the new slot numbers
+     *
+     * @param numberOfSlots - new number of slots
+     * @param formName - name of the slot type ex: "head", "eyes"
+     */
     updatePaperDollView(numberOfSlots, formName) {
         const gridName = formName.slice(0, -5);
         const location = $(`#${gridName}`).children('.itemSlotsGrid');
@@ -75,9 +98,16 @@ export default class personalSettingsApp extends FormApplication {
             replaceableSlots.replaceWith(createButtonSlot(this.filteredItems[gridName], this.allItems))
 
         }
-        // const elementsToReplace = location.slice(0,)
     }
 
+    /**
+     * Stores setting as flags on actor
+     *
+     * @param event
+     * @param formData
+     * @returns {Promise<void>}
+     * @private
+     */
     async _updateObject(event, formData) {
         const formattedFromData = [];
         Object.keys(formData).forEach((formName) => {

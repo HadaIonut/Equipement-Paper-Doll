@@ -45,6 +45,12 @@ export default class PaperDollApp extends FormApplication {
         }
     }
 
+    /**
+     * Extracts the ids of the equipped items
+     *
+     * @returns { Array<object> }
+     * @exampleObject {head: [ids of all equipped items]}
+     */
     extractDataFromForm() {
         const divStructureArray = [...$('.paperDollImage')[0].children, ...$('.secondaryItems')[0].children];
         const formData = {};
@@ -61,8 +67,16 @@ export default class PaperDollApp extends FormApplication {
         return formData;
     }
 
+    /**
+     * On loading the app replaces the button tiles with the imageTiles of items that are saved
+     *
+     * @param html - app html
+     * @param storedItems - object that contains lists of what items ids are on each slot
+     * @param actorItems - all items from the actor
+     */
     replaceWithStoredItems(html, storedItems, actorItems) {
         if (!storedItems) return;
+
         Object.keys(storedItems).forEach((itemType) => {
             const slotsArray = [...html.find(`#${itemType}`).children('.itemSlotsGrid').children('button')];
             storedItems[itemType].forEach((itemSlot, index) => {
@@ -74,17 +88,36 @@ export default class PaperDollApp extends FormApplication {
         })
     }
 
+    /**
+     * Method called on submit, saves the stored items as a flag on the actor
+     *
+     * @param event - submit event
+     * @param formData - form data returned by the submit event, it get overwritten, idk why I need it
+     * @private
+     */
     async _updateObject(event, formData) {
         formData = this.extractDataFromForm();
 
         await this.sourceActor.setFlag("Equipment-Paper-Doll", "data", formData)
     }
 
+    /**
+     * Renders the search window
+     *
+     * @param source - event that caused the render
+     * @param selectedItems - items that match the slot filter
+     * @param allItems - all equipable items
+     */
     renderSearchWindow(source, selectedItems, allItems) {
         const location = source.currentTarget.parentNode.parentNode;
         new itemSearchApp(selectedItems[location.id], allItems ,source).render(true);
     }
 
+    /**
+     * Replaces a image tile with an empty slot
+     *
+     * @param item - item to be removed
+     */
     unequipItem (item) {
         const addBox = $('<button type="button" class="addBox"></button>');
         addBox.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
@@ -94,6 +127,11 @@ export default class PaperDollApp extends FormApplication {
         item.replaceWith(addBox);
     }
 
+    /**
+     * Creates a context menu in a given app
+     *
+     * @param html - app
+     */
     createNewContextMenu(html) {
         new ContextMenu(html, '.addedItem', [{
             name: 'Unequip item',
@@ -103,6 +141,12 @@ export default class PaperDollApp extends FormApplication {
         }])
     }
 
+    /**
+     * Adds the button that opens the personal settings screen
+     * Only creates the button if the user is a GM
+     *
+     * @param html - app
+     */
     openPersonalSettings(html) {
         if (!game.user.isGM) return;
 

@@ -32,17 +32,33 @@ export default class itemSearchApp extends FormApplication {
 
     }
 
+    /**
+     * Creates an image tile in the place of the clicked button
+     *
+     * @param item - item to "equip"
+     */
     createNewTile(item) {
         createImageTile(item, this.source.currentTarget);
         this.close();
     }
 
+    /**
+     * Gets the item from the id of the clicked object on the grid
+     *
+     * @param source - event trigger by the click
+     * @param itemList - items available for equipment
+     */
     prepareDataForNewTile(source, itemList) {
         const selectedItemId = source.currentTarget.id;
         const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0];
         this.createNewTile(selectedItem);
     }
 
+    /**
+     * Hides the items that do not match the text into the search bar
+     *
+     * @param event - new character added to the search bar
+     */
     searchItems(event) {
         const itemObjectsArray = [...event.currentTarget.parentNode.firstElementChild.children];
 
@@ -56,6 +72,13 @@ export default class itemSearchApp extends FormApplication {
         })
     }
 
+    /**
+     * When the list is made all equipable items are loaded, this function hides the ones that do not match the filter on
+     * the current slot, idk why I made it this way
+     *
+     * @param displayedItems - JQ object of all the items in the list
+     * @param filteredItems - the items that match the slot filter
+     */
     hideNonFilteredItems(displayedItems, filteredItems) {
         const filteredItemsIds = [];
         filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
@@ -67,6 +90,11 @@ export default class itemSearchApp extends FormApplication {
         })
     }
 
+    /**
+     * Appends the show all items button and calls the function to make the items that do not match the slot filter visible
+     *
+     * @param html - html of the app
+     */
     showAllItemsButton(html) {
         const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
         const showAllButton = $(`<a class="popout"> Show all </a>`);
