@@ -35,12 +35,12 @@ export default class PaperDollApp extends FormApplication {
             selectedItems: this.selectedItems,
             itemTypes: {
                 types: itemSlotNames,
-                slots: getItemsSlotArray(itemSlotNames)
+                slots: getItemsSlotArray(itemSlotNames, this.sourceActor)
             },
             items: {...this.filteredItems},
             weaponsTypes: {
                 types: weaponSlotNames,
-                slots: getItemsSlotArray(weaponSlotNames)
+                slots: getItemsSlotArray(weaponSlotNames, this.sourceActor)
             }
         }
     }
@@ -64,10 +64,10 @@ export default class PaperDollApp extends FormApplication {
     replaceWithStoredItems(html, storedItems, actorItems) {
         if (!storedItems) return;
         Object.keys(storedItems).forEach((itemType) => {
+            const slotsArray = [...html.find(`#${itemType}`).children('.itemSlotsGrid').children('button')];
             storedItems[itemType].forEach((itemSlot, index) => {
                 if (itemSlot === '') return;
 
-                const slotsArray = [...html.find(`#${itemType}`)[0].lastElementChild.children];
                 const item = actorItems.filter(localItem => localItem.data._id === itemSlot)[0];
                 createImageTile(item, slotsArray[index])
             })
@@ -107,7 +107,7 @@ export default class PaperDollApp extends FormApplication {
         const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
         const openSettingsButton = $(`<a class="popout"> Open Settings </a>`);
         openSettingsButton.on('click', () => {
-            new personalSettingsApp(this.sourceActor).render(true);
+            new personalSettingsApp(this.sourceActor, this.filteredItems, this.equipableItems).render(true);
         })
         lastButton.before(openSettingsButton[0]);
     }
@@ -116,9 +116,9 @@ export default class PaperDollApp extends FormApplication {
         const addBoxes = html.find('.addBox');
         addBoxes.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
 
+        this.replaceWithStoredItems(html, this.selectedItems, this.items)
         this.openPersonalSettings(html);
         this.createNewContextMenu(html);
-        this.replaceWithStoredItems(html, this.selectedItems, this.items)
         super.activateListeners(html);
     }
 }

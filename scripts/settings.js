@@ -15,9 +15,14 @@ const getFilterArray = (slot) => {
     return [...settingData.split(', ')];
 }
 
-const getItemsSlotArray = (namesArray) => {
+const getItemsSlotArray = (namesArray, sourceActor) => {
     const itemSlotsArray = [];
-    namesArray.forEach((item) => itemSlotsArray.push(getSetting(`${item}Slots`)));
+    const personalSettings = sourceActor.getFlag(moduleTitle, 'personalSettings');
+    namesArray.forEach((item) => {
+        const settingName = `${item}Slots`
+        const personalSettingsForItem = personalSettings.filter((setting) => setting.name === settingName)[0]
+        itemSlotsArray.push(personalSettingsForItem?.value || getSetting(settingName))
+    });
     return itemSlotsArray;
 }
 

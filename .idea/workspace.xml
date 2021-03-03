@@ -19,11 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="WIP personal settings">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Finished the personal settings app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollApp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/personalSettingsApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +111,8 @@
       <workItem from="1614664274951" duration="3677000" />
       <workItem from="1614669853168" duration="1205000" />
       <workItem from="1614671090661" duration="423000" />
-      <workItem from="1614671529772" duration="22309000" />
+      <workItem from="1614671529772" duration="22556000" />
+      <workItem from="1614752976525" duration="11235000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -274,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614703424906</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Finished the personal settings app">
+      <created>1614707599266</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1614707599266</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,6 +327,7 @@
     <MESSAGE value="Max 8 rings and some cleanup" />
     <MESSAGE value="More refactor to the naming of the apps" />
     <MESSAGE value="WIP personal settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP personal settings" />
+    <MESSAGE value="Finished the personal settings app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished the personal settings app" />
   </component>
 </project>
