@@ -20,7 +20,7 @@ const getItemsSlotArray = (namesArray, sourceActor) => {
     const personalSettings = sourceActor.getFlag(moduleTitle, 'personalSettings');
     namesArray.forEach((item) => {
         const settingName = `${item}Slots`
-        const personalSettingsForItem = personalSettings.filter((setting) => setting.name === settingName)[0]
+        const personalSettingsForItem = personalSettings?.filter((setting) => setting.name === settingName)[0]
         itemSlotsArray.push(personalSettingsForItem?.value || getSetting(settingName))
     });
     return itemSlotsArray;

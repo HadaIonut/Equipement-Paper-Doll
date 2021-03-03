@@ -2,7 +2,7 @@
     <div class="personalSettingsContainer">
         {{#each items}}
             <div class="form-group">
-                <label for="{{this.name}}"> {{this.name}} </label>
+                <label for="{{this.name}}"> {{prettifyTextToDisplay this.name}} </label>
                 <div class="form-fields">
                     <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.value}}">
                     <span class="range-value">{{this.value}}</span>

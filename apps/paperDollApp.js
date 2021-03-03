@@ -104,6 +104,8 @@ export default class PaperDollApp extends FormApplication {
     }
 
     openPersonalSettings(html) {
+        if (!game.user.isGM) return;
+
         const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
         const openSettingsButton = $(`<a class="popout"> Open Settings </a>`);
         openSettingsButton.on('click', () => {
