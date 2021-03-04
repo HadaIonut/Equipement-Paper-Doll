@@ -8,6 +8,13 @@ const show = (popperInstance, toolTip) => {
     popperInstance.update();
 }
 
+/**
+ * Adds the events for the tooltip
+ *
+ * @param newTile - image tile
+ * @param popperInstance - instance returned by popperJS
+ * @param toolTip - tooltip object
+ */
 const createEvents = (newTile, popperInstance, toolTip) => {
     const showEvents = ['mouseenter', 'focus'];
     const hideEvents = ['mouseleave', 'blur'];
@@ -21,6 +28,13 @@ const createEvents = (newTile, popperInstance, toolTip) => {
     });
 }
 
+/**
+ * Creates an image tile a given location.
+ * This image tile has a tooltip made py popperJs
+ *
+ * @param item - item equipped
+ * @param location
+ */
 const createImageTile = (item, location) => {
     if (!item) return;
     const newTile = $(`<div id='${item.data._id}' class="addedItem" aria-describedby="tooltip"><img src="${item.data.img}" ></div>`);

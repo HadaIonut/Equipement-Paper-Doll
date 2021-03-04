@@ -10,11 +10,24 @@ const registerSettings = () => {
 
 const getSetting = (key) => game.settings.get(moduleTitle, key);
 
+/**
+ * Returns a list of all keywords to filter by on a body part
+ *
+ * @param slot - body part
+ * @returns {*[]}
+ */
 const getFilterArray = (slot) => {
     const settingData = getSetting(`${slot}Filter`);
     return [...settingData.split(', ')];
 }
 
+/**
+ * Returns a list of the number of available slots for each body part
+ *
+ * @param namesArray - list of body parts
+ * @param sourceActor - actor
+ * @returns {[]}
+ */
 const getItemsSlotArray = (namesArray, sourceActor) => {
     const itemSlotsArray = [];
     const personalSettings = sourceActor.getFlag(moduleTitle, 'personalSettings');
@@ -32,6 +45,7 @@ const settingList = [
         data: {
             type: String,
             name: "Head slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "helmet, circlet, headband, helm, crown, hat",
             scope: "world",
             config: true,
@@ -43,6 +57,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of head slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -58,6 +73,7 @@ const settingList = [
         data: {
             type: String,
             name: "Eyes slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "goggle, eye",
             scope: "world",
             config: true,
@@ -69,6 +85,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of eyes slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -84,6 +101,7 @@ const settingList = [
         data: {
             type: String,
             name: "Neck slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "amulet, necklace, periapt",
             scope: "world",
             config: true,
@@ -95,6 +113,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of neck slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -110,6 +129,7 @@ const settingList = [
         data: {
             type: String,
             name: "Cape slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "cape, backpack, haversack, mantle, robe, cloak",
             scope: "world",
             config: true,
@@ -121,6 +141,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of cape slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -136,6 +157,7 @@ const settingList = [
         data: {
             type: String,
             name: "Back slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "",
             scope: "world",
             config: true,
@@ -147,6 +169,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of back slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -162,6 +185,7 @@ const settingList = [
         data: {
             type: String,
             name: "Torso slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "breastplate, armor, mail, mantle, chain, plate, clothes, shirt",
             scope: "world",
             config: true,
@@ -173,6 +197,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of torso slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -188,6 +213,7 @@ const settingList = [
         data: {
             type: String,
             name: "Waist slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "belt",
             scope: "world",
             config: true,
@@ -199,6 +225,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of waist slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -214,6 +241,7 @@ const settingList = [
         data: {
             type: String,
             name: "Wrists slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "shackle, manacles, bracers",
             scope: "world",
             config: true,
@@ -225,6 +253,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of wrists slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -240,6 +269,7 @@ const settingList = [
         data: {
             type: String,
             name: "Hands slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "gloves",
             scope: "world",
             config: true,
@@ -251,6 +281,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of hands slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -266,6 +297,7 @@ const settingList = [
         data: {
             type: String,
             name: "Feet slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "boot",
             scope: "world",
             config: true,
@@ -277,6 +309,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of feet slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -292,6 +325,7 @@ const settingList = [
         data: {
             type: String,
             name: "Ring slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "ring",
             scope: "world",
             config: true,
@@ -303,6 +337,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of ring slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 8,
@@ -318,6 +353,7 @@ const settingList = [
         data: {
             type: String,
             name: "Main hand slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "",
             scope: "world",
             config: true,
@@ -329,6 +365,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of main hand slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,
@@ -344,6 +381,7 @@ const settingList = [
         data: {
             type: String,
             name: "Off hand slot filter ",
+            hint: "List of keywords that select items from actor's inventory for each slot",
             default: "shield",
             scope: "world",
             config: true,
@@ -355,6 +393,7 @@ const settingList = [
         data: {
             type: Number,
             name: 'Number of off hand slots',
+            hint: 'Number of available slots for this body part',
             range: {
                 min: 1,
                 max: 4,

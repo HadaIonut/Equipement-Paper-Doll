@@ -21,9 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Finished the personal settings app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/itemSearchApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/itemSearchApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/personalSettingsApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/imageTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/imageTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,8 @@
       <workItem from="1614671529772" duration="22556000" />
       <workItem from="1614752976525" duration="16153000" />
       <workItem from="1614789975076" duration="170000" />
-      <workItem from="1614803034430" duration="1552000" />
+      <workItem from="1614803034430" duration="1862000" />
+      <workItem from="1614854947070" duration="2396000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -298,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614789919977</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Commented the apps and cleaup">
+      <created>1614804884958</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1614804884958</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +329,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Init" />
     <MESSAGE value="Initial commit" />
     <MESSAGE value="WIP item filtering &#10;WIP item dropdown display" />
     <MESSAGE value="Finished MVP for display" />
@@ -346,6 +353,7 @@
     <MESSAGE value="Finished the personal settings app" />
     <MESSAGE value="Added individual settings for each actor" />
     <MESSAGE value="Beautify displayed text and added check for dm on settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Beautify displayed text and added check for dm on settings" />
+    <MESSAGE value="Commented the apps and cleaup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commented the apps and cleaup" />
   </component>
 </project>

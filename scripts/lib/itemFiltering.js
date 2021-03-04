@@ -17,21 +17,46 @@ const itemsContains = (itemsArray, namesArray) => {
     return itemsList;
 }
 
+/**
+ * Returns a list of items that can be equipped
+ *
+ * @param actorItems
+ * @returns {*}
+ */
 const filterEquipableItems = (actorItems) => {
     const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot'];
     return actorItems.filter((item) => equipableTypes.includes(item.type));
 }
 
-const findWeapons = (items) => {
-    return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, getFilterArray('mainHand')))
+/**
+ * Returns weapons and items that match the filter
+ *
+ * @param items - all items
+ * @param filters
+ * @returns {*}
+ */
+const findWeaponsAndFilter = (items, filters) => {
+    return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, filters))
 }
 
+/**
+ * Returns the items that can be equipped on offhand
+ *
+ * @param items
+ * @returns {*}
+ */
 const findOffHand = (items) => {
     const weapons = items.filter((item) => item.type === 'weapon');
     const secondary = itemsContains(items, getFilterArray('offHand'));
     return weapons.concat(secondary);
 }
 
+/**
+ * Returns an object with the items that can be equipped on each body part
+ *
+ * @param actorItems - all actor items
+ * @returns {{}}
+ */
 const filterActorItems = (actorItems) => {
     const itemTypesObject = {};
     const equipableItems = filterEquipableItems(actorItems);
@@ -45,7 +70,8 @@ const filterActorItems = (actorItems) => {
     itemTypesObject['hands'] = itemsContains(equipableItems, getFilterArray('hands'));
     itemTypesObject['feet'] = itemsContains(equipableItems, getFilterArray('feet'));
     itemTypesObject['ring'] = itemsContains(equipableItems, getFilterArray('ring'));
-    itemTypesObject['mainHand'] = findWeapons(equipableItems);
+    itemTypesObject['back'] = findWeaponsAndFilter(equipableItems, getFilterArray('back'))
+    itemTypesObject['mainHand'] = findWeaponsAndFilter(equipableItems, getFilterArray('mainHand'));
     itemTypesObject['offHand'] = findOffHand(equipableItems);
 
     return itemTypesObject;
