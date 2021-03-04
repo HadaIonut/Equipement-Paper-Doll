@@ -110,7 +110,7 @@ export default class PaperDollApp extends FormApplication {
      */
     renderSearchWindow(source, selectedItems, allItems) {
         const location = source.currentTarget.parentNode.parentNode;
-        new itemSearchApp(selectedItems[location.id], allItems ,source).render(true);
+        new itemSearchApp(selectedItems[location.id], allItems, source).render(true);
     }
 
     /**
@@ -118,7 +118,7 @@ export default class PaperDollApp extends FormApplication {
      *
      * @param item - item to be removed
      */
-    unequipItem (item) {
+    unequipItem(item) {
         const addBox = $('<button type="button" class="addBox"></button>');
         addBox.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
         item.parent().children().each((index, element) => {

@@ -1,6 +1,6 @@
 import {createImageTile} from "../scripts/lib/imageTile.js";
 
-export default class itemSearchApp extends FormApplication {
+export default class itemSearchApp extends Application {
     constructor(filteredItems, allItems, source) {
         super();
         this.filteredItems = filteredItems;
@@ -26,10 +26,6 @@ export default class itemSearchApp extends FormApplication {
             allItems: this.allItems,
             filteredItems: this.filteredItems
         }
-    }
-
-    async _updateObject(event, formData) {
-
     }
 
     /**
@@ -72,6 +68,12 @@ export default class itemSearchApp extends FormApplication {
         })
     }
 
+    findEquippedItems() {
+        const IDs = [];
+        $('.itemSlotsGrid').children('div .addedItem').each((index, item) => IDs.push(item.id));
+        return IDs;
+    }
+
     /**
      * When the list is made all equipable items are loaded, this function hides the ones that do not match the filter on
      * the current slot, idk why I made it this way
@@ -81,9 +83,10 @@ export default class itemSearchApp extends FormApplication {
      */
     hideNonFilteredItems(displayedItems, filteredItems) {
         const filteredItemsIds = [];
+        const equippedItems = this.findEquippedItems();
         filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
         displayedItems.each((index, item) => {
-            if (!filteredItemsIds.includes(item.id)) {
+            if (!(filteredItemsIds.includes(item.id)) || equippedItems.includes(item.id)) {
                 item.style.display = 'none';
                 $(item).addClass('notInFilter');
             }
@@ -105,6 +108,7 @@ export default class itemSearchApp extends FormApplication {
         })
         lastButton.before(showAllButton[0]);
     }
+
 
     activateListeners(html) {
         const itemsFromDisplay = html.find('.searchInternalGrid');
