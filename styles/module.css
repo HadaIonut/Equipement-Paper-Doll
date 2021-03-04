@@ -54,6 +54,7 @@
 
 
 .addBox {
+    background-image: url(../../../ui/parchment.jpg);
     height: 45px;
     width: 45px;
     border: 1px solid #000;
@@ -122,7 +123,7 @@
 .fillerElement {
     border: 1px solid #000;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     box-shadow: 0 0 5px #000 inset;
 }
 
