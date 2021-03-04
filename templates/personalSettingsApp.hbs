@@ -9,6 +9,15 @@
                 </div>
             </div>
         {{/each}}
-        <button type="submit" style="margin-top: 90px">Submit</button>
+        <div class="form-group">
+            <label>Background art: </label>
+            <div class="form-fields">
+                <button class="imageBrowser" type="button"> <i class="fas fa-file-import fa-fw"></i> </button>
+                <input class="imagePath" type="text" name="img" placeholder="File Path" value="{{image}}">
+            </div>
+            <p class="notes">Select the background image. To go back to the default one, clear the text field and restart the paper doll view </p>
+        </div>
+
+        <button type="submit" style="margin-top: 25px">Submit</button>
     </div>
 </form>

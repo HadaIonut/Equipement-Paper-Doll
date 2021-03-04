@@ -72,7 +72,8 @@ export default class personalSettingsApp extends FormApplication {
 
     getData(options) {
         return {
-            items: this.constructItemsData()
+            items: this.constructItemsData(),
+            image: this.currentSlotSettings?.filter(obj => obj.name === 'image')[0].value
         }
     }
 
@@ -111,20 +112,45 @@ export default class personalSettingsApp extends FormApplication {
     async _updateObject(event, formData) {
         const formattedFromData = [];
         Object.keys(formData).forEach((formName) => {
-            const globalSetting = getSetting(formName);
-            this.updatePaperDollView(formData[formName], formName);
+            if (formName === 'img') {
+                formattedFromData.push({
+                    name: 'image',
+                    value: formData[formName]
+                })
+            } else {
+                const globalSetting = getSetting(formName);
+                this.updatePaperDollView(formData[formName], formName);
 
-            if (formData[formName] === globalSetting) return;
+                if (formData[formName] === globalSetting) return;
 
-            formattedFromData.push({
-                name: formName,
-                value: formData[formName]
-            })
+                formattedFromData.push({
+                    name: formName,
+                    value: formData[formName]
+                })
+            }
+
         })
         await this.sourceActor.setFlag("Equipment-Paper-Doll", "personalSettings", formattedFromData);
     }
 
+    createFilePicker(html) {
+        html.find($('.imageBrowser')).click(async (ev) => {
+            await new FilePicker({
+                type: 'image',
+                current: this.currentSlotSettings?.filter(obj => obj.name === 'image')?.[0]?.value || '',
+                callback: (path) => {
+                    const paperDollImage = $('.paperDollImage')
+                    paperDollImage.css('background', `url(./${path}) no-repeat center`);
+                    paperDollImage.css('background-size', '600px 480px');
+                    $('.imagePath').val(`./${path}`);
+                }
+            }).render(true);
+        })
+
+    }
+
     activateListeners(html) {
+        this.createFilePicker(html);
         super.activateListeners(html);
     }
 

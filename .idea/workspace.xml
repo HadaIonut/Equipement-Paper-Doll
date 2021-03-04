@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Finished the personal settings app">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More clean-up and removed equipped items from the search list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/itemSearchApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/itemSearchApp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/paperDollApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/personalSettingsApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/paperDollApp.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paperDollApp.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/personalSettingsApp.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,8 @@
       <workItem from="1614752976525" duration="16153000" />
       <workItem from="1614789975076" duration="170000" />
       <workItem from="1614803034430" duration="1862000" />
-      <workItem from="1614854947070" duration="5517000" />
+      <workItem from="1614854947070" duration="6171000" />
+      <workItem from="1614873991417" duration="4922000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -312,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614857408538</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="More clean-up and removed equipped items from the search list">
+      <created>1614869019373</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1614869019373</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +345,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="WIP item filtering &#10;WIP item dropdown display" />
     <MESSAGE value="Finished MVP for display" />
     <MESSAGE value="Populated the dropdowns with the actors items" />
     <MESSAGE value="Persistent selections" />
@@ -360,6 +369,7 @@
     <MESSAGE value="Beautify displayed text and added check for dm on settings" />
     <MESSAGE value="Commented the apps and cleaup" />
     <MESSAGE value="Commented everything and added hints to global settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commented everything and added hints to global settings" />
+    <MESSAGE value="More clean-up and removed equipped items from the search list" />
+    <option name="LAST_COMMIT_MESSAGE" value="More clean-up and removed equipped items from the search list" />
   </component>
 </project>

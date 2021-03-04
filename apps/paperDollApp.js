@@ -5,6 +5,10 @@ import {getItemsSlotArray} from "../scripts/settings.js";
 import {createImageTile} from "../scripts/lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
 
+const getBackgroundImageFromActorFlags = (sourceActor) => {
+    return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
+}
+
 export default class PaperDollApp extends FormApplication {
     constructor(sourceActor) {
         super();
@@ -41,7 +45,7 @@ export default class PaperDollApp extends FormApplication {
             weaponsTypes: {
                 types: weaponSlotNames,
                 slots: getItemsSlotArray(weaponSlotNames, this.sourceActor)
-            }
+            },
         }
     }
 
@@ -141,6 +145,14 @@ export default class PaperDollApp extends FormApplication {
         }])
     }
 
+    setBackgroundImage(html) {
+        const backgroundContainer = html.find('.paperDollImage');
+        const path = getBackgroundImageFromActorFlags(this.sourceActor);
+        if (!path) return;
+        backgroundContainer.css('background', `url(./${path}) no-repeat center`);
+        backgroundContainer.css('background-size', '600px 480px');
+    }
+
     /**
      * Adds the button that opens the personal settings screen
      * Only creates the button if the user is a GM
@@ -159,6 +171,7 @@ export default class PaperDollApp extends FormApplication {
     }
 
     activateListeners(html) {
+        this.setBackgroundImage(html);
         const addBoxes = html.find('.addBox');
         addBoxes.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
 
