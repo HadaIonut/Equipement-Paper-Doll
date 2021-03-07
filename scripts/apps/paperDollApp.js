@@ -150,7 +150,7 @@ export default class PaperDollApp extends FormApplication {
         const path = getBackgroundImageFromActorFlags(this.sourceActor);
         if (!path) return;
         backgroundContainer.css('background', `url(./${path}) no-repeat center`);
-        backgroundContainer.css('background-size', '600px 480px');
+        backgroundContainer.css('background-size', 'contain');
     }
 
     /**

@@ -10,7 +10,7 @@ Hooks.once('ready', async () => {
 
 Hooks.on('renderActorSheet', (obj, html) => {
     let element = html.find(".window-header .window-title");
-    let button = $(`<a class="popout" style><i class="fas fa-ruler"></i>Open paper doll</a>`);
+    let button = $(`<a class="popout" style><i class="fas fa-ruler"></i>Open Paper Doll</a>`);
     button.on('click', () => {
         new PaperDollApp(obj.object).render(true);
     })

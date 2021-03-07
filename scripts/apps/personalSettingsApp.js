@@ -141,7 +141,7 @@ export default class personalSettingsApp extends FormApplication {
                 callback: (path) => {
                     const paperDollImage = $('.paperDollImage')
                     paperDollImage.css('background', `url(./${path}) no-repeat center`);
-                    paperDollImage.css('background-size', '600px 480px');
+                    paperDollImage.css('background-size', 'contain');
                     $('.imagePath').val(`./${path}`);
                 }
             }).render(true);
