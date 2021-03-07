@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More clean-up and removed equipped items from the search list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts/lib/popperJs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -114,7 +114,9 @@
       <workItem from="1614789975076" duration="170000" />
       <workItem from="1614803034430" duration="1862000" />
       <workItem from="1614854947070" duration="6171000" />
-      <workItem from="1614873991417" duration="5884000" />
+      <workItem from="1614873991417" duration="6320000" />
+      <workItem from="1614956334110" duration="3000" />
+      <workItem from="1615097360512" duration="286000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -326,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614879048057</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="light styling">
+      <created>1614880489856</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1614880489856</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +358,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Populated the dropdowns with the actors items" />
     <MESSAGE value="Persistent selections" />
     <MESSAGE value="Finished design for the paper doll view" />
     <MESSAGE value="WIP new item display" />
@@ -374,6 +382,7 @@
     <MESSAGE value="Commented everything and added hints to global settings" />
     <MESSAGE value="More clean-up and removed equipped items from the search list" />
     <MESSAGE value="Added changeable background images" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added changeable background images" />
+    <MESSAGE value="light styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="light styling" />
   </component>
 </project>
