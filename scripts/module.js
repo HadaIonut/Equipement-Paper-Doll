@@ -1,4 +1,4 @@
-import PaperDollApp from "../apps/paperDollApp.js";
+import PaperDollApp from "./apps/paperDollApp.js";
 import {registerSettings} from "./settings.js";
 
 Hooks.once('init', async () => {});

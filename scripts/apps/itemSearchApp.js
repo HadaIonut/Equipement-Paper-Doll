@@ -1,4 +1,4 @@
-import {createImageTile} from "../scripts/lib/imageTile.js";
+import {createImageTile} from "../lib/imageTile.js";
 
 export default class itemSearchApp extends Application {
     constructor(filteredItems, allItems, source) {

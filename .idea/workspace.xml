@@ -21,7 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="More clean-up and removed equipped items from the search list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/itemSearchApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/itemSearchApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/personalSettingsApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,11 +85,11 @@
       <recent name="C:\Users\Marian\OneDrive\Documents\ProiectePersonale\fvtt-module-template\scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\personalProjects\Equipement-Paper-Doll\scripts" />
       <recent name="C:\personalProjects\Equipement-Paper-Doll\apps" />
       <recent name="C:\personalProjects\Equipement-Paper-Doll\styles" />
       <recent name="C:\personalProjects\Equipement-Paper-Doll\scripts\lib" />
       <recent name="C:\personalProjects\Equipement-Paper-Doll" />
-      <recent name="C:\personalProjects\Equipement-Paper-Doll\templates" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -116,7 +119,7 @@
       <workItem from="1614854947070" duration="6171000" />
       <workItem from="1614873991417" duration="6320000" />
       <workItem from="1614956334110" duration="3000" />
-      <workItem from="1615097360512" duration="286000" />
+      <workItem from="1615097360512" duration="1163000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -335,7 +338,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614880489856</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="manifest">
+      <created>1615097660295</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1615097660295</updated>
+    </task>
+    <task id="LOCAL-00033" summary="manifest">
+      <created>1615097922363</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1615097922363</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +375,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Persistent selections" />
     <MESSAGE value="Finished design for the paper doll view" />
     <MESSAGE value="WIP new item display" />
     <MESSAGE value="Added filters" />
@@ -383,6 +399,7 @@
     <MESSAGE value="More clean-up and removed equipped items from the search list" />
     <MESSAGE value="Added changeable background images" />
     <MESSAGE value="light styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="light styling" />
+    <MESSAGE value="manifest" />
+    <option name="LAST_COMMIT_MESSAGE" value="manifest" />
   </component>
 </project>

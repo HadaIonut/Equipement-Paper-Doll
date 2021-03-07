@@ -1,4 +1,4 @@
-import {getItemsSlotArray, getSetting} from "../scripts/settings.js";
+import {getItemsSlotArray, getSetting} from "../settings.js";
 import itemSearchApp from "./itemSearchApp.js";
 
 /**
