@@ -1,13 +1,12 @@
 {
   "name": "Equipment-Paper-Doll",
   "title": "Equipment-Paper-Doll",
-  "description": "",
+  "description": "Provides a classic paper doll style view of your equipped items.",
   "version": "0.0.1",
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.9",
   "author": "HadaIonut",
   "dependencies": [
-
   ],
   "esmodules": [
     "/scripts/module.js"
