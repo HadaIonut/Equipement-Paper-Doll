@@ -1,7 +1,7 @@
 {
   "name": "Equipment-Paper-Doll",
   "title": "Equipment-Paper-Doll",
-  "description": "Provides a classic paper doll style view of your equipped items.",
+  "description": "Equipment Paper Doll is a module that offers an immersive interface for equipping items on your actors.",
   "version": "0.0.1",
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.9",
