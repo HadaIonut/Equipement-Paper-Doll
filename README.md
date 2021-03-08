@@ -7,11 +7,13 @@ Equipment Paper Doll is a module that offers an immersive interface for equippin
 
 All actors have an individual interface where they can equip items present in their inventories.
 ![img](https://i.imgur.com/uMBkZ2Z.png)
+
 Note: Equipping items here does not have an actual effect, it is just a visual tool for what items go where on your
 actor's body.
 
 For convenience each body part has a list of items that matches some filters specific for that part.
 ![img](https://i.imgur.com/V511K7d.gif)
+
 If you want to equip an item that does not match the filter you can always see all items in the inventory.
 
 ## Settings
