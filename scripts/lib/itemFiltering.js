@@ -24,7 +24,7 @@ const itemsContains = (itemsArray, namesArray) => {
  * @returns {*}
  */
 const filterEquipableItems = (actorItems) => {
-    const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot'];
+    const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot', 'consumable', 'tool'];
     return actorItems.filter((item) => equipableTypes.includes(item.type));
 }
 

@@ -1,6 +1,5 @@
 import {filterActorItems, filterEquipableItems} from "../lib/itemFiltering.js"
 import {registerHelpers} from "../lib/handlebarsHelpers.js";
-import itemSearchApp from "./itemSearchApp.js";
 import {getItemsSlotArray} from "../settings.js";
 import {createImageTile} from "../lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
@@ -10,13 +9,14 @@ const getBackgroundImageFromActorFlags = (sourceActor) => {
 }
 
 export default class PaperDollApp extends FormApplication {
-    constructor(sourceActor) {
+    constructor(sourceActor, itemSearchWindow) {
         super();
         this.sourceActor = sourceActor;
         this.items = sourceActor.items.entries;
         this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
         this.equipableItems = filterEquipableItems(this.items);
         this.filteredItems = filterActorItems(this.items);
+        this.itemSearchWindow = itemSearchWindow;
     }
 
     static get defaultOptions() {
@@ -114,7 +114,8 @@ export default class PaperDollApp extends FormApplication {
      */
     renderSearchWindow(source, selectedItems, allItems) {
         const location = source.currentTarget.parentNode.parentNode;
-        new itemSearchApp(selectedItems[location.id], allItems, source).render(true);
+        this.itemSearchWindow.setWindowData(selectedItems[location.id], allItems, source);
+        this.itemSearchWindow.render(true);
     }
 
     /**
@@ -124,7 +125,9 @@ export default class PaperDollApp extends FormApplication {
      */
     unequipItem(item) {
         const addBox = $('<button type="button" class="addBox"></button>');
-        addBox.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
+        addBox.on('click', (source) => {
+            this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+        });
         item.parent().children().each((index, element) => {
             if (element.nodeName === 'SPAN' && element.id === 'tooltip' && element.className === `${item[0].id}`) element.remove();
         })
@@ -173,7 +176,9 @@ export default class PaperDollApp extends FormApplication {
     activateListeners(html) {
         this.setBackgroundImage(html);
         const addBoxes = html.find('.addBox');
-        addBoxes.on('click', (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems));
+        addBoxes.on('click', (source) => {
+            this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+        });
 
         this.replaceWithStoredItems(html, this.selectedItems, this.items)
         this.openPersonalSettings(html);

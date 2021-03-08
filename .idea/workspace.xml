@@ -19,13 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Moved apps folder to scrips">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Before done changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/apps/itemSearchApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/itemSearchApp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/apps/personalSettingsApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/personalSettingsApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/itemFiltering.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/paperDollFigure.svg" beforeDir="false" afterPath="$PROJECT_DIR$/styles/static/paperDollFigure.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +40,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="tidy5eSheetFix" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -121,7 +125,8 @@
       <workItem from="1614873991417" duration="6320000" />
       <workItem from="1614956334110" duration="3000" />
       <workItem from="1615097360512" duration="2241000" />
-      <workItem from="1615135449124" duration="1700000" />
+      <workItem from="1615135449124" duration="3155000" />
+      <workItem from="1615181139758" duration="8253000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -361,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615098616193</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Before done changes">
+      <created>1615137814023</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1615137814023</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,7 +396,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="WIP new item display" />
     <MESSAGE value="Added filters" />
     <MESSAGE value="finished selected items" />
     <MESSAGE value="More design changes and added weapons to display and filter" />
@@ -409,6 +420,7 @@
     <MESSAGE value="light styling" />
     <MESSAGE value="manifest" />
     <MESSAGE value="Moved apps folder to scrips" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved apps folder to scrips" />
+    <MESSAGE value="Before done changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before done changes" />
   </component>
 </project>

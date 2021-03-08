@@ -1,8 +1,7 @@
 import {createImageTile} from "../lib/imageTile.js";
 
-export default class itemSearchApp extends Application {
-    constructor(filteredItems, allItems, source) {
-        super();
+export default class itemSearchApp extends FormApplication {
+    setWindowData (filteredItems, allItems, source) {
         this.filteredItems = filteredItems;
         this.allItems = allItems;
         this.source = source;
@@ -11,13 +10,12 @@ export default class itemSearchApp extends Application {
     static get defaultOptions() {
         return {
             ...super.defaultOptions,
-            id: "item-search",
+            id: "paper-doll-item-search",
             template: "modules/Equipment-Paper-Doll/templates/itemSearchApp.hbs",
             resizable: false,
             minimizable: false,
-            closeOnSubmit: false,
             submitOnClose: true,
-            submitOnChange: true,
+            title: "Item Search",
         }
     }
 
@@ -68,6 +66,10 @@ export default class itemSearchApp extends Application {
         })
     }
 
+    async _updateObject(event, formData) {
+
+    }
+
     findEquippedItems() {
         const IDs = [];
         $('.itemSlotsGrid').children('div .addedItem').each((index, item) => IDs.push(item.id));
@@ -93,28 +95,10 @@ export default class itemSearchApp extends Application {
         })
     }
 
-    /**
-     * Appends the show all items button and calls the function to make the items that do not match the slot filter visible
-     *
-     * @param html - html of the app
-     */
-    showAllItemsButton(html) {
-        const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
-        const showAllButton = $(`<a class="popout"> Show all </a>`);
-        showAllButton.on('click', () => {
-            const items = $('.searchGrid').children();
-            items.show();
-            items.removeClass('notInFilter');
-        })
-        lastButton.before(showAllButton[0]);
-    }
-
-
     activateListeners(html) {
         const itemsFromDisplay = html.find('.searchInternalGrid');
         itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.allItems));
         this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)
-        this.showAllItemsButton(html);
 
         const searchBar = html.find('.searchBar');
         searchBar.on('input', this.searchItems)
