@@ -64,6 +64,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -92,6 +93,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -120,6 +122,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -148,6 +151,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -176,6 +180,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -204,6 +209,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -232,6 +238,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -260,6 +267,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -288,6 +296,7 @@ const settingList = [
                 step: 1
             },
             default: 2,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -316,6 +325,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -344,6 +354,7 @@ const settingList = [
                 step: 1
             },
             default: 2,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -372,6 +383,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }
@@ -400,6 +412,7 @@ const settingList = [
                 step: 1
             },
             default: 1,
+            scope: "world",
             config: true,
             restricted: true
         }

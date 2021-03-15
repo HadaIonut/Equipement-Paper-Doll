@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Fixed search not opening with tidy 5e sheet. Added consumeables and tools to the equipable list">
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Readme and prepare for 1.0.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +123,9 @@
       <workItem from="1614956334110" duration="3000" />
       <workItem from="1615097360512" duration="2241000" />
       <workItem from="1615135449124" duration="3155000" />
-      <workItem from="1615181139758" duration="11038000" />
+      <workItem from="1615181139758" duration="11637000" />
+      <workItem from="1615569808445" duration="849000" />
+      <workItem from="1615808082153" duration="606000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -378,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615205833867</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Readme and prepare for 1.0.0">
+      <created>1615208878990</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1615208878990</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +409,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="finished selected items" />
     <MESSAGE value="More design changes and added weapons to display and filter" />
     <MESSAGE value="Settings for slot numbers and filter list" />
     <MESSAGE value="Data extraction from paperDoll" />
@@ -426,6 +433,7 @@
     <MESSAGE value="Moved apps folder to scrips" />
     <MESSAGE value="Before done changes" />
     <MESSAGE value="Fixed search not opening with tidy 5e sheet. Added consumeables and tools to the equipable list" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed search not opening with tidy 5e sheet. Added consumeables and tools to the equipable list" />
+    <MESSAGE value="Readme and prepare for 1.0.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Readme and prepare for 1.0.0" />
   </component>
 </project>
