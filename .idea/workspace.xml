@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Readme and prepare for 1.0.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +126,9 @@
       <workItem from="1615135449124" duration="3155000" />
       <workItem from="1615181139758" duration="11637000" />
       <workItem from="1615569808445" duration="849000" />
-      <workItem from="1615808082153" duration="606000" />
+      <workItem from="1615808082153" duration="731000" />
+      <workItem from="1615835225466" duration="730000" />
+      <workItem from="1615899868818" duration="1929000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -386,7 +389,21 @@
       <option name="project" value="LOCAL" />
       <updated>1615208878990</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="added scope global for item slot count">
+      <created>1615808805354</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1615808805354</updated>
+    </task>
+    <task id="LOCAL-00039" summary="maybe working popper on forge?">
+      <created>1615900435764</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1615900435764</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,8 +426,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="More design changes and added weapons to display and filter" />
-    <MESSAGE value="Settings for slot numbers and filter list" />
     <MESSAGE value="Data extraction from paperDoll" />
     <MESSAGE value="Added persistence for main items (not for weapons)" />
     <MESSAGE value="Added persistent weapons" />
@@ -434,6 +449,8 @@
     <MESSAGE value="Before done changes" />
     <MESSAGE value="Fixed search not opening with tidy 5e sheet. Added consumeables and tools to the equipable list" />
     <MESSAGE value="Readme and prepare for 1.0.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme and prepare for 1.0.0" />
+    <MESSAGE value="added scope global for item slot count" />
+    <MESSAGE value="maybe working popper on forge?" />
+    <option name="LAST_COMMIT_MESSAGE" value="maybe working popper on forge?" />
   </component>
 </project>
