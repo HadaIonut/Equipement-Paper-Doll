@@ -9,11 +9,11 @@
   "dependencies": [
   ],
   "esmodules": [
-    "/scripts/module.js",
-    "/scripts/lib/popperJS/popper.min.js"
+    "/scripts/module.js"
   ],
   "scripts": [
-    "/scripts/lib/lib.js"
+    "/scripts/lib/lib.js",
+    "/scripts/lib/popperJS/popper.min.js"
   ],
   "styles": [
     "/styles/module.css",

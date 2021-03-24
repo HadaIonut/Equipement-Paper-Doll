@@ -22,7 +22,7 @@
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Readme and prepare for 1.0.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lib/imageTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/imageTile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +128,8 @@
       <workItem from="1615569808445" duration="849000" />
       <workItem from="1615808082153" duration="731000" />
       <workItem from="1615835225466" duration="730000" />
-      <workItem from="1615899868818" duration="1929000" />
+      <workItem from="1615899868818" duration="2109000" />
+      <workItem from="1616583167327" duration="819000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -403,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615900435764</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="small fixes">
+      <created>1615901893054</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1615901893055</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +434,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Data extraction from paperDoll" />
     <MESSAGE value="Added persistence for main items (not for weapons)" />
     <MESSAGE value="Added persistent weapons" />
     <MESSAGE value="More design changes to the display and added removeable items" />
@@ -451,6 +458,7 @@
     <MESSAGE value="Readme and prepare for 1.0.0" />
     <MESSAGE value="added scope global for item slot count" />
     <MESSAGE value="maybe working popper on forge?" />
-    <option name="LAST_COMMIT_MESSAGE" value="maybe working popper on forge?" />
+    <MESSAGE value="small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
   </component>
 </project>

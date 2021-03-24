@@ -1,3 +1,5 @@
+import "./popperJs/popper.min.js"
+
 const hide = (toolTip) => {
     toolTip.removeAttribute('data-show');
 }
