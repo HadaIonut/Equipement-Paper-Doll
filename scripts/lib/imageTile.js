@@ -39,7 +39,7 @@ const createEvents = (newTile, popperInstance, toolTip) => {
  */
 const createImageTile = (item, location) => {
     if (!item) return;
-    const newTile = $(`<div id='${item.data._id}' class="addedItem" aria-describedby="tooltip"><img src="${item.data.img}" ></div>`);
+    const newTile = $(`<div id='${item.data._id}' class="addedItem" aria-describedby="tooltip"><img src="${item.data.img}" style="height: 45px; width: 47px;"></div>`);
     const toolTip = $(`<span id="tooltip" role="tooltip" class='${item.data._id}'> ${item.data.name} <span id="arrow" data-popper-arrow></span> </span>`);
 
     location.after(toolTip[0]);
