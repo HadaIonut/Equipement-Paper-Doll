@@ -12,7 +12,7 @@ export default class PaperDollApp extends FormApplication {
     constructor(sourceActor, itemSearchWindow) {
         super();
         this.sourceActor = sourceActor;
-        this.items = sourceActor.items.entries;
+        this.items = isNewerVersion(game.data.version, "0.7.0") ? sourceActor.items : sourceActor.items.entries;
         this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
         this.equipableItems = filterEquipableItems(this.items);
         this.filteredItems = filterActorItems(this.items);
