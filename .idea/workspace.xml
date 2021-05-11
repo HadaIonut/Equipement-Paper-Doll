@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Readme and prepare for 1.0.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lib/imageTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lib/imageTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +128,8 @@
       <workItem from="1615808082153" duration="731000" />
       <workItem from="1615835225466" duration="730000" />
       <workItem from="1615899868818" duration="2109000" />
-      <workItem from="1616583167327" duration="1419000" />
+      <workItem from="1616583167327" duration="2275000" />
+      <workItem from="1620725450164" duration="932000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -417,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616584157211</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Bounded images to container size">
+      <created>1616584614868</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1616584614868</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,7 +448,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added persistent weapons" />
     <MESSAGE value="More design changes to the display and added removeable items" />
     <MESSAGE value="Modified the context menu to not leave the screen on the right" />
     <MESSAGE value="Added tooltips and WIP on show all button" />
@@ -465,6 +472,7 @@
     <MESSAGE value="maybe working popper on forge?" />
     <MESSAGE value="small fixes" />
     <MESSAGE value="Attempt at fixing popperJs on forge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Attempt at fixing popperJs on forge" />
+    <MESSAGE value="Bounded images to container size" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bounded images to container size" />
   </component>
 </project>
