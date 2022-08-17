@@ -13,6 +13,8 @@ export default class TagsEditApp extends FormApplication {
   }
 
   extractFlags() {
+    if (!this?.item?.data?.data?.properties) return;
+
     Object.entries(this.item.data.data.properties).forEach(([key, value]) => {
       if (value && attributeToFlagMap[key]) this.currentFlags.add(...attributeToFlagMap[key])
     })

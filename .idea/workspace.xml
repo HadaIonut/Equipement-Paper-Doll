@@ -19,15 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="Readme and prepare for 1.0.0">
-      <change afterPath="$PROJECT_DIR$/constants/flagMaps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constants/slotNames.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/apps/tagsEditApp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/tagsEditApp.hbs" afterDir="false" />
+    <list default="true" id="6d538012-f92f-483f-b3e1-d7f3fcd6b66b" name="Default Changelist" comment="added a tagging system for items">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/paperDollApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/apps/tagsEditApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/apps/tagsEditApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +127,7 @@
       <workItem from="1615899868818" duration="2109000" />
       <workItem from="1616583167327" duration="2275000" />
       <workItem from="1620725450164" duration="932000" />
-      <workItem from="1660749250886" duration="12363000" />
+      <workItem from="1660749250886" duration="12835000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1604937546780</created>
@@ -428,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616584614868</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="added a tagging system for items">
+      <created>1660762146757</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1660762146757</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +452,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="More design changes to the display and added removeable items" />
     <MESSAGE value="Modified the context menu to not leave the screen on the right" />
     <MESSAGE value="Added tooltips and WIP on show all button" />
     <MESSAGE value="Show all button" />
@@ -475,7 +476,8 @@
     <MESSAGE value="small fixes" />
     <MESSAGE value="Attempt at fixing popperJs on forge" />
     <MESSAGE value="Bounded images to container size" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bounded images to container size" />
+    <MESSAGE value="added a tagging system for items" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a tagging system for items" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
