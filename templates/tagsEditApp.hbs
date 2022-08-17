@@ -1,0 +1,32 @@
+<form>
+  <div class="tags-settings-container">
+    <div class="form-fields tag-creater">
+      <div class="number-selector">
+        <input name="number-input" type="range" min="1" max="4" value="1">
+        <span class="range-value">1</span>
+      </div>
+
+      <div class="slot-dropdown">
+        <select class="slot-select" name="slot-type" id="slot-type">
+          {{#each availableSlots}}
+            <option value="{{this}}">
+              {{this}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <button class="add-flag-button">Add flag</button>
+
+    <div class="flag-container">
+      {{#each currentFlags}}
+        <div class="flag-wrapper">
+          <div class="flag-tile">{{this}}</div>
+          <button class="remove-flag" id="{{this}}">X</button>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+</form>

@@ -144,4 +144,75 @@
     height: 500px;
     width: 300px;
 }
+
+.tags-settings-container {
+    width: 300px;
+    height: 130px;
+}
+
+.tag-creater {
+    width: 100%;
+    display: flex;
+}
+
+.number-selector {
+    width: 50%;
+    display: flex;
+}
+
+.slot-dropdown {
+    width: 50%;
+}
+
+.slot-select {
+    width: calc(100% - 10px);
+    margin-left: 10px;
+}
+
+.add-flag-button {
+    margin-top: 8px;
+}
+
+.flag-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    border: 2px groove;
+    min-height: 42px;
+}
+
+.flag-tile {
+    margin: 3px 5px;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px groove #eeede0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.remove-flag {
+    display: none;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    margin: 0;
+    background: rgba(0,0,0,0.7);
+    font-size: 10px;
+    line-height: 14px;
+    border-radius: 100%;
+    border: 1px solid black;
+    color: wheat;
+    top: -6px;
+    right: -6px;
+}
+
+.flag-wrapper {
+    position: relative;
+}
+
+.flag-wrapper:hover > .remove-flag {
+    display: block;
+}
 /*# sourceMappingURL=module.css.map */

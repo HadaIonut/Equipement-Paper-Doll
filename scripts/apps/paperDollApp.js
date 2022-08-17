@@ -3,6 +3,7 @@ import {registerHelpers} from "../lib/handlebarsHelpers.js";
 import {getItemsSlotArray} from "../settings.js";
 import {createImageTile} from "../lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
+import {slotNames} from "../../constants/slotNames.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
     return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
@@ -33,7 +34,7 @@ export default class PaperDollApp extends FormApplication {
     }
 
     getData(options) {
-        const itemSlotNames = ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet'];
+        const itemSlotNames = slotNames;
         const weaponSlotNames = ['mainHand', 'offHand'];
         return {
             selectedItems: this.selectedItems,
