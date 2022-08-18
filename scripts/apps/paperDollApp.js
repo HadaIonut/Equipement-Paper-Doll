@@ -21,6 +21,7 @@ export default class PaperDollApp extends FormApplication {
     this.filteredItems = filterActorItems(this.items);
 
     this.flagEquippedItems()
+    this.getSlotsStructure()
   }
 
   flagEquippedItems() {
@@ -60,6 +61,20 @@ export default class PaperDollApp extends FormApplication {
         slots: getItemsSlotArray(weaponSlotNames, this.sourceActor)
       },
     }
+  }
+
+  getSlotsStructure() {
+    const weaponSlotNames = ['mainHand', 'offHand'];
+    const itemSlotsArray = getItemsSlotArray(slotNames, this.sourceActor)
+    const weaponSlotsArray = getItemsSlotArray(weaponSlotNames, this.sourceActor)
+    this.slotStructure = this.selectedItems
+    slotNames.forEach((slot, index) =>  {
+      this.slotStructure[slot].splice(1, this.slotStructure[slot].length - itemSlotsArray[index])
+    })
+    weaponSlotNames.forEach((slot, index) =>  {
+      this.slotStructure[slot].splice(1, this.slotStructure[slot].length - weaponSlotsArray[index])
+    })
+    console.log(this.slotStructure)
   }
 
   /**
@@ -127,6 +142,7 @@ export default class PaperDollApp extends FormApplication {
    */
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
+    console.log(this.slotStructure[location.id].filter((el) => el === '').length)
     new itemSearchApp(selectedItems[location.id], allItems, source).render(true);
   }
 

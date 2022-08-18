@@ -19,7 +19,6 @@ const itemsContainsKeyWords = (itemsArray, namesArray) => {
 const itemContainsRelatedFlags = (itemsArray, slotName) => {
   return itemsArray.reduce((acc, cur) => {
     const flags = cur.getFlag('Equipment-Paper-Doll', 'flags')
-    console.log(slotName, cur, flags)
     if (flags && containsAnyOfArray(flags, slotName))
       return [...acc, cur]
     return [...acc]
