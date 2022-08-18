@@ -1,20 +1,33 @@
 import {getFilterArray} from "../settings.js";
 
 const containsAnyOfArray = (array, target) => {
-    let output = false;
-    if (array.length === 1 && array[0] === '') return output;
-    array.forEach((current) => {
-        if (target.includes(current)) output = true;
-    })
-    return output;
+  let output = false;
+  if (array.length === 1 && array[0] === '') return output;
+  array.forEach((current) => {
+    if (target.includes(current) || current.includes(target)) output = true;
+  })
+  return output;
 }
 
-const itemsContains = (itemsArray, namesArray) => {
-    let itemsList = [];
-    itemsArray.forEach((item) => {
-        if (containsAnyOfArray(namesArray, item.data.name.toLowerCase())) itemsList.push(item);
-    })
-    return itemsList;
+const itemsContainsKeyWords = (itemsArray, namesArray) => {
+  return itemsArray.reduce((acc, cur) => {
+    if (containsAnyOfArray(namesArray, cur.data.name.toLowerCase())) return [...acc, cur]
+    return [...acc]
+  }, [])
+}
+
+const itemContainsRelatedFlags = (itemsArray, slotName) => {
+  return itemsArray.reduce((acc, cur) => {
+    const flags = cur.getFlag('Equipment-Paper-Doll', 'flags')
+    console.log(slotName, cur, flags)
+    if (flags && containsAnyOfArray(flags, slotName))
+      return [...acc, cur]
+    return [...acc]
+  }, [])
+}
+
+const itemsContains = (itemsArray, namesArray, slotName) => {
+  return [...itemsContainsKeyWords(itemsArray, namesArray), ...itemContainsRelatedFlags(itemsArray, slotName)];
 }
 
 /**
@@ -24,8 +37,8 @@ const itemsContains = (itemsArray, namesArray) => {
  * @returns {*}
  */
 const filterEquipableItems = (actorItems) => {
-    const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot', 'consumable', 'tool'];
-    return actorItems.filter((item) => equipableTypes.includes(item.type));
+  const equipableTypes = ['backpack', 'equipment', 'weapon', 'loot', 'consumable', 'tool'];
+  return actorItems.filter((item) => equipableTypes.includes(item.type));
 }
 
 /**
@@ -36,7 +49,7 @@ const filterEquipableItems = (actorItems) => {
  * @returns {*}
  */
 const findWeaponsAndFilter = (items, filters) => {
-    return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, filters))
+  return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, filters, 'hands'))
 }
 
 /**
@@ -46,9 +59,9 @@ const findWeaponsAndFilter = (items, filters) => {
  * @returns {*}
  */
 const findOffHand = (items) => {
-    const weapons = items.filter((item) => item.type === 'weapon');
-    const secondary = itemsContains(items, getFilterArray('offHand'));
-    return weapons.concat(secondary);
+  const weapons = items.filter((item) => item.type === 'weapon');
+  const secondary = itemsContains(items, getFilterArray('offHand'), 'hands');
+  return weapons.concat(secondary);
 }
 
 /**
@@ -58,23 +71,23 @@ const findOffHand = (items) => {
  * @returns {{}}
  */
 const filterActorItems = (actorItems) => {
-    const itemTypesObject = {};
-    const equipableItems = filterEquipableItems(actorItems);
-    itemTypesObject['head'] = itemsContains(equipableItems, getFilterArray('head'));
-    itemTypesObject['eyes'] = itemsContains(equipableItems, getFilterArray('eyes'));
-    itemTypesObject['neck'] = itemsContains(equipableItems, getFilterArray('neck'));
-    itemTypesObject['cape'] = itemsContains(equipableItems, getFilterArray('cape'));
-    itemTypesObject['torso'] = itemsContains(equipableItems, getFilterArray('torso'));
-    itemTypesObject['waist'] = itemsContains(equipableItems, getFilterArray('waist'));
-    itemTypesObject['wrists'] = itemsContains(equipableItems, getFilterArray('wrists'));
-    itemTypesObject['hands'] = itemsContains(equipableItems, getFilterArray('hands'));
-    itemTypesObject['feet'] = itemsContains(equipableItems, getFilterArray('feet'));
-    itemTypesObject['ring'] = itemsContains(equipableItems, getFilterArray('ring'));
-    itemTypesObject['back'] = findWeaponsAndFilter(equipableItems, getFilterArray('back'))
-    itemTypesObject['mainHand'] = findWeaponsAndFilter(equipableItems, getFilterArray('mainHand'));
-    itemTypesObject['offHand'] = findOffHand(equipableItems);
+  const itemTypesObject = {};
+  const equipableItems = filterEquipableItems(actorItems);
+  itemTypesObject['head'] = itemsContains(equipableItems, getFilterArray('head'), 'head');
+  itemTypesObject['eyes'] = itemsContains(equipableItems, getFilterArray('eyes'), 'eyes');
+  itemTypesObject['neck'] = itemsContains(equipableItems, getFilterArray('neck'), 'neck');
+  itemTypesObject['cape'] = itemsContains(equipableItems, getFilterArray('cape'), 'cape');
+  itemTypesObject['torso'] = itemsContains(equipableItems, getFilterArray('torso'), 'torso');
+  itemTypesObject['waist'] = itemsContains(equipableItems, getFilterArray('waist'), 'waist');
+  itemTypesObject['wrists'] = itemsContains(equipableItems, getFilterArray('wrists'), 'wrists');
+  itemTypesObject['hands'] = itemsContains(equipableItems, getFilterArray('hands'), 'hands');
+  itemTypesObject['feet'] = itemsContains(equipableItems, getFilterArray('feet'), 'feet');
+  itemTypesObject['ring'] = itemsContains(equipableItems, getFilterArray('ring'), 'ring');
+  itemTypesObject['back'] = findWeaponsAndFilter(equipableItems, getFilterArray('back'))
+  itemTypesObject['mainHand'] = findWeaponsAndFilter(equipableItems, getFilterArray('mainHand'));
+  itemTypesObject['offHand'] = findOffHand(equipableItems);
 
-    return itemTypesObject;
+  return itemTypesObject;
 }
 
 export {filterActorItems, filterEquipableItems};

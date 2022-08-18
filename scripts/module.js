@@ -15,8 +15,7 @@ Hooks.on('renderActorSheet', (obj, html) => {
   let element = html.find(".window-header .window-title");
   let button = $(`<a class="popout" style><i class="fas fa-ruler"></i>Open Paper Doll</a>`);
   button.on('click', () => {
-    const itemSearch = new itemSearchApp;
-    new PaperDollApp(obj.object, itemSearch).render(true);
+    new PaperDollApp(obj.object).render(true);
   })
   element.after(button);
 });
@@ -38,7 +37,6 @@ Hooks.on('renderItemSheet', (item, html) => {
   editTagsButton.innerHTML = 'Edit Tags'
   editTagsButton.classList.add('popout')
   editTagsButton.addEventListener('click', () => {
-    console.log('caca')
     new TagsEditApp(item.object).render(true)
   })
 

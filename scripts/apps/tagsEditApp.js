@@ -1,5 +1,6 @@
 import {attributeToFlagMap} from "../../constants/flagMaps.js";
 import {slotNames} from "../../constants/slotNames.js";
+import {extractFlags} from "../lib/flagsExtracter.js";
 
 export default class TagsEditApp extends FormApplication {
   currentFlags
@@ -9,16 +10,11 @@ export default class TagsEditApp extends FormApplication {
     super();
     this.currentFlags = new Set(Array.isArray(item.getFlag('Equipment-Paper-Doll', 'flags')) ? item.getFlag('Equipment-Paper-Doll', 'flags') : [])
     this.item = item
-    if (this.currentFlags.size === 0) this.extractFlags()
+    if (this.currentFlags.size === 0) this.addExtractedFlags()
   }
 
-  extractFlags() {
-    if (!this?.item?.data?.data?.properties) return;
-
-    Object.entries(this.item.data.data.properties).forEach(([key, value]) => {
-      if (value && attributeToFlagMap[key]) this.currentFlags.add(...attributeToFlagMap[key])
-    })
-    this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
+  addExtractedFlags() {
+    extractFlags(this.item).forEach((flag) => this.currentFlags.add(flag))
   }
 
   static get defaultOptions() {
@@ -58,7 +54,6 @@ export default class TagsEditApp extends FormApplication {
       this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
     }
 
-    console.log(event, formData, this)
   }
 
   activateListeners(html) {
