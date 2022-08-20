@@ -8,7 +8,7 @@ const registerHelpers = () => {
     });
 
     Handlebars.registerHelper('leftOrRight', function (n) {
-        return n % 2 === 0 ? "leftItem" : "rightItem";
+        return n % 2 === 0 ? "paperDollApp__left-item" : "paperDollApp__right-item";
     })
 
     Handlebars.registerHelper('createFillerElements', function (createdItems, itemNames, currentItem, block) {

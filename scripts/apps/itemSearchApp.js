@@ -8,7 +8,6 @@ export default class itemSearchApp extends FormApplication {
     this.source = source
     this.availableSlots = availableSlots
     this.categoryName = categoryName
-    console.log(this)
   }
 
   static get defaultOptions() {
@@ -47,7 +46,7 @@ export default class itemSearchApp extends FormApplication {
    * @param item - item to "equip"
    */
   createNewTile(item) {
-    createImageTile(item, this.source.currentTarget);
+    createImageTile(item, this.source.target);
     this.close();
   }
 
@@ -60,7 +59,6 @@ export default class itemSearchApp extends FormApplication {
   prepareDataForNewTile(source, itemList) {
     const selectedItemId = source.currentTarget.id;
     const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots');
-    console.log(selectedItemSlotsRequired)
     const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0];
     this.createNewTile(selectedItem);
   }
@@ -104,20 +102,23 @@ export default class itemSearchApp extends FormApplication {
     const filteredItemsIds = [];
     const equippedItems = this.findEquippedItems();
     filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
-    displayedItems.each((index, item) => {
+    displayedItems.forEach((item, index) => {
       if (!(filteredItemsIds.includes(item.id)) || equippedItems.includes(item.id)) {
-        item.style.display = 'none';
-        $(item).addClass('notInFilter');
+        item.classList.toggle('itemSearchApp__not-in-filter');
       }
     })
   }
 
   activateListeners(html) {
-    const itemsFromDisplay = html.find('.searchInternalGrid');
-    itemsFromDisplay.on('click', (source) => this.prepareDataForNewTile(source, this.allItems));
+    const itemsFromDisplay = document.querySelectorAll('.itemSearchApp__internal-grid');
+    itemsFromDisplay.forEach((item) => {
+      item.addEventListener('click',
+        (event) => this.prepareDataForNewTile(event, this.allItems));
+    })
+
     this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)
 
-    const searchBar = html.find('.searchBar');
-    searchBar.on('input', this.searchItems)
+    const searchBar = document.querySelector('.itemSearchApp__search-bar');
+    searchBar.addEventListener('input', this.searchItems)
   }
 }

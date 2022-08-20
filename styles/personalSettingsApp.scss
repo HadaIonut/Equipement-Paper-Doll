@@ -1,0 +1,10 @@
+@mixin PersonalSettingsApp($name: '.personalSettingsApp') {
+  #{$name} {
+    &__container {
+      height: 500px;
+      width: 300px;
+    }
+  }
+}
+
+@include PersonalSettingsApp();

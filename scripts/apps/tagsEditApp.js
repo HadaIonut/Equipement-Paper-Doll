@@ -1,4 +1,3 @@
-import {attributeToFlagMap} from "../../constants/flagMaps.js";
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 
@@ -37,23 +36,22 @@ export default class TagsEditApp extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    if (event.submitter.classList.value === 'add-flag-button') {
+    if (event.submitter.classList.value === 'tagsEditApp__add-flag-button') {
       const newFlag = `${formData['number-input']}-${formData['slot-type']}`;
       const newFlagElement = document.createElement('div');
       newFlagElement.innerText = newFlag;
-      newFlagElement.classList.add('flag-tile');
+      newFlagElement.classList.add('tagsEditApp__flag-tile');
 
-      if (!this.currentFlags.has(newFlag)) this.form.querySelector('.flag-container').appendChild(newFlagElement)
+      if (!this.currentFlags.has(newFlag)) this.form.querySelector('.tagsEditApp__flag-container').appendChild(newFlagElement)
 
       this.currentFlags.add(newFlag);
       this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
 
-    } else if (event.submitter.classList.value === 'remove-flag') {
+    } else if (event.submitter.classList.value === 'tagsEditApp__remove-flag') {
       this.currentFlags.delete(event.submitter.id)
       event.submitter.parentElement.remove();
       this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
     }
-
   }
 
   activateListeners(html) {

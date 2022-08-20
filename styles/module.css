@@ -1,218 +1,192 @@
-.container {
-    height: 600px;
-    width: 600px;
+.itemSearchApp__container {
+  height: 400px;
+  width: 300px;
+}
+.itemSearchApp__grid {
+  height: 90%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(7, 50px);
+  grid-auto-flow: row;
+  grid-auto-rows: 50px;
+  overflow: scroll;
+  grid-gap: 2px;
+}
+.itemSearchApp__internal-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr;
+  grid-gap: 2px;
+  cursor: pointer;
+}
+.itemSearchApp__internal-grid:hover {
+  text-shadow: 0 0 10px red;
+}
+.itemSearchApp__not-in-filter {
+  display: none;
 }
 
-.paperDollImage {
-    background: url("static/paperDollFigure.svg") no-repeat center;
-    background-size: contain;
-    height: 80%;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    align-items: center;
-    grid-gap: 5px;
+input[type=text].itemSearchApp__search-bar {
+  height: 10%;
 }
 
-.secondaryItems {
-    height: 15%;
-    margin: 0 80px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    align-items: center;
+.is-hidden {
+  display: none;
 }
 
-.leftItem {
-    justify-self: left;
-    /*border: 2px solid black;*/
+.full-size {
+  height: 100%;
+  width: 100%;
 }
 
-.leftItem h3 {
-    text-align: center;
+.tagsEditApp__container {
+  width: 300px;
+  height: 130px;
+}
+.tagsEditApp__creater {
+  width: 100%;
+  display: flex;
+}
+.tagsEditApp__slot-number-selector {
+  width: 50%;
+  display: flex;
+}
+.tagsEditApp__slot-dropdown {
+  width: 50%;
+}
+.tagsEditApp__slot-select {
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+.tagsEditApp__add-flag-button {
+  margin-top: 8px;
+}
+.tagsEditApp__flag-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  border: 2px groove;
+  min-height: 42px;
+}
+.tagsEditApp__flag-wrapper {
+  position: relative;
+}
+.tagsEditApp__flag-wrapper:hover > .tagsEditApp__remove-flag {
+  display: block;
+}
+.tagsEditApp__flag-tile {
+  margin: 3px 5px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+.tagsEditApp__remove-flag {
+  display: none;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 10px;
+  line-height: 14px;
+  border-radius: 100%;
+  border: 1px solid black;
+  color: wheat;
+  top: -6px;
+  right: -6px;
 }
 
-.rightItem {
-    justify-self: right;
-    /*border: 2px solid black;*/
+.personalSettingsApp__container {
+  height: 500px;
+  width: 300px;
 }
 
-.rightItem h3 {
-    text-align: center;
+.paperDollApp__container {
+  height: 600px;
+  width: 600px;
 }
-
-.centerItem {
-    justify-self: center;
-    /*border: 2px solid black;*/
+.paperDollApp__secondary-items {
+  height: 15%;
+  margin: 0 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
 }
-
-.centerItem h3 {
-    text-align: center;
+.paperDollApp__item-slots-grid {
+  height: 50%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-gap: 3px;
 }
-
-
-.addBox {
-    background-image: url(../../../ui/parchment.jpg);
-    height: 45px;
-    width: 45px;
-    border: 1px solid #000;
-    border-radius: 2px;
-    box-shadow: 0 0 5px #000 inset;
-    cursor: pointer;
+.paperDollApp__background-image {
+  background: url("static/paperDollFigure.svg") no-repeat center;
+  background-size: contain;
+  height: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  align-items: center;
+  grid-gap: 5px;
 }
-
-.selector {
-    width: 150px;
-    overflow: hidden;
-    margin-bottom: 25px;
+.paperDollApp__left-item {
+  justify-self: left;
 }
-
-.addedItem {
-    height: 45px;
-    width: 47px;
-    border: 1px solid #000;
-    border-radius: 2px;
-    box-shadow: 0 0 5px #000 inset;
-    cursor: pointer;
+.paperDollApp__right-item {
+  justify-self: right;
 }
-
-.selectorImage {
-    height: 100%;
-    width: 100%;
+.paperDollApp__right-item > .paperDollApp__item-slots-grid > .paperDollApp__added-item > #context-menu {
+  left: -100px;
 }
-
-.searchContainer {
-    height: 400px;
-    width: 300px;
+.paperDollApp__center-item {
+  justify-self: center;
 }
-
-.searchGrid {
-    height: 90%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(7, 50px);
-    grid-auto-flow: row;
-    grid-auto-rows: 50px;
-    overflow: scroll;
-    grid-gap: 2px;
+.paperDollApp__category-title {
+  text-align: center;
+  height: 50%;
 }
-
-.searchInternalGrid {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr;
-    grid-gap: 2px;
+.paperDollApp__filler-element {
+  border: 1px solid #000;
+  border-radius: 2px;
+  background: rgb(66, 66, 62);
+  box-shadow: 0 0 5px #000 inset;
 }
-
-.searchInternalGrid:hover {
-    text-shadow: 0 0 10px red;
+.paperDollApp__added-item {
+  height: 45px;
+  width: 47px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 0 5px #000 inset;
+  cursor: pointer;
 }
-
-.itemSlotsGrid {
-    height: 50%;
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr;
-    grid-gap: 3px;
-}
-
-.fillerElement {
-    border: 1px solid #000;
-    border-radius: 2px;
-    background: rgb(66, 66, 62);
-    box-shadow: 0 0 5px #000 inset;
-}
-
-.rightItem .itemSlotsGrid .addedItem #context-menu {
-    left: -100px;
+.paperDollApp__add-box {
+  background-image: url(../../../ui/parchment.jpg);
+  height: 45px;
+  width: 45px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 0 5px #000 inset;
+  cursor: pointer;
 }
 
 #ring {
-    grid-row: auto / span 2;
-    align-self: baseline;
+  grid-row: auto/span 2;
+  align-self: baseline;
+}
+#ring > .paperDollApp__item-slots-grid {
+  grid-template-rows: 1fr 1fr;
 }
 
-#ring .itemSlotsGrid {
-    grid-template-rows: 1fr 1fr;
+.selector {
+  width: 150px;
+  overflow: hidden;
+  margin-bottom: 25px;
 }
 
-.personalSettingsContainer {
-    height: 500px;
-    width: 300px;
-}
-
-.tags-settings-container {
-    width: 300px;
-    height: 130px;
-}
-
-.tag-creater {
-    width: 100%;
-    display: flex;
-}
-
-.number-selector {
-    width: 50%;
-    display: flex;
-}
-
-.slot-dropdown {
-    width: 50%;
-}
-
-.slot-select {
-    width: calc(100% - 10px);
-    margin-left: 10px;
-}
-
-.add-flag-button {
-    margin-top: 8px;
-}
-
-.flag-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-    border: 2px groove;
-    min-height: 42px;
-}
-
-.flag-tile {
-    margin: 3px 5px;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.05);
-    border: 2px groove #eeede0;
-    text-align: center;
-    font-size: 12px;
-    line-height: 18px;
-}
-
-.remove-flag {
-    display: none;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    padding: 3px;
-    margin: 0;
-    background: rgba(0,0,0,0.7);
-    font-size: 10px;
-    line-height: 14px;
-    border-radius: 100%;
-    border: 1px solid black;
-    color: wheat;
-    top: -6px;
-    right: -6px;
-}
-
-.flag-wrapper {
-    position: relative;
-}
-
-.flag-wrapper:hover > .remove-flag {
-    display: block;
-}
 /*# sourceMappingURL=module.css.map */

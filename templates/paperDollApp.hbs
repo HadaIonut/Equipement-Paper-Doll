@@ -1,30 +1,32 @@
 <form>
-  <div class="container">
-    <div class="paperDollImage" style="">
+  <div class="paperDollApp__container">
+    <div class="paperDollApp__background-image" style="">
       {{#each itemTypes.types}}
         <div id="{{this}}" class="{{leftOrRight @index}}">
-          <h3 style="height: 50%">{{prettifyTextToDisplay this}}</h3>
-          <div class="itemSlotsGrid">
+          <h3 class="paperDollApp__category-title">
+            {{prettifyTextToDisplay this}}
+          </h3>
+          <div class="paperDollApp__item-slots-grid">
             {{#times ../itemTypes.slots ../itemTypes.types this}}
-              <button type="submit" class="addBox"></button>
+              <button type="submit" class="paperDollApp__add-box"></button>
             {{/times}}
             {{#createFillerElements ../itemTypes.slots ../itemTypes.types this}}
-              <div class="fillerElement"></div>
+              <div class="paperDollApp__filler-element"></div>
             {{/createFillerElements}}
           </div>
         </div>
       {{/each}}
     </div>
-    <div class="secondaryItems">
+    <div class="paperDollApp__secondary-items">
       {{#each weaponsTypes.types}}
-        <div id="{{this}}" class="centerItem">
-          <h3>{{prettifyTextToDisplay this}}</h3>
-          <div class="itemSlotsGrid">
+        <div id="{{this}}" class="paperDollApp__center-item">
+          <h3 class="paperDollApp__category-title">{{prettifyTextToDisplay this}}</h3>
+          <div class="paperDollApp__item-slots-grid">
             {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
-              <button type="submit" class="addBox"></button>
+              <button type="submit" class="paperDollApp__add-box"></button>
             {{/times}}
             {{#createFillerElements ../weaponsTypes.slots ../weaponsTypes.types this}}
-              <div class="fillerElement"></div>
+              <div class="paperDollApp__filler-element"></div>
             {{/createFillerElements}}
           </div>
         </div>

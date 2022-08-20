@@ -1,14 +1,14 @@
 <form>
-  <div class="searchContainer">
-    <div class="searchGrid">
+  <div class="itemSearchApp__container">
+    <div class="itemSearchApp__grid">
       {{#each allItems}}
-        <div id="{{this.data._id}}" class="searchInternalGrid {{itemHasEnoughFreeSlots ../availableSlots ../relevantFlags @index}}"
+        <div id="{{this.data._id}}" class="itemSearchApp__internal-grid {{itemHasEnoughFreeSlots ../availableSlots ../relevantFlags @index}}"
              requiredSlots="{{getValueAtIndex ../relevantFlags @index}}">
-          <img src={{this.data.img}} class="selectorImage">
+          <img src={{this.data.img}} class="full-size">
           <h3>{{this.data.name}}</h3>
         </div>
       {{/each}}
     </div>
-    <input class="searchBar" type="text" style="height: 10%">
+    <input class="itemSearchApp__search-bar" type="text">
   </div>
 </form>

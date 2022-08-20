@@ -6,6 +6,7 @@ import personalSettingsApp from "./personalSettingsApp.js";
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
+import {createHeaderButton, insertBefore} from "../lib/headerButtonCreater.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
@@ -75,7 +76,6 @@ export default class PaperDollApp extends FormApplication {
     weaponSlotNames.forEach((slot, index) =>  {
       this.slotStructure[slot].splice(1, this.slotStructure[slot].length - weaponSlotsArray[index])
     })
-    console.log(this.slotStructure)
   }
 
   /**
@@ -85,7 +85,8 @@ export default class PaperDollApp extends FormApplication {
    * @exampleObject {head: [ids of all equipped items]}
    */
   extractDataFromForm() {
-    const divStructureArray = [...$('.paperDollImage')[0].children, ...$('.secondaryItems')[0].children];
+    const divStructureArray = [...document.querySelectorAll('.paperDollApp__background-image > *'),
+      ...document.querySelectorAll('.paperDollApp__secondary-items > *')];
     const formData = {};
     divStructureArray.forEach((element) => {
       const dataPoints = [...element.lastElementChild.children];
@@ -111,7 +112,7 @@ export default class PaperDollApp extends FormApplication {
     if (!storedItems) return;
 
     Object.keys(storedItems).forEach((itemType) => {
-      const slotsArray = [...html.find(`#${itemType}`).children('.itemSlotsGrid').children('button')];
+      const slotsArray = html.querySelectorAll(`#${itemType} > .paperDollApp__item-slots-grid > button`);
       storedItems[itemType].forEach((itemSlot, index) => {
         if (itemSlot === '') return;
 
@@ -153,7 +154,7 @@ export default class PaperDollApp extends FormApplication {
    * @param item - item to be removed
    */
   unEquipItem(item) {
-    const addBox = $('<button type="submit" class="addBox"></button>');
+    const addBox = $('<button type="submit" class="paperDollApp__add-box"></button>');
     addBox.on('click', (source) => {
       this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
     });
@@ -170,7 +171,7 @@ export default class PaperDollApp extends FormApplication {
    * @param html - app
    */
   createNewContextMenu(html) {
-    new ContextMenu(html, '.addedItem', [{
+    new ContextMenu(html, '.paperDollApp__added-item', [{
       name: 'Unequip item',
       icon: '<i class="fas fa-trash fa-fw"></i>',
       condition: () => true,
@@ -179,11 +180,11 @@ export default class PaperDollApp extends FormApplication {
   }
 
   setBackgroundImage(html) {
-    const backgroundContainer = html.find('.paperDollImage');
+    const backgroundContainer = html.querySelector('.paperDollApp__background-image');
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
     if (!path) return;
-    backgroundContainer.css('background', `url(./${path}) no-repeat center`);
-    backgroundContainer.css('background-size', 'contain');
+    backgroundContainer.style.background = `url(./${path}) no-repeat center`
+    backgroundContainer.style['background-size'] = 'contain'
   }
 
   /**
@@ -195,23 +196,23 @@ export default class PaperDollApp extends FormApplication {
   openPersonalSettings(html) {
     if (!game.user.isGM) return;
 
-    const lastButton = html.parent().parent()[0].firstElementChild.lastElementChild;
-    const openSettingsButton = $(`<a class="popout"> Open Settings </a>`);
-    openSettingsButton.on('click', () => {
+    const lastButton = html.parentNode.parentNode.firstElementChild.lastElementChild;
+    const openSettingsButton = createHeaderButton('Open Settings')
+    openSettingsButton.addEventListener('click', () => {
       new personalSettingsApp(this.sourceActor, this.filteredItems, this.equipableItems).render(true);
     })
-    lastButton.before(openSettingsButton[0]);
+    insertBefore(lastButton, openSettingsButton);
   }
 
   activateListeners(html) {
-    this.setBackgroundImage(html);
-    const addBoxes = html.find('.addBox');
-    addBoxes.on('click', (source) => {
+    this.setBackgroundImage(html[0]);
+    const addBoxes = html[0].querySelectorAll('.paperDollApp__add-box');
+    addBoxes.forEach((box) => box.addEventListener('click', (source) => {
       this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
-    });
+    }))
 
-    this.replaceWithStoredItems(html, this.selectedItems, this.items)
-    this.openPersonalSettings(html);
+    this.replaceWithStoredItems(html[0], this.selectedItems, this.items)
+    this.openPersonalSettings(html[0]);
     this.createNewContextMenu(html);
     super.activateListeners(html);
   }

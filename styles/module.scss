@@ -1,0 +1,11 @@
+@import "itemSearchApp";
+@import "generics";
+@import "tagsEditApp";
+@import "personalSettingsApp";
+@import "paperDollApp";
+
+.selector {
+  width: 150px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,40 @@
+@mixin ItemSearchApp($name: '.itemSearchApp') {
+  #{$name} {
+    &__container {
+      height: 400px;
+      width: 300px;
+    }
+
+    &__grid {
+      height: 90%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(7, 50px);
+      grid-auto-flow: row;
+      grid-auto-rows: 50px;
+      overflow: scroll;
+      grid-gap: 2px;
+    }
+
+    &__internal-grid {
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+      grid-template-rows: 1fr;
+      grid-gap: 2px;
+      cursor: pointer;
+
+      &:hover {
+        text-shadow: 0 0 10px red;
+      }
+    }
+
+    &__not-in-filter {
+      display: none;
+    }
+  }
+  input[type="text"]#{$name}__search-bar {
+    height: 10%;
+  }
+}
+
+@include ItemSearchApp();

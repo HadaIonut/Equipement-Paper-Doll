@@ -1,13 +1,13 @@
 <form>
-  <div class="tags-settings-container">
-    <div class="form-fields tag-creater">
-      <div class="number-selector">
+  <div class="tagsEditApp__container">
+    <div class="form-fields tagsEditApp__creater">
+      <div class="tagsEditApp__slot-number-selector">
         <input name="number-input" type="range" min="1" max="4" value="1">
         <span class="range-value">1</span>
       </div>
 
-      <div class="slot-dropdown">
-        <select class="slot-select" name="slot-type" id="slot-type">
+      <div class="tagsEditApp__slot-dropdown">
+        <select class="tagsEditApp__slot-select" name="slot-type" id="slot-type">
           {{#each availableSlots}}
             <option value="{{this}}">
               {{this}}
@@ -17,13 +17,13 @@
       </div>
     </div>
 
-    <button class="add-flag-button">Add flag</button>
+    <button class="tagsEditApp__add-flag-button">Add flag</button>
 
-    <div class="flag-container">
+    <div class="tagsEditApp__flag-container">
       {{#each currentFlags}}
-        <div class="flag-wrapper">
-          <div class="flag-tile">{{this}}</div>
-          <button class="remove-flag" id="{{this}}">X</button>
+        <div class="tagsEditApp__flag-wrapper">
+          <div class="tagsEditApp__flag-tile">{{this}}</div>
+          <button class="tagsEditApp__remove-flag" id="{{this}}">X</button>
         </div>
       {{/each}}
     </div>

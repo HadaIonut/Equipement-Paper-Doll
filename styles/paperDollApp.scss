@@ -1,0 +1,98 @@
+@mixin PaperDollApp($name: '.paperDollApp') {
+  #{$name} {
+    &__container {
+      height: 600px;
+      width: 600px;
+    }
+
+    &__secondary-items {
+      height: 15%;
+      margin: 0 80px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      align-items: center;
+    }
+
+    &__item-slots-grid {
+      height: 50%;
+      width: 100%;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      grid-gap: 3px;
+    }
+
+    &__background-image {
+      background: url("static/paperDollFigure.svg") no-repeat center;
+      background-size: contain;
+      height: 80%;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(6, 1fr);
+      align-items: center;
+      grid-gap: 5px;
+    }
+
+    &__left-item {
+      justify-self: left;
+    }
+
+    &__right-item {
+      justify-self: right;
+
+      & > #{$name}__item-slots-grid > #{$name}__added-item > #context-menu {
+        left: -100px;
+      }
+    }
+
+    &__center-item {
+      justify-self: center;
+    }
+
+    &__category-title {
+      text-align: center;
+      height: 50%;
+    }
+
+    &__filler-element {
+      border: 1px solid #000;
+      border-radius: 2px;
+      background: rgb(66, 66, 62);
+      box-shadow: 0 0 5px #000 inset;
+    }
+
+    &__added-item {
+      height: 45px;
+      width: 47px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #000 inset;
+      cursor: pointer;
+    }
+
+    &__add-box {
+      background-image: url(../../../ui/parchment.jpg);
+      height: 45px;
+      width: 45px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #000 inset;
+      cursor: pointer;
+    }
+  }
+
+  #ring {
+    grid-row: auto / span 2;
+    align-self: baseline;
+
+    & > #{$name}__item-slots-grid {
+      grid-template-rows: 1fr 1fr;
+    }
+  }
+}
+
+@include PaperDollApp()
