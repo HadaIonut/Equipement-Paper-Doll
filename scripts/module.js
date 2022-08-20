@@ -30,7 +30,7 @@ Hooks.on('renderitemSearchApp', (app, html) => {
       item.classList.remove('itemSearchApp__not-in-filter')
     })
   })
-  insertBefore(showAllButton, closeButton);
+  insertBefore(closeButton,showAllButton);
 })
 
 Hooks.on('renderItemSheet', (item, html) => {

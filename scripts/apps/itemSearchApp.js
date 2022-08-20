@@ -75,9 +75,9 @@ export default class itemSearchApp extends FormApplication {
       const itemObjectText = itemObject.lastElementChild.innerText.toLowerCase();
       const searchText = event.currentTarget.value.toLowerCase();
 
-      if (!itemObjectText.includes(searchText) || $(itemObject).hasClass('notInFilter')) {
-        $(itemObject).hide();
-      } else $(itemObject).show();
+      if (!itemObjectText.includes(searchText)) {
+        itemObject.classList.add('itemSearchApp__not-in-filter')
+      } else itemObject.classList.remove('itemSearchApp__not-in-filter')
     })
   }
 
@@ -87,7 +87,9 @@ export default class itemSearchApp extends FormApplication {
 
   findEquippedItems() {
     const IDs = [];
-    $('.itemSlotsGrid').children('div .addedItem').each((index, item) => IDs.push(item.id));
+    document
+      .querySelectorAll('.paperDollApp__item-slots-grid > .paperDollApp__added-item')
+      .forEach((item) => IDs.push(item.id))
     return IDs;
   }
 
