@@ -1,13 +1,14 @@
 <form>
-    <div class="searchContainer">
-        <div class="searchGrid">
-            {{#each allItems}}
-                <div id="{{this.data._id}}" class="searchInternalGrid">
-                    <img src={{this.data.img}} class="selectorImage">
-                    <h3>{{this.data.name}}</h3>
-                </div>
-            {{/each}}
+  <div class="searchContainer">
+    <div class="searchGrid">
+      {{#each allItems}}
+        <div id="{{this.data._id}}" class="searchInternalGrid {{itemHasEnoughFreeSlots ../availableSlots ../relevantFlags @index}}"
+             requiredSlots="{{getValueAtIndex ../relevantFlags @index}}">
+          <img src={{this.data.img}} class="selectorImage">
+          <h3>{{this.data.name}}</h3>
         </div>
-        <input class="searchBar" type="text" style="height: 10%">
+      {{/each}}
     </div>
+    <input class="searchBar" type="text" style="height: 10%">
+  </div>
 </form>

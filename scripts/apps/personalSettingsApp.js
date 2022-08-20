@@ -43,7 +43,7 @@ export default class personalSettingsApp extends FormApplication {
             resizable: false,
             minimizable: true,
             title: "Paper Doll Settings",
-            closeOnSubmit: true,
+            submitOnClose: true,
         }
     }
 

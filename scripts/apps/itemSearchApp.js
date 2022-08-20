@@ -1,11 +1,14 @@
 import {createImageTile} from "../lib/imageTile.js";
 
 export default class itemSearchApp extends FormApplication {
-  constructor(filteredItems, allItems, source) {
-    super();
-    this.filteredItems = filteredItems;
-    this.allItems = allItems;
-    this.source = source;
+  constructor(filteredItems, allItems, source, availableSlots, categoryName) {
+    super()
+    this.filteredItems = filteredItems
+    this.allItems = allItems
+    this.source = source
+    this.availableSlots = availableSlots
+    this.categoryName = categoryName
+    console.log(this)
   }
 
   static get defaultOptions() {
@@ -20,10 +23,21 @@ export default class itemSearchApp extends FormApplication {
     }
   }
 
+  getRelevantFlags() {
+    return this.allItems.reduce((acc, cur) => {
+      const relevantFlagsForItem = cur.getFlag('Equipment-Paper-Doll', 'flags').reduce((acc, cur) => {
+        return acc + cur.includes(this.categoryName) ? cur[0] : ''
+      }, '')
+      return [...acc, relevantFlagsForItem]
+    }, [])
+  }
+
   getData(options) {
     return {
       allItems: this.allItems,
-      filteredItems: this.filteredItems
+      filteredItems: this.filteredItems,
+      relevantFlags: this.getRelevantFlags(),
+      availableSlots: this.availableSlots
     }
   }
 
@@ -45,6 +59,8 @@ export default class itemSearchApp extends FormApplication {
    */
   prepareDataForNewTile(source, itemList) {
     const selectedItemId = source.currentTarget.id;
+    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots');
+    console.log(selectedItemSlotsRequired)
     const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0];
     this.createNewTile(selectedItem);
   }

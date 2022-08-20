@@ -30,6 +30,14 @@ const registerHelpers = () => {
 
         return outText;
     })
+
+    Handlebars.registerHelper('getValueAtIndex', function (array, index) {
+        return array?.[index]
+    })
+
+    Handlebars.registerHelper('itemHasEnoughFreeSlots', function (availableSlots, array, index) {
+        return array?.[index] <= availableSlots ? '' : 'no-slots'
+    })
 }
 
 export {registerHelpers}

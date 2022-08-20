@@ -42,7 +42,8 @@ export default class PaperDollApp extends FormApplication {
       resizable: false,
       minimizable: true,
       title: "Paper Doll Viewer",
-      closeOnSubmit: true,
+      submitOnClose: true,
+      closeOnSubmit: false
     }
   }
 
@@ -142,8 +143,8 @@ export default class PaperDollApp extends FormApplication {
    */
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
-    console.log(this.slotStructure[location.id].filter((el) => el === '').length)
-    new itemSearchApp(selectedItems[location.id], allItems, source).render(true);
+    const availableSlots = this.slotStructure[location.id].filter((el) => el === '').length
+    new itemSearchApp(selectedItems[location.id], allItems, source, availableSlots, location.id).render(true);
   }
 
   /**
@@ -151,8 +152,8 @@ export default class PaperDollApp extends FormApplication {
    *
    * @param item - item to be removed
    */
-  unequipItem(item) {
-    const addBox = $('<button type="button" class="addBox"></button>');
+  unEquipItem(item) {
+    const addBox = $('<button type="submit" class="addBox"></button>');
     addBox.on('click', (source) => {
       this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
     });
@@ -160,6 +161,7 @@ export default class PaperDollApp extends FormApplication {
       if (element.nodeName === 'SPAN' && element.id === 'tooltip' && element.className === `${item[0].id}`) element.remove();
     })
     item.replaceWith(addBox);
+    document.querySelector('.hidden-submit').click()
   }
 
   /**
@@ -172,7 +174,7 @@ export default class PaperDollApp extends FormApplication {
       name: 'Unequip item',
       icon: '<i class="fas fa-trash fa-fw"></i>',
       condition: () => true,
-      callback: this.unequipItem.bind(this)
+      callback: this.unEquipItem.bind(this)
     }])
   }
 

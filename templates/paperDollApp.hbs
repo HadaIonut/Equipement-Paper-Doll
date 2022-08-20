@@ -1,35 +1,35 @@
 <form>
-    <div class="container">
-        <div class="paperDollImage" style="">
-            {{#each itemTypes.types}}
-                <div id="{{this}}" class="{{leftOrRight @index}}">
-                    <h3 style="height: 50%">{{prettifyTextToDisplay this}}</h3>
-                    <div class="itemSlotsGrid">
-                        {{#times ../itemTypes.slots ../itemTypes.types this}}
-                            <button type="button" class="addBox"></button>
-                        {{/times}}
-                        {{#createFillerElements ../itemTypes.slots ../itemTypes.types this}}
-                            <div class="fillerElement"></div>
-                        {{/createFillerElements}}
-                    </div>
-                </div>
-            {{/each}}
+  <div class="container">
+    <div class="paperDollImage" style="">
+      {{#each itemTypes.types}}
+        <div id="{{this}}" class="{{leftOrRight @index}}">
+          <h3 style="height: 50%">{{prettifyTextToDisplay this}}</h3>
+          <div class="itemSlotsGrid">
+            {{#times ../itemTypes.slots ../itemTypes.types this}}
+              <button type="submit" class="addBox"></button>
+            {{/times}}
+            {{#createFillerElements ../itemTypes.slots ../itemTypes.types this}}
+              <div class="fillerElement"></div>
+            {{/createFillerElements}}
+          </div>
         </div>
-        <div class="secondaryItems">
-            {{#each weaponsTypes.types}}
-                <div id="{{this}}" class="centerItem">
-                    <h3>{{prettifyTextToDisplay this}}</h3>
-                    <div class="itemSlotsGrid">
-                        {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
-                            <button type="button" class="addBox"></button>
-                        {{/times}}
-                        {{#createFillerElements ../weaponsTypes.slots ../weaponsTypes.types this}}
-                            <div class="fillerElement"></div>
-                        {{/createFillerElements}}
-                    </div>
-                </div>
-            {{/each}}
-        </div>
+      {{/each}}
     </div>
-    <button type="submit">Submit</button>
+    <div class="secondaryItems">
+      {{#each weaponsTypes.types}}
+        <div id="{{this}}" class="centerItem">
+          <h3>{{prettifyTextToDisplay this}}</h3>
+          <div class="itemSlotsGrid">
+            {{#times ../weaponsTypes.slots ../weaponsTypes.types this}}
+              <button type="submit" class="addBox"></button>
+            {{/times}}
+            {{#createFillerElements ../weaponsTypes.slots ../weaponsTypes.types this}}
+              <div class="fillerElement"></div>
+            {{/createFillerElements}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <button class="hidden-submit" type="submit" hidden>hidden</button>
+  </div>
 </form>
