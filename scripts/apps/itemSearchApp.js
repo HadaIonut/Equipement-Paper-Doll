@@ -1,4 +1,6 @@
 import {createImageTile} from "../lib/imageTile.js";
+import "../lib/popperJs/popper.min.js"
+import {linkWithTooltip} from "../lib/tooltips.js";
 
 export default class itemSearchApp extends FormApplication {
   constructor(filteredItems, allItems, source, availableSlots, categoryName) {
@@ -111,9 +113,19 @@ export default class itemSearchApp extends FormApplication {
     })
   }
 
+  linkItemsWithTooltips(html) {
+    html.querySelectorAll('.itemSearchApp__no-slots').forEach((item) => {
+      let tooltip = html.querySelector(`.${item.id}`)
+
+      linkWithTooltip(item, tooltip)
+    })
+  }
+
   activateListeners(html) {
     const itemsFromDisplay = document.querySelectorAll('.itemSearchApp__internal-grid');
     itemsFromDisplay.forEach((item) => {
+      if (item.classList.contains('itemSearchApp__no-slots')) return
+
       item.addEventListener('click',
         (event) => this.prepareDataForNewTile(event, this.allItems));
     })
@@ -122,5 +134,7 @@ export default class itemSearchApp extends FormApplication {
 
     const searchBar = document.querySelector('.itemSearchApp__search-bar');
     searchBar.addEventListener('input', this.searchItems)
+
+    this.linkItemsWithTooltips(html[0])
   }
 }

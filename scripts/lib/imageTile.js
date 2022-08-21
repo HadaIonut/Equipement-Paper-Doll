@@ -1,34 +1,5 @@
 import "./popperJs/popper.min.js"
-
-const hide = (toolTip) => {
-    toolTip.removeAttribute('data-show');
-}
-
-const show = (popperInstance, toolTip) => {
-    toolTip.setAttribute('data-show', '');
-
-    popperInstance.update();
-}
-
-/**
- * Adds the events for the tooltip
- *
- * @param newTile - image tile
- * @param popperInstance - instance returned by popperJS
- * @param toolTip - tooltip object
- */
-const createEvents = (newTile, popperInstance, toolTip) => {
-    const showEvents = ['mouseenter', 'focus'];
-    const hideEvents = ['mouseleave', 'blur'];
-
-    showEvents.forEach(event => {
-        newTile.addEventListener(event, () => show(popperInstance, toolTip));
-    });
-
-    hideEvents.forEach(event => {
-        newTile.addEventListener(event, () => hide(toolTip));
-    });
-}
+import {linkWithTooltip} from "./tooltips.js";
 
 /**
  * Creates an image tile a given location.
@@ -45,19 +16,7 @@ const createImageTile = (item, location) => {
     location?.parentNode?.insertBefore?.(toolTip[0], location);
     location?.parentNode?.replaceChild?.(newTile[0], location);
 
-    const popperInstance = Popper.createPopper(newTile[0], toolTip[0], {
-        placement: 'top',
-        modifiers: [
-            {
-                name: 'offset',
-                options: {
-                    offset: [0, 8],
-                },
-            },
-        ],
-    })
-
-    createEvents(newTile[0], popperInstance, toolTip[0]);
+    linkWithTooltip(newTile[0], toolTip[0])
 }
 
 export {createImageTile}
