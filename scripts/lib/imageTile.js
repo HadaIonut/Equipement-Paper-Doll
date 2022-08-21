@@ -20,16 +20,15 @@ const createImageTile = (item, location, secondary = false) => {
       className: 'paperDollApp__added-item',
       'aria-describedby': 'tooltip',
       id: itemId
-    }
+    },
+    children: [{
+      elementName: 'img',
+      attributes: {
+        src: item.data.img,
+        className: imageClasses
+      }
+    }]
   })
-  const img = createHTMLElement({
-    elementName: 'img',
-    attributes: {
-      src: item.data.img,
-      className: imageClasses
-    }
-  })
-  newTile.appendChild(img)
 
   const toolTip = createHTMLElement({
     elementName: 'span',
@@ -38,18 +37,17 @@ const createImageTile = (item, location, secondary = false) => {
       role: 'tooltip',
       className: itemId,
       innerText: item.data.name
-    }
-  })
-  const tooltipArrow = createHTMLElement({
-    elementName: 'span',
-    attributes: {
-      id: 'arrow'
     },
-    customAttributes: {
-      'data-popper-arrow': ''
-    }
+    children: [{
+      elementName: 'span',
+      attributes: {
+        id: 'arrow'
+      },
+      customAttributes: {
+        'data-popper-arrow': ''
+      }
+    }]
   })
-  toolTip.appendChild(tooltipArrow)
 
   location?.parentNode?.insertBefore?.(toolTip, location);
   location?.parentNode?.replaceChild?.(newTile, location);

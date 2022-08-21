@@ -43,26 +43,21 @@ export default class TagsEditApp extends FormApplication {
         elementName: 'div',
         attributes: {
           className: 'tagsEditApp__flag-wrapper'
-        }
+        },
+        children: [{
+          elementName: 'div',
+          attributes: {
+            className: 'tagsEditApp__flag-tile',
+            innerText: newFlag
+          }}, {
+          elementName: 'button',
+          attributes: {
+            className: 'tagsEditApp__remove-flag',
+            id: newFlag,
+            innerText: 'X'
+          }
+        }]
       })
-      const newFlagElement = createHTMLElement({
-        elementName: 'div',
-        attributes: {
-          className: 'tagsEditApp__flag-tile',
-          innerText: newFlag
-        }
-      })
-      const removeFlagButton = createHTMLElement({
-        elementName: 'button',
-        attributes: {
-          className: 'tagsEditApp__remove-flag',
-          id: newFlag,
-          innerText: 'X'
-        }
-      })
-
-      newFlagWrapper.appendChild(newFlagElement)
-      newFlagWrapper.appendChild(removeFlagButton)
 
 
       if (!this.currentFlags.has(newFlag)) this.form.querySelector('.tagsEditApp__flag-container').appendChild(newFlagWrapper)

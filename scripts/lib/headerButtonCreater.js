@@ -9,7 +9,8 @@ export const createHTMLElement = ({
                                     elementName,
                                     attributes = {},
                                     customAttributes = {},
-                                    events = {}
+                                    events = {},
+                                    children = []
                                   }) => {
   const element = document.createElement(elementName)
   Object.entries(attributes).forEach(([key, value]) => {
@@ -20,6 +21,12 @@ export const createHTMLElement = ({
   })
   Object.entries(events).forEach(([eventTrigger, eventFunction]) => {
     element.addEventListener(eventTrigger, eventFunction)
+  })
+
+  children.forEach((child) => {
+    const htmlChild = createHTMLElement(child)
+
+    element.appendChild(htmlChild)
   })
 
   return element
