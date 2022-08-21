@@ -6,7 +6,7 @@ import personalSettingsApp from "./personalSettingsApp.js";
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
-import {createHeaderButton, createHTMLButton, insertBefore} from "../lib/headerButtonCreater.js";
+import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
@@ -162,24 +162,30 @@ export default class PaperDollApp extends FormApplication {
    */
   unEquipItem(item) {
     //TODO: un-equipping doesnt update available slots
-    console.log(item)
-    const addBox = createHTMLButton({
-      type: 'submit',
-      className: 'paperDollApp__add-box',
-      eventTrigger: 'click',
-      eventListener: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+    const addBox = createHTMLElement({
+      elementName: 'button',
+      attributes: {
+        type: 'submit',
+        className: 'paperDollApp__add-box'
+      }, events: {
+        click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+      }
     })
+
     item.parent().children().each((index, element) => {
       if (element.nodeName === 'SPAN' && element.id === 'tooltip' &&
         (element.className === `${item[0].id}` || element.className === `${item[0].id}__secondary`))
         element.remove();
       if (element.nodeName === 'DIV' && element.id === `${item[0].id}__secondary`
         && element.className === 'paperDollApp__added-item') {
-        let box = createHTMLButton({
-          type: 'submit',
-          className: 'paperDollApp__add-box',
-          eventTrigger: 'click',
-          eventListener: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+        let box = createHTMLElement({
+          elementName: 'button',
+          attributes: {
+            type: 'submit',
+            className: 'paperDollApp__add-box'
+          }, events: {
+            click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+          }
         })
 
         element.parentNode.replaceChild(box, element);

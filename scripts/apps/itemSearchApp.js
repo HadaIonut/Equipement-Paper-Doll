@@ -72,7 +72,6 @@ export default class itemSearchApp extends FormApplication {
     const secondarySlotsAvailable = [...this.source.target.parentNode
       .querySelectorAll('.paperDollApp__add-box')]
       .filter((item) => item !== this.source.target)
-    console.log(selectedItemSlotsRequired)
     this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, selectedItemSlotsRequired - 1)
     this.createNewTile(selectedItem)
   }

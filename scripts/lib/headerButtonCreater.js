@@ -5,14 +5,24 @@ export const createHeaderButton = (text) => {
   return button
 }
 
-export const createHTMLButton = ({type, className, id, eventListener, eventTrigger}) => {
-  const button = document.createElement('button')
-  if (type) button.type = type
-  if (className) button.className = className
-  if (id) button.id = id
-  if (eventListener && eventTrigger) button.addEventListener(eventTrigger, eventListener)
+export const createHTMLElement = ({
+                                    elementName,
+                                    attributes = {},
+                                    customAttributes = {},
+                                    events = {}
+                                  }) => {
+  const element = document.createElement(elementName)
+  Object.entries(attributes).forEach(([key, value]) => {
+    element[key] = value
+  })
+  Object.entries(customAttributes).forEach(([key, value]) => {
+    element.setAttribute(key, value)
+  })
+  Object.entries(events).forEach(([eventTrigger, eventFunction]) => {
+    element.addEventListener(eventTrigger, eventFunction)
+  })
 
-  return button
+  return element
 }
 
 export const insertBefore = (target, element) => {

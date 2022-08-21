@@ -40,5 +40,5 @@ Hooks.on('renderItemSheet', (item, html) => {
     new TagsEditApp(item.object).render(true)
   })
 
-  insertBefore(editTagsButton, closeButton);
+  insertBefore(closeButton, editTagsButton);
 })

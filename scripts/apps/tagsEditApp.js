@@ -1,5 +1,6 @@
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
+import {createHTMLElement} from "../lib/headerButtonCreater.js";
 
 export default class TagsEditApp extends FormApplication {
   currentFlags
@@ -38,20 +39,40 @@ export default class TagsEditApp extends FormApplication {
   async _updateObject(event, formData) {
     if (event.submitter.classList.value === 'tagsEditApp__add-flag-button') {
       const newFlag = `${formData['number-input']}-${formData['slot-type']}`;
-      const newFlagElement = document.createElement('div');
-      newFlagElement.innerText = newFlag;
-      newFlagElement.classList.add('tagsEditApp__flag-tile');
+      const newFlagWrapper = createHTMLElement({
+        elementName: 'div',
+        attributes: {
+          className: 'tagsEditApp__flag-wrapper'
+        }
+      })
+      const newFlagElement = createHTMLElement({
+        elementName: 'div',
+        attributes: {
+          className: 'tagsEditApp__flag-tile',
+          innerText: newFlag
+        }
+      })
+      const removeFlagButton = createHTMLElement({
+        elementName: 'button',
+        attributes: {
+          className: 'tagsEditApp__remove-flag',
+          id: newFlag,
+          innerText: 'X'
+        }
+      })
 
-      if (!this.currentFlags.has(newFlag)) this.form.querySelector('.tagsEditApp__flag-container').appendChild(newFlagElement)
+      newFlagWrapper.appendChild(newFlagElement)
+      newFlagWrapper.appendChild(removeFlagButton)
 
-      this.currentFlags.add(newFlag);
-      this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
 
-    } else if (event.submitter.classList.value === 'tagsEditApp__remove-flag') {
-      this.currentFlags.delete(event.submitter.id)
-      event.submitter.parentElement.remove();
-      this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
-    }
+      if (!this.currentFlags.has(newFlag)) this.form.querySelector('.tagsEditApp__flag-container').appendChild(newFlagWrapper)
+        this.currentFlags.add(newFlag);
+        this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
+      } else if (event.submitter.classList.value === 'tagsEditApp__remove-flag') {
+        this.currentFlags.delete(event.submitter.id)
+        event.submitter.parentElement.remove();
+        this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
+      }
   }
 
   activateListeners(html) {

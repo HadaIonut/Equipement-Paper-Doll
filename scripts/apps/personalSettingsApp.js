@@ -1,5 +1,6 @@
-import {getItemsSlotArray, getSetting} from "../settings.js";
+import {getSetting} from "../settings.js";
 import itemSearchApp from "./itemSearchApp.js";
+import {createHTMLElement} from "../lib/headerButtonCreater.js";
 
 /**
  * Returns a filler slot
@@ -20,13 +21,15 @@ const createFillerSlot = () => {
  * @returns {*|jQuery|HTMLElement}
  */
 const createButtonSlot = (filteredItems, allItems) => {
-  const button = document.createElement('button')
-  button.classList.add('paperDollApp__add-box')
-  button.type = 'button'
-  button.addEventListener('click', (event) => {
-    new itemSearchApp(filteredItems, allItems, event).render(true);
-  })
-  return button;
+  return createHTMLElement({
+    elementName: 'button',
+    attributes: {
+      className: 'paperDollApp__add-box',
+      type: 'button'
+    }, events: {
+      click: (event) => new itemSearchApp(filteredItems, allItems, event).render(true)
+    }
+  });
 }
 
 export default class personalSettingsApp extends FormApplication {
@@ -122,7 +125,6 @@ export default class personalSettingsApp extends FormApplication {
         })
       } else {
         const globalSetting = getSetting(formName);
-        console.log(formName)
         this.updatePaperDollView(formData[formName], formName);
 
         if (formData[formName] === globalSetting) return;
