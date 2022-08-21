@@ -52,6 +52,12 @@ export default class itemSearchApp extends FormApplication {
     this.close();
   }
 
+  createSecondaryTiles(item, slotsAvailable, slotsRequired) {
+    for (let i = 0; i < slotsRequired; i++) {
+      createImageTile(item, slotsAvailable[i], true)
+    }
+  }
+
   /**
    * Gets the item from the id of the clicked object on the grid
    *
@@ -59,10 +65,16 @@ export default class itemSearchApp extends FormApplication {
    * @param itemList - items available for equipment
    */
   prepareDataForNewTile(source, itemList) {
-    const selectedItemId = source.currentTarget.id;
-    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots');
-    const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0];
-    this.createNewTile(selectedItem);
+    const selectedItemId = source.currentTarget.id
+    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots')
+    const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0]
+    //TODO: expand this to main hand + offhand
+    const secondarySlotsAvailable = [...this.source.target.parentNode
+      .querySelectorAll('.paperDollApp__add-box')]
+      .filter((item) => item !== this.source.target)
+    console.log(selectedItemSlotsRequired)
+    this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, selectedItemSlotsRequired - 1)
+    this.createNewTile(selectedItem)
   }
 
   /**

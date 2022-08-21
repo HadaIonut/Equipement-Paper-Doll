@@ -74,6 +74,15 @@
       cursor: pointer;
     }
 
+    &__image-tile {
+      height: 45px;
+      width: 47px;
+    }
+
+    &__secondary-image {
+      opacity: 0.45;
+    }
+
     &__add-box {
       background-image: url(../../../ui/parchment.jpg);
       height: 45px;

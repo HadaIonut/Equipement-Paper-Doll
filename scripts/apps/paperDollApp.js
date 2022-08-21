@@ -6,7 +6,7 @@ import personalSettingsApp from "./personalSettingsApp.js";
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
-import {createHeaderButton, insertBefore} from "../lib/headerButtonCreater.js";
+import {createHeaderButton, createHTMLButton, insertBefore} from "../lib/headerButtonCreater.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
@@ -69,11 +69,11 @@ export default class PaperDollApp extends FormApplication {
     const weaponSlotNames = ['mainHand', 'offHand'];
     const itemSlotsArray = getItemsSlotArray(slotNames, this.sourceActor)
     const weaponSlotsArray = getItemsSlotArray(weaponSlotNames, this.sourceActor)
-    this.slotStructure = this.selectedItems
-    slotNames.forEach((slot, index) =>  {
+    this.slotStructure = JSON.parse(JSON.stringify(this.selectedItems))
+    slotNames.forEach((slot, index) => {
       this.slotStructure[slot].splice(1, this.slotStructure[slot].length - itemSlotsArray[index])
     })
-    weaponSlotNames.forEach((slot, index) =>  {
+    weaponSlotNames.forEach((slot, index) => {
       this.slotStructure[slot].splice(1, this.slotStructure[slot].length - weaponSlotsArray[index])
     })
   }
@@ -116,8 +116,15 @@ export default class PaperDollApp extends FormApplication {
       storedItems[itemType].forEach((itemSlot, index) => {
         if (itemSlot === '') return;
 
-        const item = actorItems.filter(localItem => localItem.data._id === itemSlot)[0];
-        createImageTile(item, slotsArray[index])
+        if (itemSlot.includes('__secondary')) {
+          const itemId = itemSlot.split('__secondary')[0]
+          const item = actorItems.find(localItem => localItem.data._id === itemId);
+          createImageTile(item, slotsArray[index], true)
+        } else {
+          const item = actorItems.find(localItem => localItem.data._id === itemSlot);
+          createImageTile(item, slotsArray[index])
+        }
+
       })
     })
   }
@@ -154,12 +161,29 @@ export default class PaperDollApp extends FormApplication {
    * @param item - item to be removed
    */
   unEquipItem(item) {
-    const addBox = $('<button type="submit" class="paperDollApp__add-box"></button>');
-    addBox.on('click', (source) => {
-      this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
-    });
+    //TODO: un-equipping doesnt update available slots
+    console.log(item)
+    const addBox = createHTMLButton({
+      type: 'submit',
+      className: 'paperDollApp__add-box',
+      eventTrigger: 'click',
+      eventListener: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+    })
     item.parent().children().each((index, element) => {
-      if (element.nodeName === 'SPAN' && element.id === 'tooltip' && element.className === `${item[0].id}`) element.remove();
+      if (element.nodeName === 'SPAN' && element.id === 'tooltip' &&
+        (element.className === `${item[0].id}` || element.className === `${item[0].id}__secondary`))
+        element.remove();
+      if (element.nodeName === 'DIV' && element.id === `${item[0].id}__secondary`
+        && element.className === 'paperDollApp__added-item') {
+        let box = createHTMLButton({
+          type: 'submit',
+          className: 'paperDollApp__add-box',
+          eventTrigger: 'click',
+          eventListener: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+        })
+
+        element.parentNode.replaceChild(box, element);
+      }
     })
     item.replaceWith(addBox);
     document.querySelector('.hidden-submit').click()
@@ -174,7 +198,7 @@ export default class PaperDollApp extends FormApplication {
     new ContextMenu(html, '.paperDollApp__added-item', [{
       name: 'Unequip item',
       icon: '<i class="fas fa-trash fa-fw"></i>',
-      condition: () => true,
+      condition: (item) => !item[0].id.includes('__secondary'),
       callback: this.unEquipItem.bind(this)
     }])
   }

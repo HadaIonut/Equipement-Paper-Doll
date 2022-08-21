@@ -182,6 +182,13 @@ input[type=text].itemSearchApp__search-bar {
   box-shadow: 0 0 5px #000 inset;
   cursor: pointer;
 }
+.paperDollApp__image-tile {
+  height: 45px;
+  width: 47px;
+}
+.paperDollApp__secondary-image {
+  opacity: 0.45;
+}
 .paperDollApp__add-box {
   background-image: url(../../../ui/parchment.jpg);
   height: 45px;
