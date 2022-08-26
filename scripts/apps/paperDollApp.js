@@ -155,13 +155,33 @@ export default class PaperDollApp extends FormApplication {
     new itemSearchApp(selectedItems[location.id], allItems, source, availableSlots, location.id).render(true);
   }
 
+  removeElementAndSecondaries(element, itemToRemove) {
+    if (element.nodeName === 'SPAN' && element.id === 'tooltip' &&
+      (element.className === `${itemToRemove.id}` || element.className === `${itemToRemove.id}__secondary`))
+      element.remove();
+    if (element.nodeName === 'DIV' && element.id === `${itemToRemove.id}__secondary`
+      && element.className === 'paperDollApp__added-item') {
+      let box = createHTMLElement({
+        elementName: 'button',
+        attributes: {
+          type: 'submit',
+          className: 'paperDollApp__add-box'
+        }, events: {
+          click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+        }
+      })
+
+      element.parentNode.replaceChild(box, element);
+    }
+  }
   /**
    * Replaces a image tile with an empty slot
    *
    * @param item - item to be removed
    */
-  unEquipItem(item) {
-    //TODO: un-equipping doesnt update available slots
+  unEquipItem([item]) {
+    const slotName = item.parentElement.parentElement.id
+    const itemId = item.id
     const addBox = createHTMLElement({
       elementName: 'button',
       attributes: {
@@ -172,27 +192,12 @@ export default class PaperDollApp extends FormApplication {
       }
     })
 
-    item.parent().children().each((index, element) => {
-      if (element.nodeName === 'SPAN' && element.id === 'tooltip' &&
-        (element.className === `${item[0].id}` || element.className === `${item[0].id}__secondary`))
-        element.remove();
-      if (element.nodeName === 'DIV' && element.id === `${item[0].id}__secondary`
-        && element.className === 'paperDollApp__added-item') {
-        let box = createHTMLElement({
-          elementName: 'button',
-          attributes: {
-            type: 'submit',
-            className: 'paperDollApp__add-box'
-          }, events: {
-            click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
-          }
-        })
-
-        element.parentNode.replaceChild(box, element);
-      }
-    })
+    Array.from(item.parentElement.children).forEach((element) => this.removeElementAndSecondaries(element, item))
     item.replaceWith(addBox);
+
     document.querySelector('.hidden-submit').click()
+
+    this.slotStructure[slotName] = this.slotStructure[slotName].map((slot) => slot === itemId || slot === `${itemId}__secondary` ? '' : slot)
   }
 
   /**
