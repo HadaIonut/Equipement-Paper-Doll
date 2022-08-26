@@ -3,10 +3,11 @@ import {registerHelpers} from "../lib/handlebarsHelpers.js";
 import {getItemsSlotArray} from "../settings.js";
 import {createImageTile} from "../lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
-import {slotNames} from "../../constants/slotNames.js";
+import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
+import {flagFields, initialSlotStructure, moduleName, paperDollWindowData} from "../constants.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
@@ -17,7 +18,7 @@ export default class PaperDollApp extends FormApplication {
     super();
     this.sourceActor = sourceActor;
     this.items = isNewerVersion(game.data.version, "0.7.0") ? sourceActor.items : sourceActor.items.entries;
-    this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data");
+    this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data") ?? initialSlotStructure;
     this.equipableItems = filterEquipableItems(this.items);
     this.filteredItems = filterActorItems(this.items);
 
@@ -27,9 +28,9 @@ export default class PaperDollApp extends FormApplication {
 
   flagEquippedItems() {
     [...this.items].forEach((item) => {
-        if (Array.isArray(item.getFlag('Equipment-Paper-Doll', 'flags'))) return
+        if (Array.isArray(item.getFlag(moduleName, flagFields.flags))) return
 
-        item.setFlag('Equipment-Paper-Doll', 'flags', extractFlags(item))
+        item.setFlag(moduleName, flagFields.flags, extractFlags(item))
       }
     )
   }
@@ -38,24 +39,17 @@ export default class PaperDollApp extends FormApplication {
     registerHelpers()
     return {
       ...super.defaultOptions,
-      id: "paper-doll",
+      ...paperDollWindowData,
       template: "modules/Equipment-Paper-Doll/templates/paperDollApp.hbs",
-      resizable: false,
-      minimizable: true,
-      title: "Paper Doll Viewer",
-      submitOnClose: true,
-      closeOnSubmit: false
     }
   }
 
   getData(options) {
-    const itemSlotNames = slotNames;
-    const weaponSlotNames = ['mainHand', 'offHand'];
     return {
       selectedItems: this.selectedItems,
       itemTypes: {
-        types: itemSlotNames,
-        slots: getItemsSlotArray(itemSlotNames, this.sourceActor)
+        types: slotNames,
+        slots: getItemsSlotArray(slotNames, this.sourceActor)
       },
       items: {...this.filteredItems},
       weaponsTypes: {
@@ -66,16 +60,18 @@ export default class PaperDollApp extends FormApplication {
   }
 
   getSlotsStructure() {
-    const weaponSlotNames = ['mainHand', 'offHand'];
     const itemSlotsArray = getItemsSlotArray(slotNames, this.sourceActor)
     const weaponSlotsArray = getItemsSlotArray(weaponSlotNames, this.sourceActor)
-    this.slotStructure = JSON.parse(JSON.stringify(this.selectedItems))
-    slotNames.forEach((slot, index) => {
-      this.slotStructure[slot].splice(1, this.slotStructure[slot].length - itemSlotsArray[index])
-    })
-    weaponSlotNames.forEach((slot, index) => {
-      this.slotStructure[slot].splice(1, this.slotStructure[slot].length - weaponSlotsArray[index])
-    })
+    if (this.selectedItems) {
+      this.slotStructure = JSON.parse(JSON.stringify(this.selectedItems))
+      slotNames.forEach((slot, index) => {
+        this.slotStructure[slot].splice(1, this.slotStructure[slot].length - itemSlotsArray[index])
+      })
+      weaponSlotNames.forEach((slot, index) => {
+        this.slotStructure[slot].splice(1, this.slotStructure[slot].length - weaponSlotsArray[index])
+      })
+    }
+
   }
 
   /**
@@ -139,7 +135,7 @@ export default class PaperDollApp extends FormApplication {
   async _updateObject(event, formData) {
     formData = this.extractDataFromForm();
 
-    await this.sourceActor.setFlag("Equipment-Paper-Doll", "data", formData)
+    await this.sourceActor.setFlag(moduleName, flagFields.data, formData)
   }
 
   /**
@@ -151,7 +147,13 @@ export default class PaperDollApp extends FormApplication {
    */
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
-    const availableSlots = this.slotStructure[location.id].filter((el) => el === '').length
+    let availableSlots;
+    if (location.id === 'offHand' || location.id === 'mainHand') {
+      availableSlots = this.slotStructure.offHand.filter((el) => el === '').length
+      availableSlots += this.slotStructure.mainHand.filter((el) => el === '').length
+    } else  {
+      availableSlots = this.slotStructure[location.id].filter((el) => el === '').length
+    }
     new itemSearchApp(selectedItems[location.id], allItems, source, availableSlots, location.id).render(true);
   }
 
@@ -174,8 +176,14 @@ export default class PaperDollApp extends FormApplication {
       element.parentNode.replaceChild(box, element);
     }
   }
+
+  getAvailableSlotsAtLocation(location) {
+    return [...document
+      .querySelectorAll(`#${location} > .paperDollApp__item-slots-grid > *`)]
+  }
+
   /**
-   * Replaces a image tile with an empty slot
+   * Replaces an image tile with an empty slot
    *
    * @param item - item to be removed
    */
@@ -191,8 +199,16 @@ export default class PaperDollApp extends FormApplication {
         click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
       }
     })
+    let removeSources;
 
-    Array.from(item.parentElement.children).forEach((element) => this.removeElementAndSecondaries(element, item))
+    if (weaponSlotNames.includes(slotName)) {
+      removeSources = [...this.getAvailableSlotsAtLocation('mainHand'),
+        ...this.getAvailableSlotsAtLocation('offHand')]
+    } else {
+      removeSources = Array.from(item.parentElement.children)
+    }
+
+    removeSources.forEach((element) => this.removeElementAndSecondaries(element, item))
     item.replaceWith(addBox);
 
     document.querySelector('.hidden-submit').click()

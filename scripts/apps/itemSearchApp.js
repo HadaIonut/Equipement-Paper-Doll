@@ -1,6 +1,7 @@
 import {createImageTile} from "../lib/imageTile.js";
 import "../lib/popperJs/popper.min.js"
 import {linkWithTooltip} from "../lib/tooltips.js";
+import {weaponSlotNames} from "../../constants/slotNames.js";
 
 export default class itemSearchApp extends FormApplication {
   constructor(filteredItems, allItems, source, availableSlots, categoryName) {
@@ -58,6 +59,27 @@ export default class itemSearchApp extends FormApplication {
     }
   }
 
+  getAvailableSlotsAtLocation(location) {
+    return [...document
+      .querySelectorAll(`#${location} > .paperDollApp__item-slots-grid > .paperDollApp__add-box`)]
+      .filter((item) => item !== this.source.target)
+  }
+
+  mergeHandSlots(offHand, mainHand) {
+    return offHand.reduce((acc, cur, index) => {
+      if (mainHand[index])
+        return [
+          ...acc,
+          cur,
+          mainHand[index]
+        ]
+      return [
+        ...acc,
+        cur,
+      ]
+    }, [])
+  }
+
   /**
    * Gets the item from the id of the clicked object on the grid
    *
@@ -68,10 +90,21 @@ export default class itemSearchApp extends FormApplication {
     const selectedItemId = source.currentTarget.id
     const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots')
     const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0]
-    //TODO: expand this to main hand + offhand
-    const secondarySlotsAvailable = [...this.source.target.parentNode
-      .querySelectorAll('.paperDollApp__add-box')]
-      .filter((item) => item !== this.source.target)
+    const sourceSlotType = this.source.target.parentElement.parentElement.id
+    let secondarySlotsAvailable;
+
+    if (weaponSlotNames.includes(sourceSlotType)) {
+      const mainHandSlots = this.getAvailableSlotsAtLocation('mainHand')
+      const offHandSlots = this.getAvailableSlotsAtLocation('offHand')
+
+      secondarySlotsAvailable = this.mergeHandSlots(offHandSlots, mainHandSlots)
+    } else {
+      secondarySlotsAvailable = [...this.source.target.parentNode
+        .querySelectorAll('.paperDollApp__add-box')]
+        .filter((item) => item !== this.source.target)
+    }
+
+
     this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, selectedItemSlotsRequired - 1)
     this.createNewTile(selectedItem)
   }
