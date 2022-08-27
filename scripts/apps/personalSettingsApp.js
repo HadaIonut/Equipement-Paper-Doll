@@ -5,7 +5,12 @@ import {addBoxComponent, fillerElementComponent} from "../components/paperDollSc
 import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
 import {flagFields, moduleName} from "../contants/constants.js";
 import {personalSettingsAppData} from "../components/personalSettingsApp.js";
-import {nonFillerElements, slotsContainer} from "../contants/commonQuerries.js";
+import {
+  imagePathInputField,
+  imageUrlInputField,
+  nonFillerElements,
+  slotsContainer
+} from "../contants/commonQuerries.js";
 import {backgroundImage, fillerElementClass} from "../contants/objectClassNames.js";
 
 /**
@@ -152,7 +157,7 @@ export default class personalSettingsApp extends FormApplication {
         type: 'image',
         current: this.currentSlotSettings?.filter(obj => obj.name === 'image')?.[0]?.value || '',
         callback: (path) => {
-          const imageUrl = document.querySelector('input[name="imgUrl"]')
+          const imageUrl = document.querySelector(imageUrlInputField)
           if (imageUrl.value) this.setBackgroundImage(imageUrl.value)
           else {
             this.setBackgroundImage(`./${path}`)
@@ -164,8 +169,8 @@ export default class personalSettingsApp extends FormApplication {
   }
 
   addLinkEvents([html]) {
-    const imagePath = html.querySelector('input.imagePath')
-    const imageUrl = html.querySelector('input[name="imgUrl"]')
+    const imagePath = html.querySelector(imagePathInputField)
+    const imageUrl = html.querySelector(imageUrlInputField)
 
     imagePath.addEventListener('focusout', () => {
       if (imageUrl.value) return this.setBackgroundImage(imageUrl.value)
