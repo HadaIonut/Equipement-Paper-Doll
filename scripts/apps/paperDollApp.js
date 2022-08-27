@@ -18,7 +18,9 @@ import {addBoxClass, addedItemClass, backgroundImage} from "../contants/objectCl
 import {addBoxComponent, paperDollWindowData, rightClickMenuComponent} from "../components/paperDollScreen.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
-  return sourceActor.getFlag(moduleName, flagFields.personalSettings)?.filter(obj => obj.name === 'image')?.[0]?.value;
+  const actorFlags = sourceActor.getFlag(moduleName, flagFields.personalSettings)
+  return actorFlags?.filter?.(obj => obj.name === 'imageUrl')?.[0]?.value
+    || `./${actorFlags?.filter(obj => obj.name === 'image')?.[0]?.value}`
 }
 
 export default class PaperDollApp extends FormApplication {
@@ -236,9 +238,9 @@ export default class PaperDollApp extends FormApplication {
   setBackgroundImage(html) {
     const backgroundContainer = html.querySelector(`.${backgroundImage}`);
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
-    if (!path) return;
+    if (!path || path === './') return;
 
-    backgroundContainer.style.background = `url(./${path}) no-repeat center`
+    backgroundContainer.style.background = `url(${path}) no-repeat center`
     backgroundContainer.style['background-size'] = 'contain'
   }
 

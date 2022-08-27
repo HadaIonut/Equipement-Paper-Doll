@@ -118,8 +118,15 @@ input[type=text].itemSearchApp__search-bar {
 }
 
 .personalSettingsApp__container {
-  height: 500px;
+  height: 550px;
   width: 300px;
+}
+.personalSettingsApp__background-container {
+  margin-top: 16px;
+}
+.personalSettingsApp__category-title {
+  font-size: 16px;
+  border-bottom: 1px solid black;
 }
 
 .paperDollApp__container {

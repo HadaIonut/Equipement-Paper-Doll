@@ -1,22 +1,45 @@
 <form>
-    <div class="personalSettingsApp__container">
-        {{#each items}}
-            <div class="form-group">
-                <label for="{{this.name}}"> {{prettifyTextToDisplay this.name}} </label>
-                <div class="form-fields">
-                    <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.value}}">
-                    <span class="range-value">{{this.value}}</span>
-                </div>
-            </div>
-        {{/each}}
-        <div class="form-group">
-            <label>Background art: </label>
-            <div class="form-fields">
-                <button class="imageBrowser" type="button"> <i class="fas fa-file-import fa-fw"></i> </button>
-                <input class="imagePath" type="text" name="img" placeholder="File Path" value="{{image}}">
-            </div>
-            <p class="notes">Select the background image. To go back to the default one, clear the text field and restart the paper doll view </p>
+  <div class="personalSettingsApp__container">
+    <div class="personalSettingsApp__category-title">
+      Slot settings:
+    </div>
+
+    {{#each items}}
+      <div class="form-group">
+        <label for="{{this.name}}"> {{prettifyTextToDisplay this.name}} </label>
+        <div class="form-fields">
+          <input name="{{this.name}}" type="range" min="{{this.min}}" max="{{this.max}}" value="{{this.value}}">
+          <span class="range-value">{{this.value}}</span>
+        </div>
+      </div>
+    {{/each}}
+
+    <div class="personalSettingsApp__background-container">
+      <div class="personalSettingsApp__category-title">
+        Background art:
+      </div>
+
+      <div class="form-group">
+        <label>Link to Resource</label>
+
+        <div class="form-fields">
+          <input type="text" name="imgUrl" placeholder="External Url" value="{{imageUrl}}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>File picker</label>
+
+        <div class="form-fields">
+          <button class="imageBrowser" type="button"><i class="fas fa-file-import fa-fw"></i></button>
+          <input class="imagePath" type="text" name="img" placeholder="File Path" value="{{image}}">
         </div>
 
+        <p class="notes">Select the background image. To go back to the default one, clear the text field and restart the
+          paper doll view </p>
+      </div>
     </div>
+
+
+  </div>
 </form>

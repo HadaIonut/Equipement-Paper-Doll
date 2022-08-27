@@ -6,7 +6,7 @@ import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
 import {flagFields, moduleName} from "../contants/constants.js";
 import {personalSettingsAppData} from "../components/personalSettingsApp.js";
 import {nonFillerElements, slotsContainer} from "../contants/commonQuerries.js";
-import {fillerElementClass} from "../contants/objectClassNames.js";
+import {backgroundImage, fillerElementClass} from "../contants/objectClassNames.js";
 
 /**
  * Returns a filler slot
@@ -75,7 +75,8 @@ export default class personalSettingsApp extends FormApplication {
   getData(options) {
     return {
       items: this.constructItemsData(),
-      image: this.currentSlotSettings?.filter(obj => obj.name === 'image')[0].value
+      imageUrl: this.currentSlotSettings?.filter?.(obj => obj.name === 'imageUrl')?.[0]?.value,
+      image: this.currentSlotSettings?.filter?.(obj => obj.name === 'image')?.[0]?.value,
     }
   }
 
@@ -118,6 +119,11 @@ export default class personalSettingsApp extends FormApplication {
           name: 'image',
           value: formData[formName]
         })
+      } else if (formName === 'imgUrl') {
+        formattedFromData.push({
+          name: 'imageUrl',
+          value: formData[formName]
+        })
       } else {
         const globalSetting = getSetting(formName);
         this.updatePaperDollView(formData[formName], formName);
@@ -134,24 +140,52 @@ export default class personalSettingsApp extends FormApplication {
     await this.sourceActor.setFlag(moduleName, flagFields.personalSettings, formattedFromData);
   }
 
+  setBackgroundImage(path) {
+    const backgroundContainer = document.querySelector(`.${backgroundImage}`);
+    backgroundContainer.style.background = `url(${path}) no-repeat center`
+    backgroundContainer.style['background-size'] = 'contain'
+  }
+
   createFilePicker(html) {
     html[0].querySelector('.imageBrowser').addEventListener('click', async (ev) => {
       await new FilePicker({
         type: 'image',
         current: this.currentSlotSettings?.filter(obj => obj.name === 'image')?.[0]?.value || '',
         callback: (path) => {
-          const backgroundContainer = document.querySelector('.paperDollApp__background-image');
-          backgroundContainer.style.background = `url(./${path}) no-repeat center`
-          backgroundContainer.style['background-size'] = 'contain'
-          document.querySelector('.imagePath').innerHTML = `./${path}`
+          const imageUrl = document.querySelector('input[name="imgUrl"]')
+          if (imageUrl.value) this.setBackgroundImage(imageUrl.value)
+          else {
+            this.setBackgroundImage(`./${path}`)
+            document.querySelector('.imagePath').value = `./${path}`
+          }
         }
       }).render(true);
     })
+  }
 
+  addLinkEvents([html]) {
+    const imagePath = html.querySelector('input.imagePath')
+    const imageUrl = html.querySelector('input[name="imgUrl"]')
+
+    imagePath.addEventListener('focusout', () => {
+      if (imageUrl.value) return this.setBackgroundImage(imageUrl.value)
+
+      this.setBackgroundImage(imagePath.value)
+    })
+
+    imageUrl.addEventListener('focusout', () => {
+      if (imageUrl.value) return this.setBackgroundImage(imageUrl.value)
+      if (imagePath.value) return  this.setBackgroundImage(imagePath.value)
+
+      const backgroundContainer = document.querySelector(`.${backgroundImage}`);
+      backgroundContainer.style.background = ``
+    })
   }
 
   activateListeners(html) {
     this.createFilePicker(html);
+    this.addLinkEvents(html)
+
     super.activateListeners(html);
   }
 
