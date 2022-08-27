@@ -1,17 +1,19 @@
 import {getSetting} from "../settings.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {createHTMLElement} from "../lib/headerButtonCreater.js";
+import {addBoxComponent, fillerElementComponent} from "../components/paperDollScreen.js";
+import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
+import {flagFields, moduleName} from "../contants/constants.js";
+import {personalSettingsAppData} from "../components/personalSettingsApp.js";
+import {nonFillerElements, slotsContainer} from "../contants/commonQuerries.js";
+import {fillerElementClass} from "../contants/objectClassNames.js";
 
 /**
  * Returns a filler slot
  *
  * @returns {*|jQuery|HTMLElement}
  */
-const createFillerSlot = () => {
-  const slot = document.createElement('div')
-  slot.classList.add('paperDollApp__filler-element')
-  return slot
-}
+const createFillerSlot = () => createHTMLElement(fillerElementComponent)
 
 /**
  * Returns an equip new item button
@@ -22,11 +24,8 @@ const createFillerSlot = () => {
  */
 const createButtonSlot = (filteredItems, allItems) => {
   return createHTMLElement({
-    elementName: 'button',
-    attributes: {
-      className: 'paperDollApp__add-box',
-      type: 'button'
-    }, events: {
+    ...addBoxComponent,
+    events: {
       click: (event) => new itemSearchApp(filteredItems, allItems, event).render(true)
     }
   });
@@ -35,9 +34,9 @@ const createButtonSlot = (filteredItems, allItems) => {
 export default class personalSettingsApp extends FormApplication {
   constructor(sourceActor, filteredItems, allItems) {
     super();
-    this.itemSlotNames = ['head', 'eyes', 'neck', 'cape', 'back', 'torso', 'waist', 'wrists', 'hands', 'ring', 'feet', 'mainHand', 'offHand'];
+    this.itemSlotNames = [...slotNames, ...weaponSlotNames];
     this.sourceActor = sourceActor;
-    this.currentSlotSettings = sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings");
+    this.currentSlotSettings = sourceActor.getFlag(moduleName, flagFields.personalSettings);
     this.filteredItems = filteredItems;
     this.allItems = allItems;
   }
@@ -45,12 +44,8 @@ export default class personalSettingsApp extends FormApplication {
   static get defaultOptions() {
     return {
       ...super.defaultOptions,
-      id: "paper-doll-settings",
+      ...personalSettingsAppData,
       template: "modules/Equipment-Paper-Doll/templates/personalSettingsApp.hbs",
-      resizable: false,
-      minimizable: true,
-      title: "Paper Doll Settings",
-      submitOnClose: true,
     }
   }
 
@@ -92,17 +87,17 @@ export default class personalSettingsApp extends FormApplication {
    */
   updatePaperDollView(numberOfSlots, formName) {
     const gridName = formName.slice(0, -5);
-    const location = document.querySelector(`#${gridName} > .paperDollApp__item-slots-grid`)
-    const unusableSlots = location.querySelectorAll('.paperDollApp__filler-element').length;
+    const location = document.querySelector(slotsContainer(gridName))
+    const unusableSlots = location.querySelectorAll(`.${fillerElementClass}`).length;
     const usableSlots = (gridName === 'ring' ? 8 : 4) - unusableSlots;
 
     if (numberOfSlots < usableSlots) {
       //replace usable with filler
-      const replaceableSlots = [...location.querySelectorAll('.paperDollApp__added-item, button')].slice(numberOfSlots, usableSlots);
+      const replaceableSlots = [...location.querySelectorAll(nonFillerElements)].slice(numberOfSlots, usableSlots);
       replaceableSlots.forEach((slot) => slot?.parentNode.replaceChild(createFillerSlot(), slot))
     } else if (numberOfSlots > usableSlots) {
       //replace filler with usable
-      const replaceableSlots = [...location.querySelectorAll('.paperDollApp__filler-element')].slice(0, numberOfSlots - usableSlots);
+      const replaceableSlots = [...location.querySelectorAll(`.${fillerElementClass}`)].slice(0, numberOfSlots - usableSlots);
       replaceableSlots.forEach((slot) => slot?.parentNode?.replaceChild?.(createButtonSlot(this.filteredItems[gridName], this.allItems), slot))
     }
   }
@@ -136,7 +131,7 @@ export default class personalSettingsApp extends FormApplication {
       }
 
     })
-    await this.sourceActor.setFlag("Equipment-Paper-Doll", "personalSettings", formattedFromData);
+    await this.sourceActor.setFlag(moduleName, flagFields.personalSettings, formattedFromData);
   }
 
   createFilePicker(html) {

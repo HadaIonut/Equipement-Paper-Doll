@@ -2,6 +2,16 @@ import {createImageTile} from "../lib/imageTile.js";
 import "../lib/popperJs/popper.min.js"
 import {linkWithTooltip} from "../lib/tooltips.js";
 import {weaponSlotNames} from "../../constants/slotNames.js";
+import {itemSearchAppData} from "../components/itemSearchApp.js";
+import {flagFields, moduleName} from "../contants/constants.js";
+import {allEquippedItems, availableSlots} from "../contants/commonQuerries.js";
+import {
+  addBoxClass,
+  internalGrid,
+  itemNotInFilter,
+  itemWithNoSlots,
+  searchBarClass
+} from "../contants/objectClassNames.js";
 
 export default class itemSearchApp extends FormApplication {
   constructor(filteredItems, allItems, source, availableSlots, categoryName) {
@@ -16,18 +26,14 @@ export default class itemSearchApp extends FormApplication {
   static get defaultOptions() {
     return {
       ...super.defaultOptions,
-      id: "paper-doll-item-search",
+      ...itemSearchAppData,
       template: "modules/Equipment-Paper-Doll/templates/itemSearchApp.hbs",
-      resizable: false,
-      minimizable: false,
-      submitOnClose: true,
-      title: "Item Search",
     }
   }
 
   getRelevantFlags() {
     return this.allItems.reduce((acc, cur) => {
-      const relevantFlagsForItem = cur.getFlag('Equipment-Paper-Doll', 'flags').reduce((acc, cur) => {
+      const relevantFlagsForItem = cur.getFlag(moduleName, flagFields.flags).reduce((acc, cur) => {
         return acc + cur.includes(this.categoryName) ? cur[0] : ''
       }, '')
       return [...acc, relevantFlagsForItem]
@@ -61,7 +67,7 @@ export default class itemSearchApp extends FormApplication {
 
   getAvailableSlotsAtLocation(location) {
     return [...document
-      .querySelectorAll(`#${location} > .paperDollApp__item-slots-grid > .paperDollApp__add-box`)]
+      .querySelectorAll(availableSlots(location))]
       .filter((item) => item !== this.source.target)
   }
 
@@ -94,13 +100,13 @@ export default class itemSearchApp extends FormApplication {
     let secondarySlotsAvailable;
 
     if (weaponSlotNames.includes(sourceSlotType)) {
-      const mainHandSlots = this.getAvailableSlotsAtLocation('mainHand')
-      const offHandSlots = this.getAvailableSlotsAtLocation('offHand')
+      const mainHandSlots = this.getAvailableSlotsAtLocation(weaponSlotNames[0])
+      const offHandSlots = this.getAvailableSlotsAtLocation(weaponSlotNames[1])
 
       secondarySlotsAvailable = this.mergeHandSlots(offHandSlots, mainHandSlots)
     } else {
       secondarySlotsAvailable = [...this.source.target.parentNode
-        .querySelectorAll('.paperDollApp__add-box')]
+        .querySelectorAll(`.${addBoxClass}}`)]
         .filter((item) => item !== this.source.target)
     }
 
@@ -122,19 +128,18 @@ export default class itemSearchApp extends FormApplication {
       const searchText = event.currentTarget.value.toLowerCase();
 
       if (!itemObjectText.includes(searchText)) {
-        itemObject.classList.add('itemSearchApp__not-in-filter')
-      } else itemObject.classList.remove('itemSearchApp__not-in-filter')
+        itemObject.classList.add(itemNotInFilter)
+      } else itemObject.classList.remove(itemNotInFilter)
     })
   }
 
   async _updateObject(event, formData) {
-
   }
 
   findEquippedItems() {
     const IDs = [];
     document
-      .querySelectorAll('.paperDollApp__item-slots-grid > .paperDollApp__added-item')
+      .querySelectorAll(allEquippedItems)
       .forEach((item) => IDs.push(item.id))
     return IDs;
   }
@@ -150,15 +155,15 @@ export default class itemSearchApp extends FormApplication {
     const filteredItemsIds = [];
     const equippedItems = this.findEquippedItems();
     filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
-    displayedItems.forEach((item, index) => {
+    displayedItems.forEach((item) => {
       if (!(filteredItemsIds.includes(item.id)) || equippedItems.includes(item.id)) {
-        item.classList.toggle('itemSearchApp__not-in-filter');
+        item.classList.toggle(itemNotInFilter);
       }
     })
   }
 
   linkItemsWithTooltips(html) {
-    html.querySelectorAll('.itemSearchApp__no-slots').forEach((item) => {
+    html.querySelectorAll(`.${itemWithNoSlots}`).forEach((item) => {
       let tooltip = html.querySelector(`.${item.id}`)
 
       linkWithTooltip(item, tooltip)
@@ -166,9 +171,9 @@ export default class itemSearchApp extends FormApplication {
   }
 
   activateListeners(html) {
-    const itemsFromDisplay = document.querySelectorAll('.itemSearchApp__internal-grid');
+    const itemsFromDisplay = document.querySelectorAll(`.${internalGrid}`);
     itemsFromDisplay.forEach((item) => {
-      if (item.classList.contains('itemSearchApp__no-slots')) return
+      if (item.classList.contains(itemWithNoSlots)) return
 
       item.addEventListener('click',
         (event) => this.prepareDataForNewTile(event, this.allItems));
@@ -176,7 +181,7 @@ export default class itemSearchApp extends FormApplication {
 
     this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)
 
-    const searchBar = document.querySelector('.itemSearchApp__search-bar');
+    const searchBar = document.querySelector(`.${searchBarClass}`);
     searchBar.addEventListener('input', this.searchItems)
 
     this.linkItemsWithTooltips(html[0])

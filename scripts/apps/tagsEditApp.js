@@ -1,6 +1,9 @@
 import {slotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import {createHTMLElement} from "../lib/headerButtonCreater.js";
+import {flagFields, moduleName} from "../contants/constants.js";
+import {flagComponent, tagsEditAppData} from "../components/tagsEditApp.js";
+import {addFlagButton, removeFlagButtonClass} from "../contants/objectClassNames.js";
 
 export default class TagsEditApp extends FormApplication {
   currentFlags
@@ -8,7 +11,7 @@ export default class TagsEditApp extends FormApplication {
 
   constructor(item) {
     super();
-    this.currentFlags = new Set(Array.isArray(item.getFlag('Equipment-Paper-Doll', 'flags')) ? item.getFlag('Equipment-Paper-Doll', 'flags') : [])
+    this.currentFlags = new Set(Array.isArray(item.getFlag(moduleName, flagFields.flags)) ? item.getFlag(moduleName, flagFields.flags) : [])
     this.item = item
     if (this.currentFlags.size === 0) this.addExtractedFlags()
   }
@@ -20,12 +23,8 @@ export default class TagsEditApp extends FormApplication {
   static get defaultOptions() {
     return {
       ...super.defaultOptions,
-      id: 'tags-edit',
+      ...tagsEditAppData,
       template: 'modules/Equipment-Paper-Doll/templates/tagsEditApp.hbs',
-      resizable: false,
-      minimizable: true,
-      closeOnSubmit: false,
-      title: "Paper Doll Tags Editor",
     }
   }
 
@@ -37,36 +36,17 @@ export default class TagsEditApp extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    if (event.submitter.classList.value === 'tagsEditApp__add-flag-button') {
+    if (event.submitter.classList.value === addFlagButton) {
       const newFlag = `${formData['number-input']}-${formData['slot-type']}`;
-      const newFlagWrapper = createHTMLElement({
-        elementName: 'div',
-        attributes: {
-          className: 'tagsEditApp__flag-wrapper'
-        },
-        children: [{
-          elementName: 'div',
-          attributes: {
-            className: 'tagsEditApp__flag-tile',
-            innerText: newFlag
-          }}, {
-          elementName: 'button',
-          attributes: {
-            className: 'tagsEditApp__remove-flag',
-            id: newFlag,
-            innerText: 'X'
-          }
-        }]
-      })
-
+      const newFlagWrapper = createHTMLElement(flagComponent)
 
       if (!this.currentFlags.has(newFlag)) this.form.querySelector('.tagsEditApp__flag-container').appendChild(newFlagWrapper)
         this.currentFlags.add(newFlag);
-        this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
-      } else if (event.submitter.classList.value === 'tagsEditApp__remove-flag') {
+        this.item.setFlag(moduleName, flagFields.flags, [...this.currentFlags])
+      } else if (event.submitter.classList.value === removeFlagButtonClass) {
         this.currentFlags.delete(event.submitter.id)
         event.submitter.parentElement.remove();
-        this.item.setFlag('Equipment-Paper-Doll', 'flags', [...this.currentFlags])
+        this.item.setFlag(moduleName, flagFields.flags, [...this.currentFlags])
       }
   }
 

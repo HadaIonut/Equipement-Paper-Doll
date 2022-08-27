@@ -7,10 +7,18 @@ import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
 import {extractFlags} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
-import {flagFields, initialSlotStructure, moduleName, paperDollWindowData} from "../constants.js";
+import {
+  flagFields,
+  initialSlotStructure,
+  moduleName, openSettingsButtonName,
+  shadowItemModifier
+} from "../contants/constants.js";
+import {availableSlots, everythingInGrid, primaryItems, secondaryItems} from "../contants/commonQuerries.js";
+import {addBoxClass, addedItemClass, backgroundImage} from "../contants/objectClassNames.js";
+import {addBoxComponent, paperDollWindowData, rightClickMenuComponent} from "../components/paperDollScreen.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
-  return sourceActor.getFlag("Equipment-Paper-Doll", "personalSettings")?.filter(obj => obj.name === 'image')?.[0]?.value;
+  return sourceActor.getFlag(moduleName, flagFields.personalSettings)?.filter(obj => obj.name === 'image')?.[0]?.value;
 }
 
 export default class PaperDollApp extends FormApplication {
@@ -18,7 +26,7 @@ export default class PaperDollApp extends FormApplication {
     super();
     this.sourceActor = sourceActor;
     this.items = isNewerVersion(game.data.version, "0.7.0") ? sourceActor.items : sourceActor.items.entries;
-    this.selectedItems = this.sourceActor.getFlag("Equipment-Paper-Doll", "data") ?? initialSlotStructure;
+    this.selectedItems = this.sourceActor.getFlag(moduleName, flagFields.data) ?? initialSlotStructure;
     this.equipableItems = filterEquipableItems(this.items);
     this.filteredItems = filterActorItems(this.items);
 
@@ -81,8 +89,8 @@ export default class PaperDollApp extends FormApplication {
    * @exampleObject {head: [ids of all equipped items]}
    */
   extractDataFromForm() {
-    const divStructureArray = [...document.querySelectorAll('.paperDollApp__background-image > *'),
-      ...document.querySelectorAll('.paperDollApp__secondary-items > *')];
+    const divStructureArray = [...document.querySelectorAll(primaryItems),
+      ...document.querySelectorAll(secondaryItems)];
     const formData = {};
     divStructureArray.forEach((element) => {
       const dataPoints = [...element.lastElementChild.children];
@@ -108,12 +116,12 @@ export default class PaperDollApp extends FormApplication {
     if (!storedItems) return;
 
     Object.keys(storedItems).forEach((itemType) => {
-      const slotsArray = html.querySelectorAll(`#${itemType} > .paperDollApp__item-slots-grid > button`);
+      const slotsArray = html.querySelectorAll(availableSlots(itemType));
       storedItems[itemType].forEach((itemSlot, index) => {
         if (itemSlot === '') return;
 
-        if (itemSlot.includes('__secondary')) {
-          const itemId = itemSlot.split('__secondary')[0]
+        if (itemSlot.includes(shadowItemModifier)) {
+          const itemId = itemSlot.split(shadowItemModifier)[0]
           const item = actorItems.find(localItem => localItem.data._id === itemId);
           createImageTile(item, slotsArray[index], true)
         } else {
@@ -148,7 +156,7 @@ export default class PaperDollApp extends FormApplication {
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
     let availableSlots;
-    if (location.id === 'offHand' || location.id === 'mainHand') {
+    if (weaponSlotNames.includes(location.id)) {
       availableSlots = this.slotStructure.offHand.filter((el) => el === '').length
       availableSlots += this.slotStructure.mainHand.filter((el) => el === '').length
     } else  {
@@ -158,17 +166,17 @@ export default class PaperDollApp extends FormApplication {
   }
 
   removeElementAndSecondaries(element, itemToRemove) {
-    if (element.nodeName === 'SPAN' && element.id === 'tooltip' &&
-      (element.className === `${itemToRemove.id}` || element.className === `${itemToRemove.id}__secondary`))
-      element.remove();
-    if (element.nodeName === 'DIV' && element.id === `${itemToRemove.id}__secondary`
-      && element.className === 'paperDollApp__added-item') {
+    const isTooltip = element.nodeName === 'SPAN' && element.id === 'tooltip'
+    const isItemTooltip = element.className === `${itemToRemove.id}`
+    const isShadowItemTooltip = element.className === `${itemToRemove.id}${shadowItemModifier}`
+    const isShadowItem = element.nodeName === 'DIV' && element.id === `${itemToRemove.id}${shadowItemModifier}` && element.className === addedItemClass
+
+    if (isTooltip && ( isShadowItemTooltip || isItemTooltip )) element.remove();
+
+    if (isShadowItem) {
       let box = createHTMLElement({
-        elementName: 'button',
-        attributes: {
-          type: 'submit',
-          className: 'paperDollApp__add-box'
-        }, events: {
+        ...addBoxComponent,
+        events: {
           click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
         }
       })
@@ -178,8 +186,7 @@ export default class PaperDollApp extends FormApplication {
   }
 
   getAvailableSlotsAtLocation(location) {
-    return [...document
-      .querySelectorAll(`#${location} > .paperDollApp__item-slots-grid > *`)]
+    return [...document.querySelectorAll(everythingInGrid(location))]
   }
 
   /**
@@ -191,19 +198,16 @@ export default class PaperDollApp extends FormApplication {
     const slotName = item.parentElement.parentElement.id
     const itemId = item.id
     const addBox = createHTMLElement({
-      elementName: 'button',
-      attributes: {
-        type: 'submit',
-        className: 'paperDollApp__add-box'
-      }, events: {
-        click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
+      ...addBoxComponent,
+      events: {
+        click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems),
       }
     })
     let removeSources;
 
     if (weaponSlotNames.includes(slotName)) {
-      removeSources = [...this.getAvailableSlotsAtLocation('mainHand'),
-        ...this.getAvailableSlotsAtLocation('offHand')]
+      removeSources = [...this.getAvailableSlotsAtLocation(weaponSlotNames[0]),
+        ...this.getAvailableSlotsAtLocation(weaponSlotNames[1])]
     } else {
       removeSources = Array.from(item.parentElement.children)
     }
@@ -213,7 +217,8 @@ export default class PaperDollApp extends FormApplication {
 
     document.querySelector('.hidden-submit').click()
 
-    this.slotStructure[slotName] = this.slotStructure[slotName].map((slot) => slot === itemId || slot === `${itemId}__secondary` ? '' : slot)
+    this.slotStructure[slotName] = this.slotStructure[slotName]
+      .map((slot) => slot === itemId || slot === `${itemId}${shadowItemModifier}` ? '' : slot)
   }
 
   /**
@@ -222,18 +227,17 @@ export default class PaperDollApp extends FormApplication {
    * @param html - app
    */
   createNewContextMenu(html) {
-    new ContextMenu(html, '.paperDollApp__added-item', [{
-      name: 'Unequip item',
-      icon: '<i class="fas fa-trash fa-fw"></i>',
-      condition: (item) => !item[0].id.includes('__secondary'),
+    new ContextMenu(html, `.${addedItemClass}`, [{
+      ...rightClickMenuComponent,
       callback: this.unEquipItem.bind(this)
     }])
   }
 
   setBackgroundImage(html) {
-    const backgroundContainer = html.querySelector('.paperDollApp__background-image');
+    const backgroundContainer = html.querySelector(`.${backgroundImage}`);
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
     if (!path) return;
+
     backgroundContainer.style.background = `url(./${path}) no-repeat center`
     backgroundContainer.style['background-size'] = 'contain'
   }
@@ -248,7 +252,7 @@ export default class PaperDollApp extends FormApplication {
     if (!game.user.isGM) return;
 
     const lastButton = html.parentNode.parentNode.firstElementChild.lastElementChild;
-    const openSettingsButton = createHeaderButton('Open Settings')
+    const openSettingsButton = createHeaderButton(openSettingsButtonName)
     openSettingsButton.addEventListener('click', () => {
       new personalSettingsApp(this.sourceActor, this.filteredItems, this.equipableItems).render(true);
     })
@@ -257,7 +261,7 @@ export default class PaperDollApp extends FormApplication {
 
   activateListeners(html) {
     this.setBackgroundImage(html[0]);
-    const addBoxes = html[0].querySelectorAll('.paperDollApp__add-box');
+    const addBoxes = html[0].querySelectorAll(`.${addBoxClass}`);
     addBoxes.forEach((box) => box.addEventListener('click', (source) => {
       this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
     }))

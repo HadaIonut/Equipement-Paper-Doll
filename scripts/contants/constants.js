@@ -1,16 +1,8 @@
 export const moduleName = 'Equipment-Paper-Doll'
 export const flagFields = {
   flags: 'flags',
-  data: 'data'
-}
-
-export const paperDollWindowData = {
-  id: 'paper-doll',
-  title: 'Paper Doll Viewer',
-  resizable: false,
-  minimizable: true,
-  submitOnClose: true,
-  closeOnSubmit: false
+  data: 'data',
+  personalSettings: 'personalSettings'
 }
 
 export const initialSlotStructure = {
@@ -28,3 +20,7 @@ export const initialSlotStructure = {
   waist: ['', '', '', ''],
   wrists: ['', '', '', '']
 }
+
+export const shadowItemModifier = '__secondary'
+
+export const openSettingsButtonName = 'Open Settings'

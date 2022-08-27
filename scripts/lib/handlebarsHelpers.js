@@ -1,3 +1,5 @@
+import {itemWithNoSlots, leftItem, rightItem} from "../contants/objectClassNames.js";
+
 const registerHelpers = () => {
   Handlebars.registerHelper('times', function (array1, array2, item, block) {
     const n = array1[array2?.indexOf(item)];
@@ -8,7 +10,7 @@ const registerHelpers = () => {
   });
 
   Handlebars.registerHelper('leftOrRight', function (n) {
-    return n % 2 === 0 ? "paperDollApp__left-item" : "paperDollApp__right-item";
+    return n % 2 === 0 ? leftItem : rightItem;
   })
 
   Handlebars.registerHelper('createFillerElements', function (createdItems, itemNames, currentItem, block) {
@@ -36,7 +38,7 @@ const registerHelpers = () => {
   })
 
   Handlebars.registerHelper('itemHasEnoughFreeSlots', function (availableSlots, array, index) {
-    return array?.[index] <= availableSlots ? '' : 'itemSearchApp__no-slots'
+    return array?.[index] <= availableSlots ? '' : itemWithNoSlots
   })
 
   Handlebars.registerHelper('createTooltipForLockedItem', function(hasClass, id) {
