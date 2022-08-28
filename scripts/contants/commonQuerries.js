@@ -7,3 +7,5 @@ export const allEquippedItems = '.paperDollApp__item-slots-grid > .paperDollApp_
 export const nonFillerElements = '.paperDollApp__added-item, button'
 export const imageUrlInputField = 'input[name="imgUrl"]'
 export const imagePathInputField = 'input.imagePath'
+export const tabTitles = '.paperDollApp__tab-titles > *'
+export const tabContentsQuery = '.paperDollApp__tab-wrapper > *'

@@ -13,8 +13,20 @@ import {
   moduleName, openSettingsButtonName,
   shadowItemModifier
 } from "../contants/constants.js";
-import {availableSlots, everythingInGrid, primaryItems, secondaryItems} from "../contants/commonQuerries.js";
-import {addBoxClass, addedItemClass, backgroundImage} from "../contants/objectClassNames.js";
+import {
+  availableSlots,
+  everythingInGrid,
+  primaryItems,
+  secondaryItems,tabContentsQuery,
+  tabTitles
+} from "../contants/commonQuerries.js";
+import {
+  activeTabTitle,
+  addBoxClass,
+  addedItemClass,
+  backgroundImage,
+  closedTabClass
+} from "../contants/objectClassNames.js";
 import {addBoxComponent, paperDollWindowData, rightClickMenuComponent} from "../components/paperDollScreen.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
@@ -271,14 +283,36 @@ export default class PaperDollApp extends FormApplication {
     }))
   }
 
+  loadTabs([html]) {
+    const tabs = html.querySelectorAll(tabTitles)
+    tabs.forEach((tab) => {
+      const tabTarget = tab.getAttribute('data-title')
+      const tabContents = html.querySelectorAll(tabContentsQuery)
+
+      tab.addEventListener('click', () => {
+        tabContents.forEach((tabContent) => {
+          if (tabContent.getAttribute('data-tab') === tabTarget)
+            tabContent.classList.remove(closedTabClass)
+          else tabContent.classList.add(closedTabClass)
+        })
+
+        tabs.forEach((searchTab) => {
+          if (searchTab === tab) searchTab.classList.add(activeTabTitle)
+          else searchTab.classList.remove(activeTabTitle)
+        })
+      })
+    })
+  }
+
   activateListeners(html) {
-    this.setBackgroundImage(html[0]);
+    this.setBackgroundImage(html[0])
     this.addSearchEvent(html)
+    this.loadTabs(html)
 
     this.replaceWithStoredItems(html[0], this.selectedItems, this.items)
-    this.openPersonalSettings(html[0]);
-    this.createNewContextMenu(html);
+    this.openPersonalSettings(html[0])
+    this.createNewContextMenu(html)
 
-    super.activateListeners(html);
+    super.activateListeners(html)
   }
 }
