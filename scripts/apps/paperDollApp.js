@@ -27,7 +27,7 @@ export default class PaperDollApp extends FormApplication {
   constructor(sourceActor) {
     super();
     this.sourceActor = sourceActor;
-    this.items = isNewerVersion(game.data.version, "0.7.0") ? sourceActor.items : sourceActor.items.entries;
+    this.items = sourceActor.items;
     this.selectedItems = this.sourceActor.getFlag(moduleName, flagFields.data) ?? initialSlotStructure;
     this.equipableItems = filterEquipableItems(this.items);
     this.filteredItems = filterActorItems(this.items);

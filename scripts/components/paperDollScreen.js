@@ -31,12 +31,15 @@ export const fillerElementComponent = {
   }
 }
 
-export const imageTile = (itemId, image, imageClasses) => ({
+export const imageTile = (itemId, image, imageClasses, item) => ({
   elementName: 'div',
   attributes: {
     className: addedItemClass,
     'aria-describedby': 'tooltip',
     id: itemId
+  },
+  events: {
+    click: () => item.sheet.render(true)
   },
   children: [{
     elementName: 'img',

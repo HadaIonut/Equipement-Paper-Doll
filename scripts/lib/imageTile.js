@@ -15,9 +15,10 @@ import {addedImage, addedSecondaryImage} from "../contants/objectClassNames.js";
  */
 const createImageTile = (item, location, secondary = false) => {
   if (!item) return;
+
   const itemId = secondary ? `${item.data._id}${shadowItemModifier}` : item.data._id
   const imageClasses = secondary ? `${addedImage} ${addedSecondaryImage}` : addedImage
-  const newTile = createHTMLElement(imageTile(itemId, item.data.img, imageClasses))
+  const newTile = createHTMLElement(imageTile(itemId, item.data.img, imageClasses, item))
 
   const toolTip = createHTMLElement(tooltip(itemId, item.data.name))
 
