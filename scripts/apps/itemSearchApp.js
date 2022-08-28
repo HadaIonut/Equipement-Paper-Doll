@@ -3,7 +3,7 @@ import "../lib/popperJs/popper.min.js"
 import {linkWithTooltip} from "../lib/tooltips.js";
 import {weaponSlotNames} from "../../constants/slotNames.js";
 import {itemSearchAppData} from "../components/itemSearchApp.js";
-import {flagFields, moduleName} from "../contants/constants.js";
+import {flagFields, itemEquippedPath, moduleName} from "../contants/constants.js";
 import {allEquippedItems, availableSlots} from "../contants/commonQuerries.js";
 import {
   addBoxClass,
@@ -20,6 +20,7 @@ export default class itemSearchApp extends FormApplication {
     this.allItems = allItems
     this.source = source
     this.availableSlots = availableSlots
+    console.log(availableSlots)
     this.categoryName = categoryName
   }
 
@@ -106,7 +107,7 @@ export default class itemSearchApp extends FormApplication {
       secondarySlotsAvailable = this.mergeHandSlots(offHandSlots, mainHandSlots)
     } else {
       secondarySlotsAvailable = [...this.source.target.parentNode
-        .querySelectorAll(`.${addBoxClass}}`)]
+        .querySelectorAll(`.${addBoxClass}`)]
         .filter((item) => item !== this.source.target)
     }
 
@@ -170,13 +171,21 @@ export default class itemSearchApp extends FormApplication {
     })
   }
 
+  equipItem(itemId) {
+    const item = this.allItems.find(entity => entity.data._id === itemId)
+    item.update({[itemEquippedPath]: true})
+  }
+
   activateListeners(html) {
     const itemsFromDisplay = document.querySelectorAll(`.${internalGrid}`);
     itemsFromDisplay.forEach((item) => {
       if (item.classList.contains(itemWithNoSlots)) return
 
       item.addEventListener('click',
-        (event) => this.prepareDataForNewTile(event, this.allItems));
+        (event) => {
+          this.prepareDataForNewTile(event, this.allItems)
+          this.equipItem(item.id)
+        });
     })
 
     this.hideNonFilteredItems(itemsFromDisplay, this.filteredItems)

@@ -22,5 +22,6 @@ export const initialSlotStructure = {
 }
 
 export const shadowItemModifier = '__secondary'
+export const itemEquippedPath = 'data.equipped'
 
 export const openSettingsButtonName = 'Open Settings'

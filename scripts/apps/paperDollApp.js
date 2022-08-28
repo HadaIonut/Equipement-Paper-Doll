@@ -9,7 +9,7 @@ import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
 import {
   flagFields,
-  initialSlotStructure,
+  initialSlotStructure, itemEquippedPath,
   moduleName, openSettingsButtonName,
   shadowItemModifier
 } from "../contants/constants.js";
@@ -161,7 +161,7 @@ export default class PaperDollApp extends FormApplication {
     if (weaponSlotNames.includes(location.id)) {
       availableSlots = this.slotStructure.offHand.filter((el) => el === '').length
       availableSlots += this.slotStructure.mainHand.filter((el) => el === '').length
-    } else  {
+    } else {
       availableSlots = this.slotStructure[location.id].filter((el) => el === '').length
     }
     new itemSearchApp(selectedItems[location.id], allItems, source, availableSlots, location.id).render(true);
@@ -173,7 +173,7 @@ export default class PaperDollApp extends FormApplication {
     const isShadowItemTooltip = element.className === `${itemToRemove.id}${shadowItemModifier}`
     const isShadowItem = element.nodeName === 'DIV' && element.id === `${itemToRemove.id}${shadowItemModifier}` && element.className === addedItemClass
 
-    if (isTooltip && ( isShadowItemTooltip || isItemTooltip )) element.remove();
+    if (isTooltip && (isShadowItemTooltip || isItemTooltip)) element.remove();
 
     if (isShadowItem) {
       let box = createHTMLElement({
@@ -221,6 +221,9 @@ export default class PaperDollApp extends FormApplication {
 
     this.slotStructure[slotName] = this.slotStructure[slotName]
       .map((slot) => slot === itemId || slot === `${itemId}${shadowItemModifier}` ? '' : slot)
+
+    const foundryItem = this.items.find(entry => entry.data._id === item.id)
+    foundryItem.update({[itemEquippedPath]: false})
   }
 
   /**
@@ -261,16 +264,21 @@ export default class PaperDollApp extends FormApplication {
     insertBefore(lastButton, openSettingsButton);
   }
 
-  activateListeners(html) {
-    this.setBackgroundImage(html[0]);
-    const addBoxes = html[0].querySelectorAll(`.${addBoxClass}`);
+  addSearchEvent([html]) {
+    const addBoxes = html.querySelectorAll(`.${addBoxClass}`);
     addBoxes.forEach((box) => box.addEventListener('click', (source) => {
       this.renderSearchWindow(source, this.filteredItems, this.equipableItems)
     }))
+  }
+
+  activateListeners(html) {
+    this.setBackgroundImage(html[0]);
+    this.addSearchEvent(html)
 
     this.replaceWithStoredItems(html[0], this.selectedItems, this.items)
     this.openPersonalSettings(html[0]);
     this.createNewContextMenu(html);
+
     super.activateListeners(html);
   }
 }

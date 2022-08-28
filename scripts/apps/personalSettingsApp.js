@@ -25,13 +25,16 @@ const createFillerSlot = () => createHTMLElement(fillerElementComponent)
  *
  * @param filteredItems - items that can be equipped on this slot
  * @param allItems - all items held by the owner actor
+ * @param availableSlots
+ * @param categoryName
+ * @param sourceActor
  * @returns {*|jQuery|HTMLElement}
  */
-const createButtonSlot = (filteredItems, allItems) => {
+const createButtonSlot = (filteredItems, allItems, availableSlots, categoryName) => {
   return createHTMLElement({
     ...addBoxComponent,
     events: {
-      click: (event) => new itemSearchApp(filteredItems, allItems, event).render(true)
+      click: (event) => new itemSearchApp(filteredItems, allItems, event, availableSlots, categoryName).render(true)
     }
   });
 }
@@ -104,7 +107,9 @@ export default class personalSettingsApp extends FormApplication {
     } else if (numberOfSlots > usableSlots) {
       //replace filler with usable
       const replaceableSlots = [...location.querySelectorAll(`.${fillerElementClass}`)].slice(0, numberOfSlots - usableSlots);
-      replaceableSlots.forEach((slot) => slot?.parentNode?.replaceChild?.(createButtonSlot(this.filteredItems[gridName], this.allItems), slot))
+      replaceableSlots.forEach((slot) => slot?.parentNode?.replaceChild?.(
+        createButtonSlot(this.filteredItems[gridName], this.allItems, numberOfSlots, gridName),
+        slot))
     }
   }
 
@@ -180,7 +185,7 @@ export default class personalSettingsApp extends FormApplication {
 
     imageUrl.addEventListener('focusout', () => {
       if (imageUrl.value) return this.setBackgroundImage(imageUrl.value)
-      if (imagePath.value) return  this.setBackgroundImage(imagePath.value)
+      if (imagePath.value) return this.setBackgroundImage(imagePath.value)
 
       const backgroundContainer = document.querySelector(`.${backgroundImage}`);
       backgroundContainer.style.background = ``
