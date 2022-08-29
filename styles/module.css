@@ -150,17 +150,19 @@ input[type=text].itemSearchApp__search-bar {
   text-align: center;
   width: 33.3%;
   height: 100%;
+  transition: background-color ease 250ms, color ease 250ms;
 }
 .paperDollApp__tab-active {
   background: #666;
   color: #f0f0e0;
+  transition: background-color ease 250ms, color ease 250ms;
 }
 .paperDollApp__closed-tab {
   display: none;
 }
 .paperDollApp__secondary-items {
   height: 15%;
-  margin: 0 80px;
+  margin: 10px 80px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -229,6 +231,39 @@ input[type=text].itemSearchApp__search-bar {
   border-radius: 2px;
   box-shadow: 0 0 5px #000 inset;
   cursor: pointer;
+}
+.paperDollApp__inventory-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 20px;
+}
+.paperDollApp__inventory-slot {
+  background-image: url(../../../ui/parchment.jpg);
+  height: 55px;
+  width: 55px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 0 5px #000 inset;
+}
+.paperDollApp__inventory-item {
+  height: 55px;
+  width: 55px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 0 5px #000 inset;
+  cursor: pointer;
+}
+.paperDollApp__inventory-item-image {
+  height: 55px;
+  width: 55px;
+}
+.paperDollApp__inventory-equipped-image {
+  border-color: lightseagreen;
+  border-width: 3px;
+}
+.paperDollApp__inventory-equipped-wrapper {
+  border: none;
 }
 
 #ring {

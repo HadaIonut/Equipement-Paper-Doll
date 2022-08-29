@@ -7,13 +7,15 @@
       <div class="paperDollApp__tab-title paperDollApp__tab-active" data-title="main">
         Equipment
       </div>
-      <div class="paperDollApp__tab-title" data-title="spell-book">
-        Spellbook
+      <div class="paperDollApp__tab-title" data-title="tattoos">
+        Tattoos
       </div>
     </div>
     <div class="paperDollApp__tab-wrapper">
       <div class="paperDollApp__inventory-tab paperDollApp__closed-tab" data-tab="inventory">
-        inventory
+        <div class="paperDollApp__inventory-content">
+          {{{createInventorySlots inventorySlots}}}
+        </div>
       </div>
       <div class="paperDollApp__main-tab" data-tab="main">
         <div class="paperDollApp__background-image">
@@ -49,8 +51,8 @@
           {{/each}}
         </div>
       </div>
-      <div class="paperDollApp__spell-book paperDollApp__closed-tab" data-tab="spell-book">
-        spell book
+      <div class="paperDollApp__spell-book paperDollApp__closed-tab" data-tab="tattoos">
+        tattoos
       </div>
     </div>
 

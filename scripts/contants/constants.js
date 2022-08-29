@@ -25,3 +25,4 @@ export const shadowItemModifier = '__secondary'
 export const itemEquippedPath = 'data.equipped'
 
 export const openSettingsButtonName = 'Open Settings'
+export const inventorySlotsStep = 72;

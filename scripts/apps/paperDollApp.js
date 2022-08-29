@@ -9,7 +9,7 @@ import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
 import {
   flagFields,
-  initialSlotStructure, itemEquippedPath,
+  initialSlotStructure, inventorySlotsStep, itemEquippedPath,
   moduleName, openSettingsButtonName,
   shadowItemModifier
 } from "../contants/constants.js";
@@ -25,9 +25,15 @@ import {
   addBoxClass,
   addedItemClass,
   backgroundImage,
-  closedTabClass
+  closedTabClass, inventoryItemClass, inventorySlot
 } from "../contants/objectClassNames.js";
-import {addBoxComponent, paperDollWindowData, rightClickMenuComponent} from "../components/paperDollScreen.js";
+import {
+  addBoxComponent,
+  inventoryItem, inventoryRemoveComponent,
+  paperDollWindowData,
+  rightClickMenuComponent, tooltip, unequipFromInventoryComponent
+} from "../components/paperDollScreen.js";
+import {linkWithTooltip} from "../lib/tooltips.js";
 
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   const actorFlags = sourceActor.getFlag(moduleName, flagFields.personalSettings)
@@ -46,6 +52,7 @@ export default class PaperDollApp extends FormApplication {
 
     this.flagEquippedItems()
     this.getSlotsStructure()
+    this.getNumberOfInventorySlots()
   }
 
   flagEquippedItems() {
@@ -55,6 +62,10 @@ export default class PaperDollApp extends FormApplication {
         item.setFlag(moduleName, flagFields.flags, extractFlags(item))
       }
     )
+  }
+
+  getNumberOfInventorySlots() {
+    this.inventorySlots = Math.ceil(this.equipableItems.length/inventorySlotsStep) * inventorySlotsStep
   }
 
   static get defaultOptions() {
@@ -78,6 +89,7 @@ export default class PaperDollApp extends FormApplication {
         types: weaponSlotNames,
         slots: getItemsSlotArray(weaponSlotNames, this.sourceActor)
       },
+      inventorySlots: this.inventorySlots,
     }
   }
 
@@ -248,6 +260,14 @@ export default class PaperDollApp extends FormApplication {
       ...rightClickMenuComponent,
       callback: this.unEquipItem.bind(this)
     }])
+
+    new ContextMenu(html, `.${inventoryItemClass}`, [{
+      ...inventoryRemoveComponent,
+      callback: () => {}
+    }, {
+      ...unequipFromInventoryComponent,
+      callback: () => {}
+    }])
   }
 
   setBackgroundImage(html) {
@@ -304,6 +324,25 @@ export default class PaperDollApp extends FormApplication {
     })
   }
 
+  replaceInventorySlotsWithItems([html]) {
+    const slots = html.querySelectorAll(`.${inventorySlot}`)
+    const allItems = this.equipableItems
+
+    slots.forEach((slot, index) => {
+      const item = allItems[index]
+      const itemId = item?.data?._id
+      if (!item) return;
+
+      const toolTip = createHTMLElement(tooltip(itemId, item.data.name))
+      const itemElement = createHTMLElement(inventoryItem(itemId, item.data.img, item.data.data.equipped ,item))
+
+      slot?.parentNode?.insertBefore?.(toolTip, slot);
+      slot?.parentNode?.replaceChild?.(itemElement, slot)
+
+      linkWithTooltip(itemElement, toolTip)
+    })
+  }
+
   activateListeners(html) {
     this.setBackgroundImage(html[0])
     this.addSearchEvent(html)
@@ -312,6 +351,7 @@ export default class PaperDollApp extends FormApplication {
     this.replaceWithStoredItems(html[0], this.selectedItems, this.items)
     this.openPersonalSettings(html[0])
     this.createNewContextMenu(html)
+    this.replaceInventorySlotsWithItems(html)
 
     super.activateListeners(html)
   }

@@ -24,11 +24,15 @@
       text-align: center;
       width: 33.3%;
       height: 100%;
+
+      transition: background-color ease 250ms, color ease 250ms;
     }
 
     &__tab-active {
       background: #666;
       color: #f0f0e0;
+
+      transition: background-color ease 250ms, color ease 250ms;
     }
 
     &__closed-tab {
@@ -37,7 +41,7 @@
 
     &__secondary-items {
       height: 15%;
-      margin: 0 80px;
+      margin: 10px 80px 0;
 
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -121,6 +125,45 @@
       border-radius: 2px;
       box-shadow: 0 0 5px #000 inset;
       cursor: pointer;
+    }
+
+    &__inventory-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    &__inventory-slot {
+      background-image: url(../../../ui/parchment.jpg);
+      height: 55px;
+      width: 55px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #000 inset;
+    }
+
+    &__inventory-item {
+      height: 55px;
+      width: 55px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      box-shadow: 0 0 5px #000 inset;
+      cursor: pointer;
+    }
+
+    &__inventory-item-image {
+      height: 55px;
+      width: 55px;
+    }
+
+    &__inventory-equipped-image {
+      border-color: lightseagreen;
+      border-width: 3px;
+    }
+
+    &__inventory-equipped-wrapper {
+      border: none;
     }
   }
 

@@ -1,4 +1,10 @@
-import {addBoxClass, addedItemClass, fillerElementClass} from "../contants/objectClassNames.js";
+import {
+  addBoxClass,
+  addedItemClass,
+  fillerElementClass, inventoryEquippedClass, inventoryEquippedWrapperClass,
+  inventoryImageClass,
+  inventoryItemClass
+} from "../contants/objectClassNames.js";
 import {shadowItemModifier} from "../contants/constants.js";
 
 export const paperDollWindowData = {
@@ -22,6 +28,18 @@ export const rightClickMenuComponent = {
   name: 'Unequip item',
   icon: '<i class="fas fa-trash fa-fw"></i>',
   condition: (item) => !item[0].id.includes(shadowItemModifier),
+}
+
+export const inventoryRemoveComponent = {
+  name: 'Remove',
+  icon: '<i class="fas fa-trash fa-fw"></i>',
+  condition: true,
+}
+
+export const unequipFromInventoryComponent = {
+  name: 'Un Equip',
+  icon: '',
+  condition: ([item]) => item.classList.contains(inventoryEquippedClass),
 }
 
 export const fillerElementComponent = {
@@ -65,6 +83,25 @@ export const tooltip = (itemId, itemName) => ({
     },
     customAttributes: {
       'data-popper-arrow': ''
+    }
+  }]
+})
+
+export const inventoryItem = (itemId, image, equipped ,item) => ({
+  elementName: 'div',
+  attributes: {
+    className: `${inventoryImageClass} ${equipped ? inventoryEquippedWrapperClass : ''}`,
+    'aria-describedby': 'tooltip',
+    id: itemId
+  },
+  events: {
+    click: () => item.sheet.render(true)
+  },
+  children: [{
+    elementName: 'img',
+    attributes: {
+      src: image,
+      className: `${inventoryImageClass} ${equipped ? inventoryEquippedClass : ''}`
     }
   }]
 })

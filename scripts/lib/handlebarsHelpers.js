@@ -48,6 +48,15 @@ const registerHelpers = () => {
       <div id="tooltip" role="tooltip" class="${id}"> You do not have enough slots to equip this item <span id="arrow" data-popper-arrow></div>
     `
   })
+
+  Handlebars.registerHelper('createInventorySlots', (target) => {
+    let output = '';
+    for (let i = 0; i < target; i++) {
+      output += `<div class="paperDollApp__inventory-slot"></div>`
+    }
+
+    return output
+  })
 }
 
 export {registerHelpers}
