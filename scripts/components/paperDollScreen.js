@@ -37,9 +37,9 @@ export const inventoryRemoveComponent = {
 }
 
 export const unequipFromInventoryComponent = {
-  name: 'Un Equip',
-  icon: '',
-  condition: ([item]) => item.classList.contains(inventoryEquippedClass),
+  name: 'Unequip',
+  icon: '<i class="fas fa-shield-alt"></i>',
+  condition: (item) => item[0].classList.contains(inventoryEquippedWrapperClass),
 }
 
 export const fillerElementComponent = {
@@ -90,7 +90,7 @@ export const tooltip = (itemId, itemName) => ({
 export const inventoryItem = (itemId, image, equipped ,item) => ({
   elementName: 'div',
   attributes: {
-    className: `${inventoryImageClass} ${equipped ? inventoryEquippedWrapperClass : ''}`,
+    className: `${inventoryItemClass} ${equipped ? inventoryEquippedWrapperClass : ''}`,
     'aria-describedby': 'tooltip',
     id: itemId
   },

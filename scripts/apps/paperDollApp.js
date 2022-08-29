@@ -25,7 +25,12 @@ import {
   addBoxClass,
   addedItemClass,
   backgroundImage,
-  closedTabClass, inventoryItemClass, inventorySlot
+  closedTabClass,
+  inventoryEquippedClass,
+  inventoryEquippedWrapperClass,
+  inventoryImageClass,
+  inventoryItemClass,
+  inventorySlot
 } from "../contants/objectClassNames.js";
 import {
   addBoxComponent,
@@ -263,10 +268,14 @@ export default class PaperDollApp extends FormApplication {
 
     new ContextMenu(html, `.${inventoryItemClass}`, [{
       ...inventoryRemoveComponent,
-      callback: () => {}
+      callback: () => {console.log('a')}
     }, {
       ...unequipFromInventoryComponent,
-      callback: () => {}
+      callback: (item) => {
+        this.items.find(entry => entry.data._id === item[0].id).update({[itemEquippedPath]: false})
+        item[0].classList.remove(inventoryEquippedWrapperClass)
+        item[0].children[0].classList.remove(inventoryEquippedClass)
+      }
     }])
   }
 
