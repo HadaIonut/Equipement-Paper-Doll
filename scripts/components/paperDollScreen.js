@@ -3,7 +3,7 @@ import {
   addedItemClass,
   fillerElementClass, inventoryEquippedClass, inventoryEquippedWrapperClass,
   inventoryImageClass,
-  inventoryItemClass
+  inventoryItemClass, inventorySlot
 } from "../contants/objectClassNames.js";
 import {shadowItemModifier} from "../contants/constants.js";
 
@@ -105,3 +105,10 @@ export const inventoryItem = (itemId, image, equipped ,item) => ({
     }
   }]
 })
+
+export const emptyInventorySlot = {
+  elementName: 'div',
+  attributes: {
+    className: inventorySlot
+  }
+}

@@ -33,7 +33,7 @@ import {
   inventorySlot
 } from "../contants/objectClassNames.js";
 import {
-  addBoxComponent,
+  addBoxComponent, emptyInventorySlot,
   inventoryItem, inventoryRemoveComponent,
   paperDollWindowData,
   rightClickMenuComponent, tooltip, unequipFromInventoryComponent
@@ -255,6 +255,27 @@ export default class PaperDollApp extends FormApplication {
     foundryItem.update({[itemEquippedPath]: false})
   }
 
+  removeItemFromInventory(item) {
+    const inventoryContainer = item[0].parentElement
+    const form = inventoryContainer.parentElement.parentElement.parentElement.parentElement
+    const allItems = inventoryContainer.querySelectorAll(`.${inventoryItemClass}`)
+    const foundryItem = this.items.get(item[0].id)
+    foundryItem.delete()
+    this.equipableItems = this.equipableItems.filter(entry => entry.data._id !== item[0].id)
+
+    allItems.forEach(item => {
+      const emptyInventoryTile = createHTMLElement(emptyInventorySlot)
+
+      item?.parentElement?.replaceChild(emptyInventoryTile, item)
+    })
+
+    Array.from(inventoryContainer.children).forEach((element) => {
+      if (element.tagName === 'SPAN') element.remove()
+    })
+
+    this.replaceInventorySlotsWithItems([form])
+  }
+
   /**
    * Creates a context menu in a given app
    *
@@ -268,7 +289,7 @@ export default class PaperDollApp extends FormApplication {
 
     new ContextMenu(html, `.${inventoryItemClass}`, [{
       ...inventoryRemoveComponent,
-      callback: () => {console.log('a')}
+      callback: (item) => this.removeItemFromInventory(item)
     }, {
       ...unequipFromInventoryComponent,
       callback: (item) => {
@@ -335,7 +356,8 @@ export default class PaperDollApp extends FormApplication {
 
   replaceInventorySlotsWithItems([html]) {
     const slots = html.querySelectorAll(`.${inventorySlot}`)
-    const allItems = this.equipableItems
+    const allItems = [...this.equipableItems]
+    allItems.sort((a,b) => a.data.name.localeCompare(b.data.name))
 
     slots.forEach((slot, index) => {
       const item = allItems[index]
