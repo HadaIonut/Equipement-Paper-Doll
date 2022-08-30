@@ -265,6 +265,9 @@ input[type=text].itemSearchApp__search-bar {
 .paperDollApp__inventory-equipped-wrapper {
   border: none;
 }
+.paperDollApp__inventory-right > #context-menu {
+  left: -95px;
+}
 
 #ring {
   grid-row: auto/span 2;

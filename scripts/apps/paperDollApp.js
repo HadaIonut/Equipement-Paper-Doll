@@ -43,7 +43,7 @@ import {linkWithTooltip} from "../lib/tooltips.js";
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   const actorFlags = sourceActor.getFlag(moduleName, flagFields.personalSettings)
   return actorFlags?.filter?.(obj => obj.name === 'imageUrl')?.[0]?.value
-    || `./${actorFlags?.filter(obj => obj.name === 'image')?.[0]?.value}`
+    || `./${actorFlags?.filter(obj => obj.name === 'image')?.[0]?.value ?? ''}`
 }
 
 export default class PaperDollApp extends FormApplication {
@@ -303,6 +303,7 @@ export default class PaperDollApp extends FormApplication {
   setBackgroundImage(html) {
     const backgroundContainer = html.querySelector(`.${backgroundImage}`);
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
+    console.log(path)
     if (!path || path === './') return;
 
     backgroundContainer.style.background = `url(${path}) no-repeat center`
@@ -362,10 +363,11 @@ export default class PaperDollApp extends FormApplication {
     slots.forEach((slot, index) => {
       const item = allItems[index]
       const itemId = item?.data?._id
+      const reverted = index % 9 > 6
       if (!item) return;
 
       const toolTip = createHTMLElement(tooltip(itemId, item.data.name))
-      const itemElement = createHTMLElement(inventoryItem(itemId, item.data.img, item.data.data.equipped ,item))
+      const itemElement = createHTMLElement(inventoryItem(itemId, item.data.img, item.data.data.equipped, item, reverted))
 
       slot?.parentNode?.insertBefore?.(toolTip, slot);
       slot?.parentNode?.replaceChild?.(itemElement, slot)

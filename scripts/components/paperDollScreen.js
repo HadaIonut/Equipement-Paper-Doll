@@ -3,7 +3,7 @@ import {
   addedItemClass,
   fillerElementClass, inventoryEquippedClass, inventoryEquippedWrapperClass,
   inventoryImageClass,
-  inventoryItemClass, inventorySlot
+  inventoryItemClass, inventorySlot, inventorySlotRightSide
 } from "../contants/objectClassNames.js";
 import {shadowItemModifier} from "../contants/constants.js";
 
@@ -87,10 +87,10 @@ export const tooltip = (itemId, itemName) => ({
   }]
 })
 
-export const inventoryItem = (itemId, image, equipped ,item) => ({
+export const inventoryItem = (itemId, image, equipped ,item, reverted) => ({
   elementName: 'div',
   attributes: {
-    className: `${inventoryItemClass} ${equipped ? inventoryEquippedWrapperClass : ''}`,
+    className: `${inventoryItemClass} ${equipped ? inventoryEquippedWrapperClass : ''} ${reverted ? inventorySlotRightSide : ''}`,
     'aria-describedby': 'tooltip',
     id: itemId
   },
