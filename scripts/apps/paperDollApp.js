@@ -4,7 +4,7 @@ import {getItemsSlotArray} from "../settings.js";
 import {createImageTile} from "../lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
 import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
-import {extractFlags} from "../lib/flagsExtracter.js";
+import {extractFlags, extractFlagsFromItemName} from "../lib/flagsExtracter.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
 import {
@@ -64,7 +64,7 @@ export default class PaperDollApp extends FormApplication {
     [...this.items].forEach((item) => {
         if (Array.isArray(item.getFlag(moduleName, flagFields.flags))) return
 
-        item.setFlag(moduleName, flagFields.flags, extractFlags(item))
+        item.setFlag(moduleName, flagFields.flags, [...extractFlags(item), ...extractFlagsFromItemName(item)])
       }
     )
   }
@@ -303,7 +303,6 @@ export default class PaperDollApp extends FormApplication {
   setBackgroundImage(html) {
     const backgroundContainer = html.querySelector(`.${backgroundImage}`);
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
-    console.log(path)
     if (!path || path === './') return;
 
     backgroundContainer.style.background = `url(${path}) no-repeat center`

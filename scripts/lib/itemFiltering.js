@@ -1,19 +1,12 @@
 import {getFilterArray} from "../settings.js";
 
-const containsAnyOfArray = (array, target) => {
+export const containsAnyOfArray = (array, target) => {
   let output = false;
   if (array.length === 1 && array[0] === '') return output;
   array.forEach((current) => {
     if (target.includes(current) || current.includes(target)) output = true;
   })
   return output;
-}
-
-const itemsContainsKeyWords = (itemsArray, namesArray) => {
-  return itemsArray.reduce((acc, cur) => {
-    if (containsAnyOfArray(namesArray, cur.data.name.toLowerCase())) return [...acc, cur]
-    return [...acc]
-  }, [])
 }
 
 const itemContainsRelatedFlags = (itemsArray, slotName) => {
@@ -26,7 +19,7 @@ const itemContainsRelatedFlags = (itemsArray, slotName) => {
 }
 
 const itemsContains = (itemsArray, namesArray, slotName) => {
-  return [...itemsContainsKeyWords(itemsArray, namesArray), ...itemContainsRelatedFlags(itemsArray, slotName)];
+  return itemContainsRelatedFlags(itemsArray, slotName)
 }
 
 /**
