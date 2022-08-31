@@ -186,14 +186,8 @@ export default class PaperDollApp extends FormApplication {
    */
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
-    let availableSlots;
-    if (weaponSlotNames.includes(location.id)) {
-      availableSlots = this.slotStructure.offHand.filter((el) => el === '').length
-      availableSlots += this.slotStructure.mainHand.filter((el) => el === '').length
-    } else {
-      availableSlots = this.slotStructure[location.id].filter((el) => el === '').length
-    }
-    new itemSearchApp(selectedItems[location.id], allItems, source, availableSlots, location.id).render(true);
+
+    new itemSearchApp(selectedItems[location.id], allItems, source, this.slotStructure, location.id).render(true);
   }
 
   removeElementAndSecondaries(element, itemToRemove) {
@@ -321,7 +315,7 @@ export default class PaperDollApp extends FormApplication {
     const lastButton = html.parentNode.parentNode.firstElementChild.lastElementChild;
     const openSettingsButton = createHeaderButton(openSettingsButtonName)
     openSettingsButton.addEventListener('click', () => {
-      new personalSettingsApp(this.sourceActor, this.filteredItems, this.equipableItems).render(true);
+      new personalSettingsApp(this.sourceActor, this.filteredItems, this.equipableItems, this.slotStructure).render(true);
     })
     insertBefore(lastButton, openSettingsButton);
   }

@@ -37,8 +37,20 @@ const registerHelpers = () => {
     return array?.[index]
   })
 
-  Handlebars.registerHelper('itemHasEnoughFreeSlots', function (availableSlots, array, index) {
-    return array?.[index] <= availableSlots ? '' : itemWithNoSlots
+  Handlebars.registerHelper('itemHasEnoughFreeSlots', function (slotStructure, requiredSlots, flagsForSlot,index, id) {
+    const flagsForCurrentItem = flagsForSlot[index];
+
+    if (!flagsForCurrentItem) return ''
+
+    const flagsSplit = flagsForCurrentItem.split(', ');
+    const doesntFit = flagsSplit.some((flag) => {
+      const [requiredSlots, slotName] = flag.split('-');
+      const availableSlots = slotStructure[slotName].filter(el => el === '').length
+
+      return requiredSlots > availableSlots
+    })
+
+    return doesntFit ? itemWithNoSlots : ''
   })
 
   Handlebars.registerHelper('createTooltipForLockedItem', function(hasClass, id) {

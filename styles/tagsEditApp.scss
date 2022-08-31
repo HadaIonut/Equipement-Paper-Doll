@@ -2,12 +2,13 @@
   #{$name} {
     &__container {
       width: 300px;
-      height: 130px;
+      height: 150px;
     }
 
     &__creater {
       width: 100%;
       display: flex;
+      flex-wrap: wrap;
     }
 
     &__slot-number-selector {
@@ -34,6 +35,12 @@
       margin-top: 1rem;
       border: 2px groove;
       min-height: 42px;
+    }
+
+    &__has-secondary {
+      width: 100%;
+      display: flex;
+      align-items: center;
     }
 
     &__flag-wrapper {

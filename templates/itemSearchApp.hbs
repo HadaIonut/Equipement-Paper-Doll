@@ -3,12 +3,11 @@
     <div class="itemSearchApp__grid">
       {{#each allItems}}
         <div id="{{this.data._id}}"
-             class="itemSearchApp__internal-grid {{itemHasEnoughFreeSlots ../availableSlots ../relevantFlags @index}}"
-             requiredSlots="{{getValueAtIndex ../relevantFlags @index}}">
+             class="itemSearchApp__internal-grid {{itemHasEnoughFreeSlots ../slotStructure ../requiredSlots ../flagsForSlot @index this.data.name}}">
           <img src={{this.data.img}} class="full-size">
           <h3>{{this.data.name}}</h3>
         </div>
-        {{{createTooltipForLockedItem (itemHasEnoughFreeSlots ../availableSlots ../relevantFlags @index) this.data._id }}}
+        {{{createTooltipForLockedItem (itemHasEnoughFreeSlots ../slotStructure ../requiredSlots ../flagsForSlot @index) this.data._id }}}
       {{/each}}
     </div>
     <input class="itemSearchApp__search-bar" type="text">

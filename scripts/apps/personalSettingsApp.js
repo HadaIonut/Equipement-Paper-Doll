@@ -34,19 +34,20 @@ const createButtonSlot = (filteredItems, allItems, availableSlots, categoryName)
   return createHTMLElement({
     ...addBoxComponent,
     events: {
-      click: (event) => new itemSearchApp(filteredItems, allItems, event, availableSlots, categoryName).render(true)
+      click: (event) => new itemSearchApp(filteredItems, allItems, event, slotStructure, categoryName).render(true)
     }
   });
 }
 
 export default class personalSettingsApp extends FormApplication {
-  constructor(sourceActor, filteredItems, allItems) {
+  constructor(sourceActor, filteredItems, allItems, slotStructure) {
     super();
-    this.itemSlotNames = [...slotNames, ...weaponSlotNames];
-    this.sourceActor = sourceActor;
-    this.currentSlotSettings = sourceActor.getFlag(moduleName, flagFields.personalSettings);
-    this.filteredItems = filteredItems;
-    this.allItems = allItems;
+    this.itemSlotNames = [...slotNames, ...weaponSlotNames]
+    this.sourceActor = sourceActor
+    this.currentSlotSettings = sourceActor.getFlag(moduleName, flagFields.personalSettings)
+    this.filteredItems = filteredItems
+    this.allItems = allItems
+    this.slotStructure = slotStructure
   }
 
   static get defaultOptions() {
@@ -106,9 +107,10 @@ export default class personalSettingsApp extends FormApplication {
       replaceableSlots.forEach((slot) => slot?.parentNode.replaceChild(createFillerSlot(), slot))
     } else if (numberOfSlots > usableSlots) {
       //replace filler with usable
+      this.slotStructure[gridName].push(...Array(numberOfSlots-usableSlots).fill(''))
       const replaceableSlots = [...location.querySelectorAll(`.${fillerElementClass}`)].slice(0, numberOfSlots - usableSlots);
       replaceableSlots.forEach((slot) => slot?.parentNode?.replaceChild?.(
-        createButtonSlot(this.filteredItems[gridName], this.allItems, numberOfSlots, gridName),
+        createButtonSlot(this.filteredItems[gridName], this.allItems, this.slotStructure, gridName),
         slot))
     }
   }

@@ -58,11 +58,12 @@ input[type=text].itemSearchApp__search-bar {
 
 .tagsEditApp__container {
   width: 300px;
-  height: 130px;
+  height: 150px;
 }
 .tagsEditApp__creater {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 }
 .tagsEditApp__slot-number-selector {
   width: 50%;
@@ -84,6 +85,11 @@ input[type=text].itemSearchApp__search-bar {
   margin-top: 1rem;
   border: 2px groove;
   min-height: 42px;
+}
+.tagsEditApp__has-secondary {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .tagsEditApp__flag-wrapper {
   position: relative;

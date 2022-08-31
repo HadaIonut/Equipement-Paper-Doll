@@ -14,14 +14,14 @@ import {
 } from "../contants/objectClassNames.js";
 
 export default class itemSearchApp extends FormApplication {
-  constructor(filteredItems, allItems, source, availableSlots, categoryName) {
+  constructor(filteredItems, allItems, source, slotStructure, categoryName) {
     super()
     this.filteredItems = filteredItems
     this.allItems = allItems
     this.source = source
-    this.availableSlots = availableSlots
-    console.log(availableSlots)
+    this.slotStructure = slotStructure
     this.categoryName = categoryName
+    this.flagsForSlot = []
   }
 
   static get defaultOptions() {
@@ -32,12 +32,18 @@ export default class itemSearchApp extends FormApplication {
     }
   }
 
-  getRelevantFlags() {
+  getRequiredSlots() {
+    const sourceSlot = this.source.target.parentElement.parentElement.id
+
     return this.allItems.reduce((acc, cur) => {
-      const relevantFlagsForItem = cur.getFlag(moduleName, flagFields.flags).reduce((acc, cur) => {
-        return acc + cur.includes(this.categoryName) ? cur[0] : ''
-      }, '')
-      return [...acc, relevantFlagsForItem]
+      const allFlags = cur.getFlag(moduleName, flagFields.flags)
+      const flagForSlot = allFlags.find((flag) => flag.split(',')[0].includes(sourceSlot))
+      this.flagsForSlot.push(flagForSlot ?? '')
+      if (!flagForSlot) return [...acc, 1]
+
+      const necessarySlots = flagForSlot.split(', ').reduce((acc, cur) => acc + Number(cur.split('-')[0]),0)
+
+      return [...acc, necessarySlots]
     }, [])
   }
 
@@ -45,8 +51,9 @@ export default class itemSearchApp extends FormApplication {
     return {
       allItems: this.allItems,
       filteredItems: this.filteredItems,
-      relevantFlags: this.getRelevantFlags(),
-      availableSlots: this.availableSlots
+      requiredSlots: this.getRequiredSlots(),
+      slotStructure: this.slotStructure,
+      flagsForSlot: this.flagsForSlot
     }
   }
 
@@ -87,6 +94,12 @@ export default class itemSearchApp extends FormApplication {
     }, [])
   }
 
+  getCurrentFlagForItem(item, sourceSlot) {
+    const allFlags = item.getFlag(moduleName, flagFields.flags)
+
+    return allFlags.find((flag) => flag.split(',')[0].includes(sourceSlot))
+  }
+
   /**
    * Gets the item from the id of the clicked object on the grid
    *
@@ -98,6 +111,8 @@ export default class itemSearchApp extends FormApplication {
     const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots')
     const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0]
     const sourceSlotType = this.source.target.parentElement.parentElement.id
+    const itemFlag = this.getCurrentFlagForItem(selectedItem, sourceSlotType)
+    console.log(itemFlag) //TODO make item take the flagged slots
     let secondarySlotsAvailable;
 
     if (weaponSlotNames.includes(sourceSlotType)) {
