@@ -1,7 +1,7 @@
 @mixin PaperDollApp($name: '.paperDollApp') {
   #{$name} {
     &__container {
-      height: 600px;
+      height: 620px;
       width: 600px;
     }
 
@@ -90,6 +90,7 @@
     &__category-title {
       text-align: center;
       height: 50%;
+      border-bottom: none;
     }
 
     &__filler-element {

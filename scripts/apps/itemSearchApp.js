@@ -108,8 +108,8 @@ export default class itemSearchApp extends FormApplication {
    */
   prepareDataForNewTile(source, itemList) {
     const selectedItemId = source.currentTarget.id
-    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots')
-    const selectedItem = itemList.filter((item) => item.data._id === selectedItemId)[0]
+    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots') //TODO required slots doesn't exist anymore see some other way of calculating required slots
+    const selectedItem = itemList.filter((item) => item.id === selectedItemId)[0]
     const sourceSlotType = this.source.target.parentElement.parentElement.id
     const itemFlag = this.getCurrentFlagForItem(selectedItem, sourceSlotType)
     console.log(itemFlag) //TODO make item take the flagged slots
@@ -170,7 +170,7 @@ export default class itemSearchApp extends FormApplication {
   hideNonFilteredItems(displayedItems, filteredItems) {
     const filteredItemsIds = [];
     const equippedItems = this.findEquippedItems();
-    filteredItems.forEach((item) => filteredItemsIds.push(item.data._id));
+    filteredItems.forEach((item) => filteredItemsIds.push(item.id));
     displayedItems.forEach((item) => {
       if (!(filteredItemsIds.includes(item.id)) || equippedItems.includes(item.id)) {
         item.classList.toggle(itemNotInFilter);
@@ -187,7 +187,7 @@ export default class itemSearchApp extends FormApplication {
   }
 
   equipItem(itemId) {
-    const item = this.allItems.find(entity => entity.data._id === itemId)
+    const item = this.allItems.find(entity => entity._id === itemId)
     item.update({[itemEquippedPath]: true})
   }
 

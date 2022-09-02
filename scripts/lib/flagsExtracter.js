@@ -5,9 +5,9 @@ import {containsAnyOfArray} from "./itemFiltering.js";
 
 export const extractFlags = (item) => {
   let flags = new Set()
-  if (!item?.data?.data?.properties) return []
+  if (!item?.system?.properties) return []
 
-  Object.entries(item.data.data.properties).forEach(([key, value]) => {
+  Object.entries(item?.system?.properties).forEach(([key, value]) => {
     if (value && attributeToFlagMap[key]) flags.add(...attributeToFlagMap[key])
   })
 
@@ -17,7 +17,7 @@ export const extractFlags = (item) => {
 export const extractFlagsFromItemName = (item) => {
   return allSlots.reduce((acc,slot) => {
     const namesArray = getFilterArray(slot)
-    if (containsAnyOfArray(namesArray, item.data.name.toLowerCase()))
+    if (containsAnyOfArray(namesArray, item.name.toLowerCase()))
       return [...acc, `1-${slot}`]
 
     return [...acc]

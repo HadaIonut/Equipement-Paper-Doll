@@ -12,8 +12,7 @@
     "/scripts/module.js"
   ],
   "scripts": [
-    "/scripts/lib/lib.js",
-    "/scripts/lib/popperJS/popper.min.js"
+    "/scripts/lib/popperJs/popper.min.js"
   ],
   "styles": [
     "/styles/module.css",

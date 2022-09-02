@@ -71,7 +71,7 @@ export const imageTile = (itemId, image, imageClasses, item) => ({
 export const tooltip = (itemId, itemName) => ({
   elementName: 'span',
   attributes: {
-    id: 'tooltip',
+    id: 'popperTooltip',
     role: 'tooltip',
     className: itemId,
     innerText: itemName

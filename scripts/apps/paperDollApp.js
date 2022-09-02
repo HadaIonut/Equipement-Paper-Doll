@@ -153,10 +153,10 @@ export default class PaperDollApp extends FormApplication {
 
         if (itemSlot.includes(shadowItemModifier)) {
           const itemId = itemSlot.split(shadowItemModifier)[0]
-          const item = actorItems.find(localItem => localItem.data._id === itemId);
+          const item = actorItems.find(localItem => localItem.id === itemId);
           createImageTile(item, slotsArray[index], true)
         } else {
-          const item = actorItems.find(localItem => localItem.data._id === itemSlot);
+          const item = actorItems.find(localItem => localItem.id === itemSlot);
           createImageTile(item, slotsArray[index])
         }
 
@@ -245,7 +245,7 @@ export default class PaperDollApp extends FormApplication {
     this.slotStructure[slotName] = this.slotStructure[slotName]
       .map((slot) => slot === itemId || slot === `${itemId}${shadowItemModifier}` ? '' : slot)
 
-    const foundryItem = this.items.find(entry => entry.data._id === item.id)
+    const foundryItem = this.items.find(entry => entry.id === item.id)
     foundryItem.update({[itemEquippedPath]: false})
   }
 
@@ -255,7 +255,7 @@ export default class PaperDollApp extends FormApplication {
     const allItems = inventoryContainer.querySelectorAll(`.${inventoryItemClass}`)
     const foundryItem = this.items.get(item[0].id)
     foundryItem.delete()
-    this.equipableItems = this.equipableItems.filter(entry => entry.data._id !== item[0].id)
+    this.equipableItems = this.equipableItems.filter(entry => entry.id !== item[0].id)
 
     allItems.forEach(item => {
       const emptyInventoryTile = createHTMLElement(emptyInventorySlot)
@@ -287,7 +287,7 @@ export default class PaperDollApp extends FormApplication {
     }, {
       ...unequipFromInventoryComponent,
       callback: (item) => {
-        this.items.find(entry => entry.data._id === item[0].id).update({[itemEquippedPath]: false})
+        this.items.find(entry => entry.id === item[0].id).update({[itemEquippedPath]: false})
         item[0].classList.remove(inventoryEquippedWrapperClass)
         item[0].children[0].classList.remove(inventoryEquippedClass)
       }
@@ -351,16 +351,16 @@ export default class PaperDollApp extends FormApplication {
   replaceInventorySlotsWithItems([html]) {
     const slots = html.querySelectorAll(`.${inventorySlot}`)
     const allItems = [...this.equipableItems]
-    allItems.sort((a,b) => a.data.name.localeCompare(b.data.name))
+    allItems.sort((a,b) => a.name.localeCompare(b.name))
 
     slots.forEach((slot, index) => {
       const item = allItems[index]
-      const itemId = item?.data?._id
+      const itemId = item?.id
       const reverted = index % 9 > 6
       if (!item) return;
 
-      const toolTip = createHTMLElement(tooltip(itemId, item.data.name))
-      const itemElement = createHTMLElement(inventoryItem(itemId, item.data.img, item.data.data.equipped, item, reverted))
+      const toolTip = createHTMLElement(tooltip(itemId, item.name))
+      const itemElement = createHTMLElement(inventoryItem(itemId, item.img, item.system.equipped, item, reverted))
 
       slot?.parentNode?.insertBefore?.(toolTip, slot);
       slot?.parentNode?.replaceChild?.(itemElement, slot)

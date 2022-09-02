@@ -103,11 +103,12 @@ export default class personalSettingsApp extends FormApplication {
 
     if (numberOfSlots < usableSlots) {
       //replace usable with filler
+      this.slotStructure[gridName] = this.slotStructure[gridName].slice(0, numberOfSlots - usableSlots)
       const replaceableSlots = [...location.querySelectorAll(nonFillerElements)].slice(numberOfSlots, usableSlots);
       replaceableSlots.forEach((slot) => slot?.parentNode.replaceChild(createFillerSlot(), slot))
     } else if (numberOfSlots > usableSlots) {
       //replace filler with usable
-      this.slotStructure[gridName].push(...Array(numberOfSlots-usableSlots).fill(''))
+      this.slotStructure[gridName].push(...Array(numberOfSlots - usableSlots).fill(''))
       const replaceableSlots = [...location.querySelectorAll(`.${fillerElementClass}`)].slice(0, numberOfSlots - usableSlots);
       replaceableSlots.forEach((slot) => slot?.parentNode?.replaceChild?.(
         createButtonSlot(this.filteredItems[gridName], this.allItems, this.slotStructure, gridName),
