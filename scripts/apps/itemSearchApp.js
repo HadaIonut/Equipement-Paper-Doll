@@ -3,7 +3,7 @@ import "../lib/popperJs/popper.min.js"
 import {linkWithTooltip} from "../lib/tooltips.js";
 import {weaponSlotNames} from "../../constants/slotNames.js";
 import {itemSearchAppData} from "../components/itemSearchApp.js";
-import {flagFields, itemEquippedPath, moduleName} from "../contants/constants.js";
+import {flagFields, itemEquippedPath, moduleName, shadowItemModifier} from "../contants/constants.js";
 import {allEquippedItems, availableSlots} from "../contants/commonQuerries.js";
 import {
   addBoxClass,
@@ -12,6 +12,7 @@ import {
   itemWithNoSlots,
   searchBarClass
 } from "../contants/objectClassNames.js";
+import {getAllIndexes, getCurrentFlagForItem} from "../lib/flagUtils.js";
 
 export default class itemSearchApp extends FormApplication {
   constructor(filteredItems, allItems, source, slotStructure, categoryName) {
@@ -41,7 +42,7 @@ export default class itemSearchApp extends FormApplication {
       this.flagsForSlot.push(flagForSlot ?? '')
       if (!flagForSlot) return [...acc, 1]
 
-      const necessarySlots = flagForSlot.split(', ').reduce((acc, cur) => acc + Number(cur.split('-')[0]),0)
+      const necessarySlots = flagForSlot.split(', ').reduce((acc, cur) => acc + Number(cur.split('-')[0]), 0)
 
       return [...acc, necessarySlots]
     }, [])
@@ -94,10 +95,18 @@ export default class itemSearchApp extends FormApplication {
     }, [])
   }
 
-  getCurrentFlagForItem(item, sourceSlot) {
-    const allFlags = item.getFlag(moduleName, flagFields.flags)
+  updateSlotStructure(item, slotName, slotRequirement, onePrimary = true) {
+    const availableIndexes = getAllIndexes(this.slotStructure[slotName], '')
+    let itemsPlaced = 0
 
-    return allFlags.find((flag) => flag.split(',')[0].includes(sourceSlot))
+    if (onePrimary) {
+      this.slotStructure[slotName][availableIndexes[0]] = item.id
+      itemsPlaced++
+    }
+
+    for (let i = itemsPlaced; i < slotRequirement; i++) {
+      this.slotStructure[slotName][availableIndexes[i]] = `${item.id}${shadowItemModifier}`
+    }
   }
 
   /**
@@ -108,27 +117,25 @@ export default class itemSearchApp extends FormApplication {
    */
   prepareDataForNewTile(source, itemList) {
     const selectedItemId = source.currentTarget.id
-    const selectedItemSlotsRequired = source.currentTarget.getAttribute('requiredSlots') //TODO required slots doesn't exist anymore see some other way of calculating required slots
-    const selectedItem = itemList.filter((item) => item.id === selectedItemId)[0]
+    const selectedItem = itemList.find((item) => item.id === selectedItemId)
     const sourceSlotType = this.source.target.parentElement.parentElement.id
-    const itemFlag = this.getCurrentFlagForItem(selectedItem, sourceSlotType)
-    console.log(itemFlag) //TODO make item take the flagged slots
-    let secondarySlotsAvailable;
+    const itemFlag = getCurrentFlagForItem(selectedItem, sourceSlotType)
+    const flagArray = itemFlag.split(', ')
 
-    if (weaponSlotNames.includes(sourceSlotType)) {
-      const mainHandSlots = this.getAvailableSlotsAtLocation(weaponSlotNames[0])
-      const offHandSlots = this.getAvailableSlotsAtLocation(weaponSlotNames[1])
+    flagArray.forEach((flag, index) => {
+      const [slotRequirement, slotName] = flag.split('-')
+      const secondarySlotsAvailable = this.getAvailableSlotsAtLocation(slotName)
 
-      secondarySlotsAvailable = this.mergeHandSlots(offHandSlots, mainHandSlots)
-    } else {
-      secondarySlotsAvailable = [...this.source.target.parentNode
-        .querySelectorAll(`.${addBoxClass}`)]
-        .filter((item) => item !== this.source.target)
-    }
+      if (index === 0) {
+        this.createNewTile(selectedItem)
+        this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, slotRequirement - 1)
+        this.updateSlotStructure(selectedItem, slotName, slotRequirement)
+      } else {
+        this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, slotRequirement)
+        this.updateSlotStructure(selectedItem, slotName, slotRequirement, false)
+      }
+    })
 
-
-    this.createSecondaryTiles(selectedItem, secondarySlotsAvailable, selectedItemSlotsRequired - 1)
-    this.createNewTile(selectedItem)
   }
 
   /**

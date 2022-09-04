@@ -1,5 +1,5 @@
 import {allSlots, slotNames} from "../../constants/slotNames.js";
-import {extractFlags} from "../lib/flagsExtracter.js";
+import {extractFlags} from "../lib/flagUtils.js";
 import {createHTMLElement} from "../lib/headerButtonCreater.js";
 import {flagFields, moduleName} from "../contants/constants.js";
 import {flagComponent, tagsEditAppData} from "../components/tagsEditApp.js";

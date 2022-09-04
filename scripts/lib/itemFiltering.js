@@ -41,7 +41,7 @@ const filterEquipableItems = (actorItems) => {
  * @returns {*}
  */
 const findWeaponsAndFilter = (items, filters) => {
-  return items.filter((item) => item.type === 'weapon').concat(itemsContains(items, filters, 'hands'))
+  return items.filter((item) => item.type === 'weapon')
 }
 
 /**

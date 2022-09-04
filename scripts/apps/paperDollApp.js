@@ -4,7 +4,7 @@ import {getItemsSlotArray} from "../settings.js";
 import {createImageTile} from "../lib/imageTile.js";
 import personalSettingsApp from "./personalSettingsApp.js";
 import {slotNames, weaponSlotNames} from "../../constants/slotNames.js";
-import {extractFlags, extractFlagsFromItemName} from "../lib/flagsExtracter.js";
+import {extractFlags, extractFlagsFromItemName, getCurrentFlagForItem} from "../lib/flagUtils.js";
 import itemSearchApp from "./itemSearchApp.js";
 import {createHeaderButton, createHTMLElement, insertBefore} from "../lib/headerButtonCreater.js";
 import {
@@ -128,7 +128,7 @@ export default class PaperDollApp extends FormApplication {
       const fieldData = [];
 
       dataPoints.forEach(point => {
-        if (point.id !== 'tooltip') fieldData.push(point.id)
+        if (point.id !== 'popperTooltip') fieldData.push(point.id)
       });
       formData[element.id] = fieldData;
     })
@@ -191,7 +191,7 @@ export default class PaperDollApp extends FormApplication {
   }
 
   removeElementAndSecondaries(element, itemToRemove) {
-    const isTooltip = element.nodeName === 'SPAN' && element.id === 'tooltip'
+    const isTooltip = element.nodeName === 'SPAN' && element.id === 'popperTooltip'
     const isItemTooltip = element.className === `${itemToRemove.id}`
     const isShadowItemTooltip = element.className === `${itemToRemove.id}${shadowItemModifier}`
     const isShadowItem = element.nodeName === 'DIV' && element.id === `${itemToRemove.id}${shadowItemModifier}` && element.className === addedItemClass
@@ -222,31 +222,29 @@ export default class PaperDollApp extends FormApplication {
   unEquipItem([item]) {
     const slotName = item.parentElement.parentElement.id
     const itemId = item.id
+
+    const foundryItem = this.items.get(itemId)
+    const flagForItem = getCurrentFlagForItem(foundryItem, slotName)
     const addBox = createHTMLElement({
       ...addBoxComponent,
       events: {
         click: (source) => this.renderSearchWindow(source, this.filteredItems, this.equipableItems),
       }
     })
-    let removeSources;
 
-    if (weaponSlotNames.includes(slotName)) {
-      removeSources = [...this.getAvailableSlotsAtLocation(weaponSlotNames[0]),
-        ...this.getAvailableSlotsAtLocation(weaponSlotNames[1])]
-    } else {
-      removeSources = Array.from(item.parentElement.children)
-    }
+    flagForItem.split(', ').forEach((slot) => {
+      const [, slotName] = slot.split('-');
+      const slotContents = this.getAvailableSlotsAtLocation(slotName)
 
-    removeSources.forEach((element) => this.removeElementAndSecondaries(element, item))
-    item.replaceWith(addBox);
+      slotContents.forEach((element) => this.removeElementAndSecondaries(element, item))
 
-    document.querySelector('.hidden-submit').click()
+      this.slotStructure[slotName] = this.slotStructure[slotName]
+        .map((slot) => (slot === itemId || slot === `${itemId}${shadowItemModifier}`) ? '' : slot)
+    })
 
-    this.slotStructure[slotName] = this.slotStructure[slotName]
-      .map((slot) => slot === itemId || slot === `${itemId}${shadowItemModifier}` ? '' : slot)
-
-    const foundryItem = this.items.find(entry => entry.id === item.id)
+    item.replaceWith(addBox)
     foundryItem.update({[itemEquippedPath]: false})
+    document.querySelector('.hidden-submit').click()
   }
 
   removeItemFromInventory(item) {

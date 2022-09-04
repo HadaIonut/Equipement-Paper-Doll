@@ -57,7 +57,7 @@ const registerHelpers = () => {
     if (!hasClass) return ''
 
     return `
-      <div id="tooltip" role="tooltip" class="${id}"> You do not have enough slots to equip this item <span id="arrow" data-popper-arrow></div>
+      <div id="popperTooltip" role="tooltip" class="${id}"> You do not have enough slots to equip this item <span id="arrow" data-popper-arrow></div>
     `
   })
 
