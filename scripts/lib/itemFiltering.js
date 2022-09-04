@@ -75,7 +75,7 @@ const filterActorItems = (actorItems) => {
   itemTypesObject['hands'] = itemsContains(equipableItems, getFilterArray('hands'), 'hands');
   itemTypesObject['feet'] = itemsContains(equipableItems, getFilterArray('feet'), 'feet');
   itemTypesObject['ring'] = itemsContains(equipableItems, getFilterArray('ring'), 'ring');
-  itemTypesObject['back'] = findWeaponsAndFilter(equipableItems, getFilterArray('back'))
+  itemTypesObject['back'] = itemsContains(equipableItems, getFilterArray('back'), 'back')
   itemTypesObject['mainHand'] = findWeaponsAndFilter(equipableItems, getFilterArray('mainHand'));
   itemTypesObject['offHand'] = findOffHand(equipableItems);
 

@@ -1,5 +1,5 @@
 import {allSlots, slotNames} from "../../constants/slotNames.js";
-import {extractFlags} from "../lib/flagUtils.js";
+import {extractFlags, extractFlagsFromItemName} from "../lib/flagUtils.js";
 import {createHTMLElement} from "../lib/headerButtonCreater.js";
 import {flagFields, moduleName} from "../contants/constants.js";
 import {flagComponent, tagsEditAppData} from "../components/tagsEditApp.js";
@@ -16,8 +16,12 @@ export default class TagsEditApp extends FormApplication {
     if (this.currentFlags.size === 0) this.addExtractedFlags()
   }
 
+  /**
+   * Extracts flags from attributes and item name
+   */
   addExtractedFlags() {
-    extractFlags(this.item).forEach((flag) => this.currentFlags.add(flag))
+    [...extractFlags(this.item), ...extractFlagsFromItemName(this.item)]
+      .forEach((flag) => this.currentFlags.add(flag))
   }
 
   static get defaultOptions() {
@@ -35,10 +39,22 @@ export default class TagsEditApp extends FormApplication {
     }
   }
 
+  /**
+   * Checks if this flag already has this specific slot
+   *
+   * @param newFlagContent {String}
+   * @param lastFlagContent {String}
+   * @returns {Boolean}
+   */
   slotAlreadyExitsInFlag(newFlagContent, lastFlagContent) {
     return lastFlagContent.includes(newFlagContent.split('-')[1])
   }
 
+  /**
+   * If the add as secondary checkbox is checked this method modifies the current flag
+   *
+   * @param newFlagContent {String}
+   */
   handleSecondaryFlags(newFlagContent) {
     const flagsContainer = this.form.querySelector('.tagsEditApp__flag-container')
     const lastFlag = flagsContainer.children[flagsContainer.children.length - 1]
@@ -53,6 +69,14 @@ export default class TagsEditApp extends FormApplication {
     lastFlagTitle.innerText += `, ${newFlagContent}`
   }
 
+  /**
+   * Adds all the flags to the items flag list
+   *
+   * @param event
+   * @param formData
+   * @returns {Promise<void>}
+   * @private
+   */
   async _updateObject(event, formData) {
     if (event.submitter.classList.value === addFlagButton) {
       const newFlag = `${formData['number-input']}-${formData['slot-type']}`;

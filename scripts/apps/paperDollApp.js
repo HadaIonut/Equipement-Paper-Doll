@@ -40,6 +40,12 @@ import {
 } from "../components/paperDollScreen.js";
 import {linkWithTooltip} from "../lib/tooltips.js";
 
+/**
+ * Returns the background image for an actor
+ *
+ * @param sourceActor {Actor5e}
+ * @returns {string}
+ */
 const getBackgroundImageFromActorFlags = (sourceActor) => {
   const actorFlags = sourceActor.getFlag(moduleName, flagFields.personalSettings)
   return actorFlags?.filter?.(obj => obj.name === 'imageUrl')?.[0]?.value
@@ -60,6 +66,10 @@ export default class PaperDollApp extends FormApplication {
     this.getNumberOfInventorySlots()
   }
 
+  /**
+   * Flags equippable items that are not flagged already
+   * This flagging includes names and properties
+   */
   flagEquippedItems() {
     [...this.items].forEach((item) => {
         if (Array.isArray(item.getFlag(moduleName, flagFields.flags))) return
@@ -69,6 +79,12 @@ export default class PaperDollApp extends FormApplication {
     )
   }
 
+  /**
+   * Returns the rounded number of inventory slots
+   * It is calculated from the total number of items in inventory and a step
+   * Example: if step === 50 and inventory items < 50 -> 50
+   * else if inventory items > 50 and < 100 -> 100
+   */
   getNumberOfInventorySlots() {
     this.inventorySlots = Math.ceil(this.equipableItems.length/inventorySlotsStep) * inventorySlotsStep
   }
@@ -98,6 +114,9 @@ export default class PaperDollApp extends FormApplication {
     }
   }
 
+  /**
+   * Parses equipped sheet to find the number of slots for each type
+   */
   getSlotsStructure() {
     const itemSlotsArray = getItemsSlotArray(slotNames, this.sourceActor)
     const weaponSlotsArray = getItemsSlotArray(weaponSlotNames, this.sourceActor)
@@ -139,9 +158,9 @@ export default class PaperDollApp extends FormApplication {
   /**
    * On loading the app replaces the button tiles with the imageTiles of items that are saved
    *
-   * @param html - app html
-   * @param storedItems - object that contains lists of what items ids are on each slot
-   * @param actorItems - all items from the actor
+   * @param html {HTMLElement} - app html
+   * @param storedItems  - object that contains lists of what items ids are on each slot
+   * @param actorItems {Map} - all items from the actor
    */
   replaceWithStoredItems(html, storedItems, actorItems) {
     if (!storedItems) return;
@@ -153,10 +172,10 @@ export default class PaperDollApp extends FormApplication {
 
         if (itemSlot.includes(shadowItemModifier)) {
           const itemId = itemSlot.split(shadowItemModifier)[0]
-          const item = actorItems.find(localItem => localItem.id === itemId);
+          const item = actorItems.get(itemId);
           createImageTile(item, slotsArray[index], true)
         } else {
-          const item = actorItems.find(localItem => localItem.id === itemSlot);
+          const item = actorItems.get(itemSlot);
           createImageTile(item, slotsArray[index])
         }
 
@@ -180,9 +199,9 @@ export default class PaperDollApp extends FormApplication {
   /**
    * Renders the search window
    *
-   * @param source - event that caused the render
+   * @param source {Event} - event that caused the render
    * @param selectedItems - items that match the slot filter
-   * @param allItems - all equipable items
+   * @param allItems {Item5e[]} - all equipable items
    */
   renderSearchWindow(source, selectedItems, allItems) {
     const location = source.currentTarget.parentNode.parentNode;
@@ -190,6 +209,12 @@ export default class PaperDollApp extends FormApplication {
     new itemSearchApp(selectedItems[location.id], allItems, source, this.slotStructure, location.id).render(true);
   }
 
+  /**
+   * When un-equipping an item this function removes its secondaries and related tooltips
+   *
+   * @param element {HTMLElement}
+   * @param itemToRemove {Item5e}
+   */
   removeElementAndSecondaries(element, itemToRemove) {
     const isTooltip = element.nodeName === 'SPAN' && element.id === 'popperTooltip'
     const isItemTooltip = element.className === `${itemToRemove.id}`
@@ -210,14 +235,21 @@ export default class PaperDollApp extends FormApplication {
     }
   }
 
+  /**
+   * Returns the slots available for a certain slot type
+   *
+   * @param location {string} -> slot type
+   * @returns {HTMLElement[]}
+   */
   getAvailableSlotsAtLocation(location) {
     return [...document.querySelectorAll(everythingInGrid(location))]
   }
 
   /**
    * Replaces an image tile with an empty slot
+   * Removes that item from the slot structure
    *
-   * @param item - item to be removed
+   * @param item {HTMLElement} - item to be removed
    */
   unEquipItem([item]) {
     const slotName = item.parentElement.parentElement.id
@@ -247,13 +279,19 @@ export default class PaperDollApp extends FormApplication {
     document.querySelector('.hidden-submit').click()
   }
 
-  removeItemFromInventory(item) {
-    const inventoryContainer = item[0].parentElement
+  /**
+   * Removes an item from the inventory
+   * This triggers a re-render of the entire inventory screen
+   *
+   * @param item {HTMLElement}
+   */
+  removeItemFromInventory([item]) {
+    const inventoryContainer = item.parentElement
     const form = inventoryContainer.parentElement.parentElement.parentElement.parentElement
     const allItems = inventoryContainer.querySelectorAll(`.${inventoryItemClass}`)
-    const foundryItem = this.items.get(item[0].id)
+    const foundryItem = this.items.get(item.id)
     foundryItem.delete()
-    this.equipableItems = this.equipableItems.filter(entry => entry.id !== item[0].id)
+    this.equipableItems = this.equipableItems.filter(entry => entry.id !== item.id)
 
     allItems.forEach(item => {
       const emptyInventoryTile = createHTMLElement(emptyInventorySlot)
@@ -271,7 +309,7 @@ export default class PaperDollApp extends FormApplication {
   /**
    * Creates a context menu in a given app
    *
-   * @param html - app
+   * @param html {JQuery} - app
    */
   createNewContextMenu(html) {
     new ContextMenu(html, `.${addedItemClass}`, [{
@@ -292,6 +330,11 @@ export default class PaperDollApp extends FormApplication {
     }])
   }
 
+  /**
+   * Sets the background image for the current equipment page
+   *
+   * @param html {HTMLElement}
+   */
   setBackgroundImage(html) {
     const backgroundContainer = html.querySelector(`.${backgroundImage}`);
     const path = getBackgroundImageFromActorFlags(this.sourceActor);
@@ -305,7 +348,7 @@ export default class PaperDollApp extends FormApplication {
    * Adds the button that opens the personal settings screen
    * Only creates the button if the user is a GM
    *
-   * @param html - app
+   * @param html {HTMLElement} - app
    */
   openPersonalSettings(html) {
     if (!game.user.isGM) return;
@@ -318,6 +361,11 @@ export default class PaperDollApp extends FormApplication {
     insertBefore(lastButton, openSettingsButton);
   }
 
+  /**
+   * Adds the on click event for available slots
+   *
+   * @param html {HTMLElement}
+   */
   addSearchEvent([html]) {
     const addBoxes = html.querySelectorAll(`.${addBoxClass}`);
     addBoxes.forEach((box) => box.addEventListener('click', (source) => {
@@ -325,6 +373,11 @@ export default class PaperDollApp extends FormApplication {
     }))
   }
 
+  /**
+   * Adds js events to the tab navigation
+   *
+   * @param html {HTMLElement}
+   */
   loadTabs([html]) {
     const tabs = html.querySelectorAll(tabTitles)
     tabs.forEach((tab) => {
@@ -346,6 +399,11 @@ export default class PaperDollApp extends FormApplication {
     })
   }
 
+  /**
+   * Replaces empty inventory slots with items
+   *
+   * @param html {HTMLElement}
+   */
   replaceInventorySlotsWithItems([html]) {
     const slots = html.querySelectorAll(`.${inventorySlot}`)
     const allItems = [...this.equipableItems]

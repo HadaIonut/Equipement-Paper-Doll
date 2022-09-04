@@ -33,6 +33,11 @@ export default class itemSearchApp extends FormApplication {
     }
   }
 
+  /**
+   * Returns an array of how many slots are required for each item in the inventory
+   *
+   * @returns {Number[]}
+   */
   getRequiredSlots() {
     const sourceSlot = this.source.target.parentElement.parentElement.id
 
@@ -61,40 +66,48 @@ export default class itemSearchApp extends FormApplication {
   /**
    * Creates an image tile in the place of the clicked button
    *
-   * @param item - item to "equip"
+   * @param item {Item5e} - item to "equip"
    */
   createNewTile(item) {
     createImageTile(item, this.source.target);
     this.close();
   }
 
+  /**
+   * Creates the secondary image tiles for items that require multiple slots
+   *
+   * @param item {Item5e}
+   * @param slotsAvailable {HTMLElement[]}
+   * @param slotsRequired {Number}
+   */
   createSecondaryTiles(item, slotsAvailable, slotsRequired) {
     for (let i = 0; i < slotsRequired; i++) {
       createImageTile(item, slotsAvailable[i], true)
     }
   }
 
+  /**
+   * Returns a list of slots that are not used with a given slot type
+   * This list does not contain the slot that created the window
+   *
+   * @param location {string}
+   * @returns {HTMLElement[]}
+   */
   getAvailableSlotsAtLocation(location) {
     return [...document
       .querySelectorAll(availableSlots(location))]
       .filter((item) => item !== this.source.target)
   }
 
-  mergeHandSlots(offHand, mainHand) {
-    return offHand.reduce((acc, cur, index) => {
-      if (mainHand[index])
-        return [
-          ...acc,
-          cur,
-          mainHand[index]
-        ]
-      return [
-        ...acc,
-        cur,
-      ]
-    }, [])
-  }
-
+  /**
+   * Updates the slot structure reference to show that an item and it's secondaries has been added
+   * Note: modifying the slot structure here is propagated in paperDollApp.js
+   *
+   * @param item {Item5e}
+   * @param slotName {String}
+   * @param slotRequirement {Number}
+   * @param onePrimary {Boolean}
+   */
   updateSlotStructure(item, slotName, slotRequirement, onePrimary = true) {
     const availableIndexes = getAllIndexes(this.slotStructure[slotName], '')
     let itemsPlaced = 0
@@ -112,8 +125,8 @@ export default class itemSearchApp extends FormApplication {
   /**
    * Gets the item from the id of the clicked object on the grid
    *
-   * @param source - event trigger by the click
-   * @param itemList - items available for equipment
+   * @param source {Event} - event trigger by the click
+   * @param itemList {Item5e[]}- items available for equipment
    */
   prepareDataForNewTile(source, itemList) {
     const selectedItemId = source.currentTarget.id
@@ -141,7 +154,7 @@ export default class itemSearchApp extends FormApplication {
   /**
    * Hides the items that do not match the text into the search bar
    *
-   * @param event - new character added to the search bar
+   * @param event {Event} - new character added to the search bar
    */
   searchItems(event) {
     const itemObjectsArray = [...event.currentTarget.parentNode.firstElementChild.children];
@@ -159,6 +172,11 @@ export default class itemSearchApp extends FormApplication {
   async _updateObject(event, formData) {
   }
 
+  /**
+   * Returns an array of the ids of the equipped items
+   *
+   * @returns {String[]}
+   */
   findEquippedItems() {
     const IDs = [];
     document
@@ -171,8 +189,8 @@ export default class itemSearchApp extends FormApplication {
    * When the list is made all equipable items are loaded, this function hides the ones that do not match the filter on
    * the current slot, idk why I made it this way
    *
-   * @param displayedItems - JQ object of all the items in the list
-   * @param filteredItems - the items that match the slot filter
+   * @param displayedItems {HTMLElement[]} - object of all the items in the list
+   * @param filteredItems {Item5e[]} - the items that match the slot filter
    */
   hideNonFilteredItems(displayedItems, filteredItems) {
     const filteredItemsIds = [];
@@ -185,6 +203,11 @@ export default class itemSearchApp extends FormApplication {
     })
   }
 
+  /**
+   * Adds the tooltips for each item in the list
+   *
+   * @param html {HTMLElement}
+   */
   linkItemsWithTooltips(html) {
     html.querySelectorAll(`.${itemWithNoSlots}`).forEach((item) => {
       let tooltip = html.querySelector(`.${item.id}`)
@@ -193,13 +216,18 @@ export default class itemSearchApp extends FormApplication {
     })
   }
 
+  /**
+   * Equips an item on the standard foundry sheet
+   *
+   * @param itemId {String}
+   */
   equipItem(itemId) {
-    const item = this.allItems.find(entity => entity._id === itemId)
+    const item = this.allItems.find(entity => entity.id === itemId)
     item.update({[itemEquippedPath]: true})
   }
 
   activateListeners(html) {
-    const itemsFromDisplay = document.querySelectorAll(`.${internalGrid}`);
+    const itemsFromDisplay = [...document.querySelectorAll(`.${internalGrid}`)];
     itemsFromDisplay.forEach((item) => {
       if (item.classList.contains(itemWithNoSlots)) return
 

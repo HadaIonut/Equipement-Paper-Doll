@@ -1,3 +1,9 @@
+/**
+ * Creates a button generally placed in the header of a window
+ *
+ * @param text {String}
+ * @returns {HTMLAnchorElement}
+ */
 export const createHeaderButton = (text) => {
   const button = document.createElement('a')
   button.innerHTML = text
@@ -5,6 +11,16 @@ export const createHeaderButton = (text) => {
   return button
 }
 
+/**
+ * Create a new HTML element with the given attributes
+ *
+ * @param elementName {String} - name of the element (div, span, p, etc)
+ * @param attributes {Object} - object containing standard HTML attributes
+ * @param customAttributes {Object} - object containing non-standard HTML attributes
+ * @param events {Object} - object where key === event name; value at key === function to call on event
+ * @param children {Object[]} - array containing objects that match the pattern described above, they are used to add children to this html element
+ * @returns {HTMLElement}
+ */
 export const createHTMLElement = ({
                                     elementName,
                                     attributes = {},

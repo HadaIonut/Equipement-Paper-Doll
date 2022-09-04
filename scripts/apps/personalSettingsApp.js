@@ -16,25 +16,24 @@ import {backgroundImage, fillerElementClass} from "../contants/objectClassNames.
 /**
  * Returns a filler slot
  *
- * @returns {*|jQuery|HTMLElement}
+ * @returns {HTMLElement}
  */
 const createFillerSlot = () => createHTMLElement(fillerElementComponent)
 
 /**
- * Returns an equip new item button
+ * Returns a button to equip a new item
  *
- * @param filteredItems - items that can be equipped on this slot
- * @param allItems - all items held by the owner actor
- * @param availableSlots
- * @param categoryName
- * @param sourceActor
- * @returns {*|jQuery|HTMLElement}
+ * @param filteredItems {Item5e[]} - items that can be equipped on this slot
+ * @param allItems {Item5e[]} - all items held by the owner actor
+ * @param availableSlots {Number}
+ * @param categoryName {String}
+ * @returns {HTMLElement}
  */
 const createButtonSlot = (filteredItems, allItems, availableSlots, categoryName) => {
   return createHTMLElement({
     ...addBoxComponent,
     events: {
-      click: (event) => new itemSearchApp(filteredItems, allItems, event, slotStructure, categoryName).render(true)
+      click: (event) => new itemSearchApp(filteredItems, allItems, event, availableSlots, categoryName).render(true)
     }
   });
 }
@@ -92,8 +91,8 @@ export default class personalSettingsApp extends FormApplication {
   /**
    * Updates the paper doll with the new slot numbers
    *
-   * @param numberOfSlots - new number of slots
-   * @param formName - name of the slot type ex: "head", "eyes"
+   * @param numberOfSlots {Number} - new number of slots
+   * @param formName {String} - name of the slot type ex: "head", "eyes"
    */
   updatePaperDollView(numberOfSlots, formName) {
     const gridName = formName.slice(0, -5);
@@ -153,6 +152,11 @@ export default class personalSettingsApp extends FormApplication {
     await this.sourceActor.setFlag(moduleName, flagFields.personalSettings, formattedFromData);
   }
 
+  /**
+   * Dynamically sets the background image of the equipment screen
+   *
+   * @param path {string}
+   */
   setBackgroundImage(path) {
     const backgroundContainer = document.querySelector(`.${backgroundImage}`);
     backgroundContainer.style.background = `url(${path}) no-repeat center`
@@ -176,6 +180,11 @@ export default class personalSettingsApp extends FormApplication {
     })
   }
 
+  /**
+   * Adds events to the path input fields
+   *
+   * @param html {HTMLElement}
+   */
   addLinkEvents([html]) {
     const imagePath = html.querySelector(imagePathInputField)
     const imageUrl = html.querySelector(imageUrlInputField)
@@ -201,5 +210,4 @@ export default class personalSettingsApp extends FormApplication {
 
     super.activateListeners(html);
   }
-
 }

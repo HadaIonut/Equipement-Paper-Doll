@@ -1,5 +1,5 @@
 import {attributeToFlagMap} from "../../constants/flagMaps.js";
-import {allSlots} from "../../constants/slotNames.js";
+import {allSlots, weaponSlotNames} from "../../constants/slotNames.js";
 import {getFilterArray} from "../settings.js";
 import {containsAnyOfArray} from "./itemFiltering.js";
 import {flagFields, moduleName} from "../contants/constants.js";
@@ -20,6 +20,8 @@ export const extractFlagsFromItemName = (item) => {
     const namesArray = getFilterArray(slot)
     if (containsAnyOfArray(namesArray, item.name.toLowerCase()))
       return [...acc, `1-${slot}`]
+    else if (item.type === 'weapon' && weaponSlotNames.includes(slot))
+      return [...acc, '1-mainHand', '1-offHand']
 
     return [...acc]
   }, [])
