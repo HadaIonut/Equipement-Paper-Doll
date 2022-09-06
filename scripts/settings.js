@@ -417,7 +417,193 @@ const settingList = [
             restricted: true
         }
     },
-
+    {
+        key: "tattooScalpSlots",
+        data: {
+            type: Number,
+            name: 'Number of scalp tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 1,
+                max: 4,
+                step: 1
+            },
+            default: 2,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooArmLeftSlots",
+        data: {
+            type: Number,
+            name: 'Number of left arm tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 4,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooArmRightSlots",
+        data: {
+            type: Number,
+            name: 'Number of right arm tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 4,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooHandLeftSlots",
+        data: {
+            type: Number,
+            name: 'Number of left hand tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 1,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooHandRightSlots",
+        data: {
+            type: Number,
+            name: 'Number of right hand tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 1,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooTorsoSlots",
+        data: {
+            type: Number,
+            name: 'Number of torso tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 1,
+                max: 8,
+                step: 1
+            },
+            default: 8,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooBackSlots",
+        data: {
+            type: Number,
+            name: 'Number of back tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 1,
+                max: 8,
+                step: 1
+            },
+            default: 8,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooLegLeftSlots",
+        data: {
+            type: Number,
+            name: 'Number of left leg tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 4,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooLegRightSlots",
+        data: {
+            type: Number,
+            name: 'Number of right leg tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 4,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooFootLeftSlots",
+        data: {
+            type: Number,
+            name: 'Number of left foot tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 1,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
+    {
+        key: "tattooFootRightSlots",
+        data: {
+            type: Number,
+            name: 'Number of right foot tattoo slots',
+            hint: 'Number of available slots for this body part for tattoos',
+            range: {
+                min: 0,
+                max: 4,
+                step: 1
+            },
+            default: 1,
+            scope: "world",
+            config: true,
+            restricted: true
+        }
+    },
 ]
 
 export {getFilterArray, registerSettings, getItemsSlotArray, getSetting}

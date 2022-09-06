@@ -21,6 +21,22 @@ export const initialSlotStructure = {
   wrists: ['', '', '', '']
 }
 
+export const tattoosSlotStructure = {
+  tattooHandLeft: ['', '', '', ''],
+  tattooHandRight: ['', '', '', ''],
+  tattooFootLeft: ['', '', '', ''],
+  tattooFootRight: ['', '', '', ''],
+  tattooArmLeft: ['', '', '', ''],
+  tattooArmRight: ['', '', '', ''],
+  tattooLegLeft: ['', '', '', ''],
+  tattooLegRight: ['', '', '', ''],
+  tattooTorso: ['', '', '', '','', '', '', ''],
+  tattooBack: ['', '', '', '','', '', '', ''],
+  tattooScalp: ['', '', '', '']
+}
+
+export const tattoosRenderOrder = ['tattooScalp', 'tattooArmLeft', 'tattooArmRight', 'tattooHandLeft', 'tattooHandRight', 'tattooTorso', 'tattooBack', 'tattooLegLeft', 'tattooLegRight', 'tattooFootLeft', 'tattooFootRight']
+
 export const shadowItemModifier = '__secondary'
 export const itemEquippedPath = 'data.equipped'
 

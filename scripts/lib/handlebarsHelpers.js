@@ -9,8 +9,8 @@ const registerHelpers = () => {
     return accum;
   });
 
-  Handlebars.registerHelper('leftOrRight', function (n) {
-    return n % 2 === 0 ? leftItem : rightItem;
+  Handlebars.registerHelper('leftOrRight', function (n, modifier = 0) {
+    return (n + modifier) % 2 === 0 ? leftItem : rightItem;
   })
 
   Handlebars.registerHelper('createFillerElements', function (createdItems, itemNames, currentItem, block) {

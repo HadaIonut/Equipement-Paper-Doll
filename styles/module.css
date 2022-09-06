@@ -159,6 +159,9 @@ input[type=text].itemSearchApp__search-bar {
   height: 100%;
   transition: background-color ease 250ms, color ease 250ms;
 }
+.paperDollApp__tattoos {
+  height: 100%;
+}
 .paperDollApp__tab-active {
   background: #666;
   color: #f0f0e0;
@@ -187,6 +190,16 @@ input[type=text].itemSearchApp__search-bar {
   background: url("static/paperDollFigure.svg") no-repeat center;
   background-size: contain;
   height: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  align-items: center;
+  grid-gap: 5px;
+}
+.paperDollApp__background-image--tattoos {
+  background: url("static/paperDollFigure.svg") no-repeat center;
+  background-size: contain;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(6, 1fr);
@@ -283,6 +296,11 @@ input[type=text].itemSearchApp__search-bar {
 }
 #ring > .paperDollApp__item-slots-grid {
   grid-template-rows: 1fr 1fr;
+}
+
+#tattooScalp {
+  grid-column: 1/span 2;
+  justify-self: center;
 }
 
 .selector {

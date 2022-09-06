@@ -20,7 +20,7 @@
       <div class="paperDollApp__main-tab" data-tab="main">
         <div class="paperDollApp__background-image">
           {{#each itemTypes.types}}
-            <div id="{{this}}" class="{{leftOrRight @index}}">
+            <div id="{{this}}" class="{{leftOrRight @index 0 }}">
               <h3 class="paperDollApp__category-title">
                 {{prettifyTextToDisplay this}}
               </h3>
@@ -51,8 +51,24 @@
           {{/each}}
         </div>
       </div>
-      <div class="paperDollApp__spell-book paperDollApp__closed-tab" data-tab="tattoos">
-        tattoos
+      <div class="paperDollApp__tattoos paperDollApp__closed-tab" data-tab="tattoos">
+        <div class="paperDollApp__background-image--tattoos">
+          {{#each tattooTypes.types}}
+            <div id="{{this}}" class="{{leftOrRight @index -1}}">
+              <h3 class="paperDollApp__category-title">
+                {{prettifyTextToDisplay this}}
+              </h3>
+              <div class="paperDollApp__item-slots-grid">
+                {{#times ../tattooTypes.slots ../tattooTypes.types this}}
+                  <button type="submit" class="paperDollApp__add-box"></button>
+                {{/times}}
+                {{#createFillerElements ../tattooTypes.slots ../tattooTypes.types this}}
+                  <div class="paperDollApp__filler-element"></div>
+                {{/createFillerElements}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
 

@@ -11,7 +11,7 @@ import {
   flagFields,
   initialSlotStructure, inventorySlotsStep, itemEquippedPath,
   moduleName, openSettingsButtonName,
-  shadowItemModifier
+  shadowItemModifier, tattoosRenderOrder
 } from "../contants/constants.js";
 import {
   availableSlots,
@@ -109,6 +109,10 @@ export default class PaperDollApp extends FormApplication {
       weaponsTypes: {
         types: weaponSlotNames,
         slots: getItemsSlotArray(weaponSlotNames, this.sourceActor)
+      },
+      tattooTypes: {
+        types: tattoosRenderOrder,
+        slots: getItemsSlotArray(tattoosRenderOrder, this.sourceActor)
       },
       inventorySlots: this.inventorySlots,
     }
@@ -264,7 +268,7 @@ export default class PaperDollApp extends FormApplication {
       }
     })
 
-    flagForItem.split(', ').forEach((slot) => {
+    flagForItem?.split?.(', ')?.forEach?.((slot) => {
       const [, slotName] = slot.split('-');
       const slotContents = this.getAvailableSlotsAtLocation(slotName)
 

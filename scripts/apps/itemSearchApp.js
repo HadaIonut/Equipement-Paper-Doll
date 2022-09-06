@@ -133,7 +133,9 @@ export default class itemSearchApp extends FormApplication {
     const selectedItem = itemList.find((item) => item.id === selectedItemId)
     const sourceSlotType = this.source.target.parentElement.parentElement.id
     const itemFlag = getCurrentFlagForItem(selectedItem, sourceSlotType)
-    const flagArray = itemFlag.split(', ')
+    const flagArray = itemFlag?.split?.(', ')
+
+    if (!flagArray) return this.createNewTile(selectedItem)
 
     flagArray.forEach((flag, index) => {
       const [slotRequirement, slotName] = flag.split('-')
