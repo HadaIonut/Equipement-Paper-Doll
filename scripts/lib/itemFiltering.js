@@ -1,4 +1,5 @@
 import {getFilterArray} from "../settings.js";
+import {tattoosRenderOrder} from "../contants/constants.js";
 
 export const containsAnyOfArray = (array, target) => {
   let output = false;
@@ -79,6 +80,9 @@ const filterActorItems = (actorItems) => {
   itemTypesObject['mainHand'] = findWeaponsAndFilter(equipableItems, getFilterArray('mainHand'));
   itemTypesObject['offHand'] = findOffHand(equipableItems);
 
+  tattoosRenderOrder.forEach(tattoo => {
+    itemTypesObject[tattoo] = itemsContains(equipableItems, ['tattoo', 'Tattoo'], 'tattoo')
+  })
   return itemTypesObject;
 }
 

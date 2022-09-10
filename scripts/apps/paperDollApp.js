@@ -59,9 +59,10 @@ export default class PaperDollApp extends FormApplication {
     this.items = sourceActor.items;
     this.selectedItems = this.sourceActor.getFlag(moduleName, flagFields.data) ?? initialSlotStructure;
     this.equipableItems = filterEquipableItems(this.items);
-    this.filteredItems = filterActorItems(this.items);
 
-    this.flagEquippedItems()
+    this.flagEquippedItems().then(() => {
+      this.filteredItems = filterActorItems(this.items);
+    })
     this.getSlotsStructure()
     this.getNumberOfInventorySlots()
   }
@@ -70,13 +71,12 @@ export default class PaperDollApp extends FormApplication {
    * Flags equippable items that are not flagged already
    * This flagging includes names and properties
    */
-  flagEquippedItems() {
-    [...this.items].forEach((item) => {
-        if (Array.isArray(item.getFlag(moduleName, flagFields.flags))) return
+  async flagEquippedItems() {
+    for (const item of [...this.items]) {
+      if (Array.isArray(item.getFlag(moduleName, flagFields.flags))) continue;
 
-        item.setFlag(moduleName, flagFields.flags, [...extractFlags(item), ...extractFlagsFromItemName(item)])
-      }
-    )
+      await item.setFlag(moduleName, flagFields.flags, [...extractFlags(item), ...extractFlagsFromItemName(item)])
+    }
   }
 
   /**
